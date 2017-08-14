@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/29 12:26:33 by prussell          #+#    #+#              #
-#    Updated: 2017/08/14 15:18:40 by prussell         ###   ########.fr        #
+#    Updated: 2017/08/14 15:39:53 by lde-jage         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,19 @@ SOURCE = ft_atoi.c			\
 		get_next_line.c		\
 		ft_strnjoin.c		\
 		ft_printgrid.c 		\
-		ft_matrixdel.c
+		ft_matrixdel.c		\
+		ft_lstadd.c			\
+		ft_lstdel.c			\
+		ft_lstdelone.c		\
+		ft_lstiter.c		\
+		ft_lstnew.c			\
+		ft_lstmap.c			\
+		ft_strarrdel.c		\
+		ft_arrdel.c			\
+		ft_intarrnew.c		\
+		ft_strnjoin.c		\
+		ft_dbarrnew.c		\
+		ft_ftarrnew.c
 OBJ = 	ft_atoi.o			\
 		ft_bzero.o			\
 		ft_isalnum.o		\
@@ -126,7 +138,19 @@ OBJ = 	ft_atoi.o			\
 		get_next_line.o		\
 		ft_strnjoin.o		\
 		ft_printgrid.o 		\
-		ft_matrixdel.o
+		ft_matrixdel.o		\
+		ft_lstadd.o			\
+		ft_lstdel.o			\
+		ft_lstdelone.o		\
+		ft_lstiter.o		\
+		ft_lstnew.o			\
+		ft_lstmap.o			\
+		ft_strarrdel.o		\
+		ft_arrdel.o			\
+		ft_intarrnew.o		\
+		ft_strnjoin.o		\
+		ft_dbarrnew.o		\
+		ft_ftarrnew.o
 
 all: $(NAME)
 
