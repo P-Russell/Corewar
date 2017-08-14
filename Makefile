@@ -6,13 +6,13 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/08/14 15:21:33 by prussell         ###   ########.fr        #
+#    Updated: 2017/08/14 16:02:52 by prussell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 
-SRCS = srcs/*.c
+SRCS = vm_srcs/*.c
 
 FLAGS = -g3 -Wall -Werror -Wextra -iquotevm_includes
 
