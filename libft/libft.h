@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 14:01:12 by prussell          #+#    #+#             */
-/*   Updated: 2017/07/04 11:02:13 by prussell         ###   ########.fr       */
+/*   Updated: 2017/08/14 15:50:29 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # define BUFF_SIZE 50
+
+typedef struct		s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
 
 typedef struct	s_line
 {
@@ -85,5 +92,15 @@ int		get_next_line(const int fd, char **line);
 char	*ft_strnjoin(char const *s1, char const *s2, size_t n);
 void	ft_printgrid(char **grid);
 void	ft_matrixdel(void **grid);
-
+void	ft_lstadd(t_list **alst, t_list *new);
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void	ft_lstdelone(t_list **alst, void(*del)(void *, size_t));
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+t_list	*ft_lstnew(void const *content, size_t content_size);
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+void	ft_strarrdel(char **str);
+void	ft_arrdel(int **pts, int row);
+int		**ft_intarrnew(int row, int col);
+double	**ft_dbarrnew(int row, int col);
+float	**ft_ftarrnew(int row, int col);
 #endif
