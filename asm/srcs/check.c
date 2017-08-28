@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/08/28 10:13:00 by prussell         ###   ########.fr       */
+/*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
+/*   Updated: 2017/08/28 09:51:21 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "op.h"
-# include "../../libft/libft.h"
+#include "op.h"
+#include "asm.h"
 
-typedef	struct	s_src_line
+int		is_valid_source(int	fd)
 {
-	char	*data;
-	char	*lable;
-	int		acb;
-	int		params[MAX_ARGS_NUMBER];
-	int		opcode;
-	int		bytes;
-}				t_src_line;
-
-int		is_valid_source(int fd);
-
-#endif
+	return (fd > 0);
+}
