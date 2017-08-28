@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/08/28 10:13:00 by prussell         ###   ########.fr       */
+/*   Updated: 2017/08/28 10:18:24 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include "op.h"
 # include "../../libft/libft.h"
+# define MAX_LINES 200
 
 typedef	struct	s_src_line
 {
