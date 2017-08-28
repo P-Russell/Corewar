@@ -6,11 +6,23 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/08/28 13:18:41 by prussell         ###   ########.fr       */
+/*   Updated: 2017/08/28 15:59:10 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+int		get_encoding_byte(t_src_line *lines)
+{
+	int	i;
+
+	i = 0;
+	while (lines[i].data != NULL)
+	{
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
 
 int		get_raw_data(t_src_line *lines, int fd)
 {
@@ -27,6 +39,7 @@ int		get_raw_data(t_src_line *lines, int fd)
 		ft_putendl_fd("Too many lines in file", 2);
 		return (EXIT_FAILURE);
 	}
+	lines[i].data = NULL;
 	return (EXIT_SUCCESS);
 }
 
