@@ -6,13 +6,33 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/08/28 15:59:10 by prussell         ###   ########.fr       */
+/*   Updated: 2017/08/30 10:12:26 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		get_encoding_byte(t_src_line *lines)
+char	*get_line_lable(char *line)
+{
+	int	i;
+	while (line[i])
+	return (EXIT_SUCCESS);
+}
+
+int		calc_line_bytes(t_src_line line)
+{
+	return (0);
+}
+
+int		*get_params(char *lines)
+{
+	int		params[MAX_ARGS_NUMBER];
+	int		i;
+
+	while
+}
+
+int		get_acb(char *lines)
 {
 	int	i;
 
@@ -21,22 +41,28 @@ int		get_encoding_byte(t_src_line *lines)
 	{
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
 int		get_raw_data(t_src_line *lines, int fd)
 {
-	int	i;
+	int		i;
+	char	*line;
 
 	i = 0;
 	while (i < MAX_LINES && get_next_line(fd, &line) > 0)
 	{
-		lines[i].data = line;
-		i++;
+		if (!is_comment(line))
+		{
+			lines[i].data = line;
+			i++;
+		}
+		else
+			ft_strdel(&line);
 	}
 	if (i == MAX_LINES)
 	{
-		ft_putendl_fd("Too many lines in file", 2);
+		ft_putendl_fd("Lines in file exceed MAX_LINES", 2);
 		return (EXIT_FAILURE);
 	}
 	lines[i].data = NULL;
