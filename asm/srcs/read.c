@@ -6,13 +6,13 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/01 13:30:17 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/04 10:46:29 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		get_encoding_byte(t_src_line **lines)
+int		get_acb(char *lines)
 {
 	int	i;
 	int	square;
@@ -31,7 +31,7 @@ int		get_encoding_byte(t_src_line **lines)
 		}
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
 int		get_params(t_src_line **lines)
@@ -70,17 +70,23 @@ int		get_params(t_src_line **lines)
 
 int		get_raw_data(t_src_line *lines, int fd)
 {
-	int	i;
+	int		i;
+	char	*line;
 
 	i = 0;
 	while (i < MAX_LINES && get_next_line(fd, &line) > 0)
 	{
-		lines[i].data = line;
-		i++;
+		if (!is_comment(line))
+		{
+			lines[i].data = line;
+			i++;
+		}
+		else
+			ft_strdel(&line);
 	}
 	if (i == MAX_LINES)
 	{
-		ft_putendl_fd("Too many lines in file", 2);
+		ft_putendl_fd("Lines in file exceed MAX_LINES", 2);
 		return (EXIT_FAILURE);
 	}
 	lines[i].data = NULL;
