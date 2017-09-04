@@ -6,13 +6,13 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/04 10:46:29 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/04 15:21:20 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		get_acb(char *lines)
+t_src_line		*get_acb(t_src_line *lines)
 {
 	int	i;
 	int	square;
@@ -20,21 +20,21 @@ int		get_acb(char *lines)
 
 	i = 0;
 	n = MAX_ARGS_NUMBER;
-	while (lines[i]->data != NULL)
+	while (lines[i].data != NULL)
 	{
-		lines[i]->acb = 0;
-		while (lines[i]->params[n])
+		lines[i].acb = 0;
+		while (lines[i].params[n])
 		{
-			lines[i]->acb += lines[i]->params[n] * (square * square);
+			lines[i].acb += lines[i].params[n] * (square * square);
 			square /= 2;
 			n--;
 		}
 		i++;
 	}
-	return (0);
+	return (lines);
 }
 
-int		get_params(t_src_line **lines)
+t_src_line		*get_params(t_src_line *lines)
 {
 	int		i;
 	int		n;
@@ -44,30 +44,31 @@ int		get_params(t_src_line **lines)
 	n = 0;
 	i = 0;
 	p = 0;
-	while (lines[i]->data != NULL)
+	while (lines[i].data != NULL)
 	{
-		split = ft_strplit(lines[i]->data, ' ');
-		if (ft_strstr(split[0], LABEL_CHAR) != NULL)
+		split = ft_strsplit(lines[i].data, ' ');
+		if (ft_strchr(split[0], LABEL_CHAR) != NULL)
 		{
-			lines[i]->label = split[0];
+			lines[i].label = split[0];
 			n++;
 		}
 		n++;
 		while (split[n])
 		{
 			if (ft_strstr(split[n], "r") != NULL)
-				lines[i]->params[p] = 1;
+				lines[i].params[p] = 1;
 			else if (ft_strstr(split[n], "%") != NULL)
-				lines[i]->params[p] = 3;
-			else if (ft_isdigit(split[n]))
-				lines[i]->params[p] = 2;
+				lines[i].params[p] = 3;
+			else if (ft_isdigit(ft_atoi(split[n])))
+				lines[i].params[p] = 2;
 			else
-				lines[i]->params[p] = 0;
+				lines[i].params[p] = 0;
 		}
-		ft_arrdel(split);
+		free(split);
 	}
+	return (lines);
 }
-
+/*
 int		get_raw_data(t_src_line *lines, int fd)
 {
 	int		i;
@@ -102,4 +103,4 @@ int		assemble(int fd)
 		return (EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
-}
+}*/
