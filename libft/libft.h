@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 14:01:12 by prussell          #+#    #+#             */
-/*   Updated: 2017/08/14 16:12:36 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/04 11:45:18 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ void				ft_arrdel(int **pts, int row);
 int					**ft_intarrnew(int row, int col);
 double				**ft_dbarrnew(int row, int col);
 float				**ft_ftarrnew(int row, int col);
+int					ft_isspace(char c);
 
 #endif
