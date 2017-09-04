@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 14:01:12 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/04 11:45:18 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/04 15:18:50 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
+char				**ft_splitspace(char const *s);
 char				*ft_itoa(int n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -104,5 +105,6 @@ int					**ft_intarrnew(int row, int col);
 double				**ft_dbarrnew(int row, int col);
 float				**ft_ftarrnew(int row, int col);
 int					ft_isspace(char c);
+
 
 #endif

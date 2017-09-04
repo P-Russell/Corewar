@@ -6,13 +6,13 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 07:42:20 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/04 10:36:19 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/04 15:11:14 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		split_c(char const *s, char c)
+static	int		split_c(char const *s)
 {
 	int count;
 	int next;
@@ -23,40 +23,40 @@ static	int		split_c(char const *s, char c)
 	next = 1;
 	while (*s)
 	{
-		if (*s != c && next)
+		if (!ft_isspace(*s) && next)
 		{
 			count++;
 			next = 0;
 		}
-		else if (*s == c)
+		else if (ft_isspace(*s))
 			next = 1;
 		s++;
 	}
 	return (count);
 }
 
-static	int		word_len(char const *s, char c)
+static	int		word_len(char const *s)
 {
 	int i;
 
 	if (!s)
 		return (0);
 	i = 0;
-	while (s[i] && s[i] != c)
+	while (s[i] && !ft_isspace(s[i]))
 		i++;
 	return (i);
 }
 
-static	char	*add_word(char const *src, char c)
+static	char	*add_word(char const *src)
 {
 	int		j;
 	char	*dst;
 
-	dst = (char *)malloc(sizeof(*dst) * word_len(src, c) + 1);
+	dst = (char *)malloc(sizeof(*dst) * word_len(src) + 1);
 	if (!dst)
 		return (NULL);
 	j = 0;
-	while (src[j] != c && src[j])
+	while (!ft_isspace(src[j]) && src[j])
 	{
 		dst[j] = src[j];
 		j++;
@@ -65,26 +65,26 @@ static	char	*add_word(char const *src, char c)
 	return (dst);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char			**ft_splitspace(char const *s)
 {
 	char	**split;
 	int		y;
 	int		i;
 	int		len;
 
-	if (!s || !(split = (char**)malloc(sizeof(char *) * (split_c(s, c) + 1))))
+	if (!s || !(split = (char**)malloc(sizeof(char *) * (split_c(s) + 1))))
 		return (NULL);
 	y = 0;
 	i = 0;
 	len = ft_strlen(s);
 	while (i < len)
 	{
-		if (s[i] != c)
+		if (!ft_isspace(s[i]))
 		{
-			split[y] = add_word(s + i, c);
+			split[y] = add_word(s + i);
 			if (!split[y++])
 				return (NULL);
-			i += word_len(s + i, c);
+			i += word_len(s + i);
 		}
 		else
 			i++;
