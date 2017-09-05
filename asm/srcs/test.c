@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/04 15:50:56 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/04 15:59:09 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(void)
 		printf("Paramater 2 is %d\n", test_data[i].params[1]);
 		printf("Paramater 3 is %d\n", test_data[i].params[2]);
 		printf("Paramater 4 is %d\n", test_data[i].params[3]);
+		printf("\n");
 		i++;
 	}
 	return (EXIT_SUCCESS);
