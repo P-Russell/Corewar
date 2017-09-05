@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/09/05 11:07:24 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/05 12:02:05 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
-//typedef char	t_arg_type;
+typedef char	t_arg_type;
 
 # define T_REG					1
 # define T_DIR					2

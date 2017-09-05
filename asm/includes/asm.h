@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/05 11:07:02 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/05 15:09:04 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,10 @@ int		is_comment(char *line);
 int		is_opcode(char *line);
 int		is_label(char *line);
 t_src_line	*get_params(t_src_line *lines);
+void	print_struct(t_src_line*lines);
+int		assemble(int fd);
+char	**core_line_split(char const *s);
+
+
 
 #endif

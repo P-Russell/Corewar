@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/08/28 10:12:54 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/05 15:05:52 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 		ft_putendl_fd("Could not open file", 2);
 		return (-2);
 	}
-	else if (is_valid_source(fd)) // add assemble(fd) inside these parenth
+	else if (is_valid_fd(fd), assemble(fd)) // add assemble(fd) inside these parenth
 	{
 		if (close(fd) == 0)
 			return (0);
