@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/04 15:21:20 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/04 16:13:52 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ t_src_line		*get_params(t_src_line *lines)
 				lines[i].params[p] = 2;
 			else
 				lines[i].params[p] = 0;
+			p++;
+			n++;
 		}
 		free(split);
+		i++;
 	}
 	return (lines);
 }
