@@ -6,80 +6,28 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/04 16:02:02 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/05 09:53:27 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		get_acb(char *lines)
-{
-	int	i;
-	int	square;
-	int	n;
-
-	i = 0;
-	n = MAX_ARGS_NUMBER;
-	while (lines[i]->data != NULL)
-	{
-		lines[i]->acb = 0;
-		while (lines[i]->params[n])
-		{
-			lines[i]->acb += lines[i]->params[n] * (square * square);
-			square /= 2;
-			n--;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int		get_params(t_src_line **lines)
-{
-	int		i;
-	int		n;
-	int		p;
-	char	**split;
-
-	n = 0;
-	i = 0;
-	p = 0;
-	while (lines[i]->data != NULL)
-	{
-		split = ft_strplit(lines[i]->data, ' ');
-		if (ft_strstr(split[0], LABEL_CHAR) != NULL)
-		{
-			lines[i]->label = split[0];
-			n++;
-		}
-		n++;
-		while (split[n])
-		{
-			if (ft_strstr(split[n], "r") != NULL)
-				lines[i]->params[p] = 1;
-			else if (ft_strstr(split[n], "%") != NULL)
-				lines[i]->params[p] = 3;
-			else if (ft_isdigit(split[n]))
-				lines[i]->params[p] = 2;
-			else
-				lines[i]->params[p] = 0;
-		}
-		ft_arrdel(split);
-	}
-}
-
-char	*is_label(char *s)
-
-int		get_raw_data(t_src_line *lines, int fd)
+int		get_data(t_src_line *lines, int fd)
 {
 	int		i;
 	char	*line;
+	char	**split;
 
 	i = 0;
 	while (i < MAX_LINES && get_next_line(fd, &line) > 0)
 	{
-		if (!is_comment(line))
+		if (!is_comment(line) && (split == ft_splitspace(line)))
 		{
+			if (is_label(split[0]))
+			{
+				lines[i].label = ft_strdup(split[0]);
+			}
+
 			lines[i].data = line;
 			i++;
 		}
@@ -95,12 +43,33 @@ int		get_raw_data(t_src_line *lines, int fd)
 	return (EXIT_SUCCESS);
 }
 
+void	init_line_struct(t_src_line *lines)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while (i < MAX_LINES)
+	{
+		lines[i].data = NULL;
+		lines[i].label = NULL;
+		lines[i].acb = 0;
+		j = 0;
+		while (j < MAX_ARGS_NUMBER)
+			lines[i].params[j++] = 0;
+		lines[i].opcode = 0;
+		lines[i].bytes = 0;
+		i++;
+	}
+}
+
 int		assemble(int fd)
 {
 	char	*line;
-	t_src_line lines[MAX_LINES];
+	t_src_line lines[MAX_LINES + 1];
 
-	if (get_raw_data(lines, fd) == EXIT_FAILURE)
+	init_line_struct(lines);
+	if (get_data(lines, fd) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
