@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/05 09:53:27 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/05 10:45:05 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ int		get_data(t_src_line *lines, int fd)
 	i = 0;
 	while (i < MAX_LINES && get_next_line(fd, &line) > 0)
 	{
-		if (!is_comment(line) && (split == ft_splitspace(line)))
+		if (!is_comment(line) && (split == ft_splitspace(line)) && *line)
 		{
 			if (is_label(split[0]))
 			{
 				lines[i].label = ft_strdup(split[0]);
 			}
-
+			if (split[1] && is_opcode(split[1]))
+				lines[i].opcode = is_opcode(split[1]);
 			lines[i].data = line;
 			i++;
 		}
@@ -66,7 +67,7 @@ void	init_line_struct(t_src_line *lines)
 int		assemble(int fd)
 {
 	char	*line;
-	t_src_line lines[MAX_LINES + 1];
+	t_src_line lines[MAX_LINES];
 
 	init_line_struct(lines);
 	if (get_data(lines, fd) == EXIT_FAILURE)
