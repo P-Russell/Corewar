@@ -6,11 +6,10 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/05 10:52:55 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/05 11:57:46 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
 #include "asm.h"
 
 int		is_valid_fd(int fd)
