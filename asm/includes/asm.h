@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/05 15:41:49 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/06 14:31:36 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef	struct	s_src_line
 	char		*data;
 	char		*label;
 	int			acb;
-	long		params[MAX_ARGS_NUMBER];
+	char		*params[MAX_ARGS_NUMBER];
 	int			opcode;
 	int			bytes;
 }				t_src_line;

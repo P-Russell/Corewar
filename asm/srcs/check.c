@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/05 11:57:46 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:28:53 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,29 @@ int		is_label(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == LABEL_CHAR && i > 0)
-			return (1);
+		if (ft_charstr(LABEL_CHARS, line[i] == NULL)
+				break ;
 		i++;
 	}
+	if (line[i] == LABEL_CHAR && i > 0)
+		return (1);
 	return (0);
+}
+
+int		is_param(char *line)
+{
+	int i;
+	int ret;
+
+	i = 0;
+	ret = 0;
+	while (line[i])
+	{
+		if (line[i] == DIRECT_CHAR)
+			ret = DIR_CODE;
+		else if (line[i] == 
+
+	}
 }
 
 int		is_comment(char *line)
