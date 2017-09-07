@@ -6,11 +6,11 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 07:42:20 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 08:37:16 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 10:09:58 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 static	int		split_c(char const *s)
 {

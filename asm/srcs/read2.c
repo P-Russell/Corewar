@@ -6,18 +6,17 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 10:08:46 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 10:44:02 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-
 int		extract_data_from_line(char **split, t_src_line *lines)
 {
 	int		label_found;
 	int		op_code_found;
-	int		params_found;
+	int		params_found; 
 	int		i;
 
 	label_found = 0;
