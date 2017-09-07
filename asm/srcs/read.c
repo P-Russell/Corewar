@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 16:04:57 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 16:09:00 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ int		assemble(int fd)
 
 	init_line_struct(lines);
 	if (get_data(lines, fd) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (get_acb(lines) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (get_bytes(lines) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	print_struct(lines);
 	return (EXIT_SUCCESS);
