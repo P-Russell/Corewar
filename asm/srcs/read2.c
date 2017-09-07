@@ -6,12 +6,13 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/05 15:53:35 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 10:10:26 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+<<<<<<< HEAD
 int	num_check(char *str)
 {
 	int	i;
@@ -64,31 +65,45 @@ int	get_params(t_src_line *lines)
 		i++;
 	}
 	return (0);
+
+int		extract_data(char **split, t_src_line *lines)
+{
+	int		lable_found;
+	int		op_code_found;
+	int		paramas_found;
+
+	lable_found = 0;
+	op_code_found = 0;
+	params_found = 0;
+	while (*split)
+	{
+		if (is_lable_address(*split))
+	}
+	return (1);
 }
 
 int		get_data(t_src_line *lines, int fd)
 {
 	int		i;
+	int		j;
 	char	*line;
 	char	**split;
 
 	i = 0;
 	while (i < MAX_LINES && get_next_line(fd, &line) > 0)
 	{
-		if (!is_comment(line) && *line && (split == core_line_split(line)))
+		if (*line && (split == core_line_split(line)))
 		{
-			if (is_label(split[0]))
-			{
+			if (is_label_address(split[0]))
 				lines[i].label = ft_strdup(split[0]);
-			}
-			if (split[1] && is_opcode(split[1]))
+			j = 0;
+			while (split[0] && is_opcode(split[1]))
 			{
+				if (is_opcode(split[i]))
 				lines[i].opcode = is_opcode(split[1]);
-
 			}
 			ft_matrixdel((void **)split);
 			i++;
-		}
 		else
 			ft_strdel(&line);
 	}

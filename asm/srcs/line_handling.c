@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 07:42:20 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/06 15:43:23 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/07 10:09:58 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static	char	*add_word(char const *src)
 	return (dst);
 }
 
-char			**core_line_space(char const *s)
+char			**core_line_split(char const *s)
 {
 	char	**split;
 	int		y;
