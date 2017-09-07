@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 15:05:29 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 16:04:54 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ int		is_label_param(char *line)
 
 	i = 0;
 	if (ft_charstr(line, LABEL_CHAR) == NULL)
+	{
+		printf
 		return (0);
-	if (line[i] = DIRECT_CHAR || line [i] == 'r')
+	}
+	if (line[i] == DIRECT_CHAR)
 		i++;
 	while (line[i])
 	{
@@ -67,22 +70,13 @@ int		is_label_param(char *line)
 
 int		is_param(char *line)
 {
-	int ret;
-
-	ret = 0;
 	if (is_label_param(line))
 		return (1);
-	while (*line)
-	{
-		else if (*line != DIRECT_CHAR || *line != 'r' || *line != LABEL_CHAR)
-		else if (*line == 'r')
-			ret = 1;
-		else if (ft_number(line))
-			return (1);
-		else if (ret && ft_isdigits(++line))
-			return (ret);
-	}
-	return (0);
+	if (*line == DIRECT_CHAR || *line == 'r')
+		line++;
+	if (!ft_isnumber(line))
+		return (0);
+	return (1);
 }
 
 int		is_comment(char *line)
