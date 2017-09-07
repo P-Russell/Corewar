@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/29 12:26:33 by prussell          #+#    #+#              #
-#    Updated: 2017/09/07 07:41:45 by prussell         ###   ########.fr        #
+#    Updated: 2017/09/07 14:13:05 by prussell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,8 @@ SOURCE = ft_atoi.c			\
 		ft_isspace.c		\
 		ft_splitspace.c		\
 		ft_charstr.c		\
-		ft_isdigits.c
+		ft_isdigits.c		\
+		ft_isnumber.c
 OBJ = 	ft_atoi.o			\
 		ft_bzero.o			\
 		ft_isalnum.o		\
@@ -158,7 +159,8 @@ OBJ = 	ft_atoi.o			\
 		ft_isspace.o		\
 		ft_splitspace.o		\
 		ft_charstr.o		\
-		ft_isdigits.o
+		ft_isdigits.o		\
+		ft_isnumber.o
 
 all: $(NAME)
 

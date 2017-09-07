@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 14:01:12 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 07:42:10 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 14:13:35 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ double				**ft_dbarrnew(int row, int col);
 float				**ft_ftarrnew(int row, int col);
 int					ft_isspace(char c);
 int					ft_isdigits(char *s);
-
+int					ft_isnumber(char *s);
 
 #endif
