@@ -12,6 +12,60 @@
 
 #include "asm.h"
 
+int	num_check(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	get_params(t_src_line *lines)
+{
+	int		i;
+	int		n;
+	int		p;
+	char	**split;
+
+	n = 0;
+	i = 0;
+	p = 0;
+	while (i < 2)
+	{
+		split = core_line_space(lines[i].data);
+		if (ft_strchr(split[0], LABEL_CHAR) != NULL)
+		{
+			lines[i].label = ft_strdup(split[0]);
+			n++;
+		}
+		n++;
+		while (split[n])
+		{
+			if (ft_strstr(split[n], "r") != NULL)
+				lines[i].param_type[p] = 1;
+			else if (ft_strstr(split[n], "%") != NULL)
+				lines[i].param_type[p] = 3;
+			else if (num_check(split[n]))
+				lines[i].param_type[p] = 2;
+			else
+				lines[i].param_type[p] = 0;
+			p++;
+			n++;
+		}
+		free(split);
+		p = 0;
+		n = 0;
+		i++;
+	}
+	return (0);
+}
+
 int		get_data(t_src_line *lines, int fd)
 {
 	int		i;
