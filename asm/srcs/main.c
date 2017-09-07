@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/05 15:05:52 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 09:58:02 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ int		main(int argc, char **argv)
 		ft_putendl_fd("Usage: ./asm [Path to filename.s]", 2);
 		return (-1);
 	}
-	else if ((fd == open(argv[1], O_RDONLY)) < 1)
+	else if ((fd = open(argv[1], O_RDONLY)) < 1)
 	{
 		ft_putendl_fd("Could not open file", 2);
 		return (-2);
 	}
-	else if (is_valid_fd(fd), assemble(fd)) // add assemble(fd) inside these parenth
+	else if (is_valid_fd(fd)) 
 	{
+		printf("About to assemble\n");
+		assemble(fd);
 		if (close(fd) == 0)
 			return (0);
 		ft_putendl_fd("Could not close file", 2);

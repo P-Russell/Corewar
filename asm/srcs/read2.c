@@ -6,25 +6,42 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 08:54:28 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 10:08:46 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 
-int		extract_data(char **split, t_src_line *lines)
+int		extract_data_from_line(char **split, t_src_line *lines)
 {
-	int		lable_found;
+	int		label_found;
 	int		op_code_found;
-	int		paramas_found;
+	int		params_found;
+	int		i;
 
-	lable_found = 0;
+	label_found = 0;
 	op_code_found = 0;
 	params_found = 0;
+	i = 0;
 	while (*split)
 	{
-		if (is_lable_address(*split))
+		if (is_label_address(*split) && (label_found = 1))
+		{
+			printf("label found %s\n", *split);
+			lines->label = ft_strdup(*split);
+		}
+		else if (is_opcode(*split) && (op_code_found = 1))
+		{
+			printf("opcode found %s\n", *split);
+			lines->opcode = is_opcode(*split);
+		}
+		else if (is_param(*split) && i < MAX_ARGS_NUMBER && (params_found = 1))
+		{
+			printf("param found %s\n", *split);
+			lines->params[i] = ft_strdup(*split);
+		}
+		split++;
 	}
 	return (1);
 }
@@ -32,25 +49,19 @@ int		extract_data(char **split, t_src_line *lines)
 int		get_data(t_src_line *lines, int fd)
 {
 	int		i;
-	int		j;
 	char	*line;
 	char	**split;
 
 	i = 0;
 	while (i < MAX_LINES && get_next_line(fd, &line) > 0)
 	{
-		if (*line && (split == core_line_split(line)))
+		printf("%s\n", line);
+		if (*line && !is_comment(line) && (split = core_line_split(line)))
 		{
-			if (is_label_address(split[0]))
-				lines[i].label = ft_strdup(split[0]);
-			j = 0;
-			while (split[0] && is_opcode(split[1]))
-			{
-				if (is_opcode(split[i])
-				lines[i].opcode = is_opcode(split[1]);
-			}
+			extract_data_from_line(split, lines + i);
 			ft_matrixdel((void **)split);
 			i++;
+		}
 		else
 			ft_strdel(&line);
 	}
@@ -76,7 +87,7 @@ void	init_line_struct(t_src_line *lines)
 		lines[i].acb = 0;
 		j = 0;
 		while (j < MAX_ARGS_NUMBER)
-			lines[i].params[j++] = 0;
+			lines[i].params[j++] = NULL;
 		lines[i].opcode = 0;
 		lines[i].bytes = 0;
 		i++;
@@ -85,7 +96,6 @@ void	init_line_struct(t_src_line *lines)
 
 int		assemble(int fd)
 {
-	char	*line;
 	t_src_line lines[MAX_LINES];
 
 	init_line_struct(lines);

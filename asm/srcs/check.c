@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 08:54:33 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/07 10:08:50 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		is_opcode(char *line)
 	{
 		if (ft_strcmp(line, g_op_tab[i].name) == 0)
 			return (g_op_tab[i].opcode);
+		i++;
 	}
 	return (0);
 }
@@ -57,6 +58,7 @@ int		is_label_param(char *line)
 	{
 		if (ft_charstr(LABEL_CHARS, line[i]) == NULL)
 			return (0);
+		i++;
 	}
 	return (1);
 }

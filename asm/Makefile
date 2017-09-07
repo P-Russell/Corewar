@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/09/04 15:26:36 by prussell         ###   ########.fr        #
+#    Updated: 2017/09/07 09:55:27 by prussell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,3 +28,6 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+test:
+	./asm testfile.s
