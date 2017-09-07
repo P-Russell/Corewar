@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/07 14:52:24 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/07 15:17:22 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_number(char *str)
 			return (0);
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	calculate_acb(t_src_line *line)
@@ -69,4 +69,5 @@ int	get_acb(t_src_line *lines)
 		n = 0;
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
