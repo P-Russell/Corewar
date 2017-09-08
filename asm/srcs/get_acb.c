@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/08 08:33:31 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 11:52:40 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	calculate_acb(t_src_line *line)
 
 	n = 0;
 	square = 8;
-	while (n < MAX_ARGS_NUMBER)
+	while (n < MAX_ARGS_NUMBER && line->params[n])
 	{
-		if (ft_strchr(line->params[n], 'r') != NULL)
+		if (line->params[n][0] == 'r')
 			p = REG_CODE;
 		else if (ft_strchr(line->params[n], '%') != NULL)
 			p = IND_CODE;
@@ -30,6 +30,7 @@ int	calculate_acb(t_src_line *line)
 			p = DIR_CODE;
 		else
 			p = 0;
+		printf("paramcode %c: %d is %d\n", line->params[n][0], n, p);
 		line->acb += p * (square * square);
 		square /= 2;
 		n++;
@@ -42,15 +43,17 @@ int	get_acb(t_src_line *lines)
 	int	i;
 	int	n;
 
-	n = 0;
 	i = 0;
-	while (lines[i].label != NULL || lines[i].opcode == 0)
+	while (i < MAX_LINES)
 	{
-		while (g_op_tab[n].opcode != lines[i].opcode)
-			n++;
-		if (g_op_tab[n].has_pcode == 1)
-			calculate_acb(lines + i);
 		n = 0;
+		while (g_op_tab[n].opcode != 0 && g_op_tab[n].opcode != lines[i].opcode)
+			n++;
+		printf("opcode found %d\n", g_op_tab[n].opcode);
+		if (n == 16)
+			;
+		else if (g_op_tab[n].has_pcode == 1)
+			calculate_acb(lines + i);
 		i++;
 	}
 	return (EXIT_SUCCESS);
