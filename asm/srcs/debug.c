@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 12:05:54 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 10:07:05 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 09:46:25 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@ void	print_struct(t_src_line *lines)
 
 	i = 0;
 	printf("----------------------------\n");
-	while (i < MAX_LINES && (lines[i].opcode || lines[i].label))
+	while (i < MAX_LINES)
 	{
 		printf("index number %d\n", i);
 		if (lines[i].label)
 			printf("label: %s\n", lines[i].label);
-		else
-		{
+		if (lines[i].opcode)
 			printf("opcode num: %d, name: %s\n", lines[i].opcode, g_op_tab[lines[i].opcode - 1].name);
+		int j = 0;
+		while (lines[i].params[j])
+		{
+			printf("param %d: %s\n", j + 1, lines[i].params[j]);
+			j++;
 		}
 		printf("----------------------------\n");
 		i++;

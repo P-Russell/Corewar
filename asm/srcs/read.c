@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/08 08:53:41 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 10:09:34 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,11 @@ int		extract_data_from_line(char **split, t_src_line *lines)
 		if (is_comment(*split))
 			break ;
 		else if (is_label_address(*split) && (label_found = 1))
-		{
-			printf("label found %s\n", *split);
 			lines->label = ft_strdup(*split);
-		}
 		else if (is_opcode(*split) && (op_code_found = 1))
-		{
-			printf("opcode found %s\n", *split);
 			lines->opcode = is_opcode(*split);
-		}
 		else if (is_param(*split) && i < MAX_ARGS_NUMBER && (params_found = 1))
-		{
-			printf("param found %s\n", *split);
-			lines->params[i] = ft_strdup(*split);
-		}
+			lines->params[i++] = ft_strdup(*split);
 		split++;
 	}
 	return (1);
@@ -58,11 +49,6 @@ int		get_data(t_src_line *lines, int fd)
 	{
 		if (*line && !is_comment(line) && (split = core_line_split(line)))
 		{
-			int j = 0;
-			printf ("From line: ");
-			while (split[j])
-				printf(" %s", split[j++]);
-			printf("\n");
 			extract_data_from_line(split, lines + i);
 			ft_matrixdel((void **)split);
 			i++;

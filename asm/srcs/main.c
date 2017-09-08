@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 09:58:02 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 10:09:44 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		main(int argc, char **argv)
 	}
 	else if (is_valid_fd(fd)) 
 	{
-		printf("About to assemble\n");
 		assemble(fd);
 		if (close(fd) == 0)
 			return (0);
