@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/08 08:33:31 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 11:35:59 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	get_acb(t_src_line *lines)
 
 	n = 0;
 	i = 0;
-	while (lines[i].label != NULL || lines[i].opcode == 0)
+	while (i < MAX_LINES)
 	{
-		while (g_op_tab[n].opcode != lines[i].opcode)
+		while (g_op_tab[n].opcode != 0 && g_op_tab[n].opcode != lines[i].opcode)
 			n++;
 		if (g_op_tab[n].has_pcode == 1)
 			calculate_acb(lines + i);
