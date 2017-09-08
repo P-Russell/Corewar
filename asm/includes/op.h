@@ -6,15 +6,15 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/09/07 10:43:30 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 14:08:31 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OP_H
 # define OP_H
 # define IND_SIZE				2
-# define REG_SIZE				4
-# define DIR_SIZE				REG_SIZE
+# define REG_SIZE				1
+# define DIR_SIZE				4
 # define REG_CODE				1
 # define DIR_CODE				2
 # define IND_CODE				3

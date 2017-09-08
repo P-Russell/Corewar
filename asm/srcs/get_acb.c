@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/08 11:56:03 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/08 11:57:41 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	calculate_acb(t_src_line *line)
 		if (line->params[n][0] == 'r')
 			p = REG_CODE;
 		else if (ft_strchr(line->params[n], '%') != NULL)
-			p = IND_CODE;
-		else if (ft_isnumber(line->params[n]))
 			p = DIR_CODE;
+		else if (ft_isnumber(line->params[n]))
+			p = IND_CODE;
 		else
 			p = 0;
 		printf("paramcode %c: %d is %d\n", line->params[n][0], n, p);

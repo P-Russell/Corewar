@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:14:43 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/08 08:35:16 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 14:10:17 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@ int	get_bytes(t_src_line *lines)
 	int	p;
 
 	i = 0;
-	n = 0;
-	while (lines[i].label != NULL || lines[i].opcode == 0)
+	while (i < MAX_LINES)
 	{
+		n = 0;
 		if (lines[i].opcode != 0)
 		{
-			while (g_op_tab[n].opcode != lines[i].opcode)
+			while (n < 16 && g_op_tab[n].opcode != lines[i].opcode)
 				n++;
 			p = 0;
-			while (p < g_op_tab[n].nb_params)
+			if (lines[i].acb != 0)
+				lines[i].bytes += 1;
+			lines[i].bytes += 1;
+			while (p < g_op_tab[n].nb_params && lines[i].params[p])
 			{
 				if (ft_strchr(lines[i].params[p], DIRECT_CHAR) &&
 						g_op_tab[n].has_idx == 0)
@@ -35,7 +38,7 @@ int	get_bytes(t_src_line *lines)
 				else if (ft_strchr(lines[i].params[p], DIRECT_CHAR)
 						&& g_op_tab[n].has_idx == 1)
 					lines[i].bytes += IND_SIZE;
-				else if (ft_strchr(lines[i].params[p], 'r') != NULL)
+				else if (lines[i].params[p][0] == 'r')
 					lines[i].bytes += REG_SIZE;
 				else if (ft_isnumber(lines[i].params[p]))
 					lines[i].bytes += IND_SIZE;
@@ -43,7 +46,6 @@ int	get_bytes(t_src_line *lines)
 			}
 		}
 		i++;
-		n = 0;
 	}
 	return (EXIT_SUCCESS);
 }
