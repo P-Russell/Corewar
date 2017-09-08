@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 10:43:44 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 08:35:20 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int				assemble(int fd);
 char			**core_line_split(char const *s);
 int				is_param(char *line);
 int				get_params(t_src_line *lines);
-
-
+int				get_acb(t_src_line *lines);
+int				get_bytes(t_src_line *lines);
 
 #endif

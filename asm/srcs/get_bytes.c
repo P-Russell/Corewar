@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:14:43 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/07 15:17:35 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/08 08:35:16 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	get_bytes(t_src_line *lines)
 
 	i = 0;
 	n = 0;
-	while (lines[i].label != NULL || lines[i].opcode != NULL)
+	while (lines[i].label != NULL || lines[i].opcode == 0)
 	{
-		if (lines[i].opcode != NULL)
+		if (lines[i].opcode != 0)
 		{
 			while (g_op_tab[n].opcode != lines[i].opcode)
 				n++;
@@ -37,7 +37,7 @@ int	get_bytes(t_src_line *lines)
 					lines[i].bytes += IND_SIZE;
 				else if (ft_strchr(lines[i].params[p], 'r') != NULL)
 					lines[i].bytes += REG_SIZE;
-				else if (is_number(lines[i].params[p]))
+				else if (ft_isnumber(lines[i].params[p]))
 					lines[i].bytes += IND_SIZE;
 				p++;
 			}

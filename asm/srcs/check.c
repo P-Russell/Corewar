@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/07 16:04:54 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 08:32:08 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int		is_label_param(char *line)
 	i = 0;
 	if (ft_charstr(line, LABEL_CHAR) == NULL)
 	{
-		printf
 		return (0);
 	}
 	if (line[i] == DIRECT_CHAR)
