@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/08 08:32:08 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 08:53:34 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		is_label_param(char *line)
 		i++;
 	while (line[i])
 	{
-		if (ft_charstr(LABEL_CHARS, line[i]) == NULL)
+		if (ft_charstr(LABEL_CHARS, line[i]) == NULL && line[i] != LABEL_CHAR)
 			return (0);
 		i++;
 	}
