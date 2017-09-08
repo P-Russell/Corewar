@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 12:05:54 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/08 09:46:25 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/08 11:33:31 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	print_struct(t_src_line *lines)
 			printf("param %d: %s\n", j + 1, lines[i].params[j]);
 			j++;
 		}
+		printf("acb: %d\n", lines[i].acb);
+		printf("num bytes: %d\n", lines[i].bytes);
 		printf("----------------------------\n");
 		i++;
 	}
