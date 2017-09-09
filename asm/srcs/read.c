@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/08 11:30:23 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/09 13:03:35 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		get_data(t_src_line *lines, int fd)
 	i = 0;
 	while (i < MAX_LINES && get_next_line(fd, &line) > 0)
 	{
-		if (*line && !is_comment(line) && (split = core_line_split(line)))
+		if (*line && (split = core_line_split(line)) && is_code_line(split))
 		{
 			extract_data_from_line(split, lines + i);
 			ft_matrixdel((void **)split);
@@ -96,6 +96,6 @@ int		assemble(int fd)
 	printf("about to get bytes\n");
 	if (get_bytes(lines) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	print_struct(lines);
+	//print_struct(lines);
 	return (EXIT_SUCCESS);
 }
