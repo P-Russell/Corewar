@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/08 11:57:41 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/09 08:04:50 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	calculate_acb(t_src_line *line)
 			p = IND_CODE;
 		else
 			p = 0;
-		printf("paramcode %c: %d is %d\n", line->params[n][0], n, p);
 		line->acb += p * (square * square);
 		square /= 2;
 		n++;
@@ -49,7 +48,6 @@ int	get_acb(t_src_line *lines)
 		n = 0;
 		while (g_op_tab[n].opcode != 0 && g_op_tab[n].opcode != lines[i].opcode)
 			n++;
-		printf("opcode found %d\n", g_op_tab[n].opcode);
 		if (n == 16)
 			;
 		else if (g_op_tab[n].has_pcode == 1)
