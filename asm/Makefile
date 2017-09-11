@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/09/07 09:55:27 by prussell         ###   ########.fr        #
+#    Updated: 2017/09/11 14:19:11 by prussell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ clean:
 	rm -f $(NAME)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf asm.dSYM
 
 re: fclean all
 
