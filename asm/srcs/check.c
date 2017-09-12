@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 13:06:38 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/12 15:17:22 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		is_label_address(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (ft_charstr(LABEL_CHARS, line[i]) == NULL && line[i] != LABEL_CHAR)
+		if (ft_strchr(LABEL_CHARS, line[i]) == NULL && line[i] != LABEL_CHAR)
 			return (0);
 		i++;
 	}
@@ -47,7 +47,7 @@ int		is_label_param(char *line)
 	int	i;
 
 	i = 0;
-	if (ft_charstr(line, LABEL_CHAR) == NULL)
+	if (ft_strchr(line, LABEL_CHAR) == NULL)
 	{
 		return (0);
 	}
@@ -55,7 +55,7 @@ int		is_label_param(char *line)
 		i++;
 	while (line[i])
 	{
-		if (ft_charstr(LABEL_CHARS, line[i]) == NULL && line[i] != LABEL_CHAR)
+		if (ft_strchr(LABEL_CHARS, line[i]) == NULL && line[i] != LABEL_CHAR)
 			return (0);
 		i++;
 	}
