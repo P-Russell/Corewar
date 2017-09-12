@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 09:07:14 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 10:03:09 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 10:42:01 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	write_name_comment(t_binary *bin)
 	write(bin->fd, bin->header.prog_name, PROG_NAME_LENGTH);
 	write(bin->fd, buf, 8);
 	write(bin->fd, bin->header.comment, COMMENT_LENGTH);
-	write(bin->fd, buf, 4);
+    write(bin->fd, buf, 4);
 }
 
 void	write_header(t_binary *bin)

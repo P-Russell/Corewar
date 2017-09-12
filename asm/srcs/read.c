@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 08:43:46 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 10:42:29 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,8 @@ t_src_line		*build_line_data_struct(int fd)
 		return (NULL);
 	if (get_acb(lines) == EXIT_FAILURE)
 		return (NULL);
-	printf("about to get bytes\n");
 	if (get_bytes(lines) == EXIT_FAILURE)
 		return (NULL);
-	//print_struct(lines);
+	print_struct(lines);
 	return (lines_ptr);
 }
