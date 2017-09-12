@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:33:33 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/09 13:03:10 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 11:29:55 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			init_header_var(t_header *head, int fd)
 	ft_bzero(head->prog_name, PROG_NAME_LENGTH + 1);
 	ft_bzero(head->comment, COMMENT_LENGTH + 1);
 	head->magic = COREWAR_EXEC_MAGIC;
-	head->prog_size = 0;
+	head->prog_size = 42;
 	name_found = 0;
 	comment_found = 0;
 	while (get_next_line(fd, &line) && (!name_found || !comment_found))
@@ -70,21 +70,30 @@ int			init_header_var(t_header *head, int fd)
 char	*exe_name(char *name)
 {
 	int 	i;
+	int		j;
 	char	*exe;
+	char	**split;
 
 	i = 0;
-	while (name[i] && name[i] != '.')
+	j = 0;
+	if (!(split = ft_strsplit(name, '/')))
+		return (NULL);
+	while (split[j])
+		j++;
+	j--;
+	while (split[j][i] && split[j][i] != '.')
 		i++;
-	if (name[i] != '.' || !(exe = (char *)malloc(sizeof(char) * (i + 4))))
+	if (split[j][i] != '.' || !(exe = (char *)malloc(sizeof(char) * (i + 4))))
 		return (NULL);
 	exe[i + 4] = '\0';
 	i = 0;
-	while (name[i] != '.')
+	while (split[j][i] != '.')
 	{
-		exe[i] = name[i];
+		exe[i] = split[j][i];
 		i++;
 	}
 	ft_strcpy(exe + i, ".cor");
+	ft_matrixdel((void **)split);
 	return (exe);
 }
 

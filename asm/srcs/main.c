@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 08:50:28 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 11:05:51 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int		main(int argc, char **argv)
 	}
 	else if (is_valid_fd(fd)) 
 	{
-		init_bin_var(&bin, fd, argv[i]);
-		lseek(fd, 0, SEEK_SET);
 		lines = build_line_data_struct(fd);
+		lseek(fd, 0, SEEK_SET);
+		init_bin_var(&bin, fd, argv[i]);
 		if (close(fd) != 0)
 		{
 			ft_putendl_fd("Could not close file", 2);
