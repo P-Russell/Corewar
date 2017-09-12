@@ -6,16 +6,11 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:49:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/08 08:53:34 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 13:06:38 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-int		is_valid_fd(int fd)
-{
-	return (fd > 0);
-}
 
 int		is_opcode(char *line)
 {

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:33:33 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 11:29:55 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 13:24:42 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,51 +53,50 @@ int			init_header_var(t_header *head, int fd)
 	ft_bzero(head->prog_name, PROG_NAME_LENGTH + 1);
 	ft_bzero(head->comment, COMMENT_LENGTH + 1);
 	head->magic = COREWAR_EXEC_MAGIC;
-	head->prog_size = 42;
+	head->prog_size = 0;
 	name_found = 0;
 	comment_found = 0;
 	while (get_next_line(fd, &line) && (!name_found || !comment_found))
 	{
 		if (line && ft_strstr(line, NAME_CMD_STRING) && (name_found = 1))
 			read_in_name(line, head->prog_name);
-		else if (line && ft_strstr(line, COMMENT_CMD_STRING) && (comment_found = 1))
+		else if (line && ft_strstr(line, COMMENT_CMD_STRING) &&
+				(comment_found = 1))
 			read_in_comment(line, head->comment);
 		ft_strdel(&line);
 	}
 	return (0);
 }
 
-char	*exe_name(char *name)
+char		*exe_name(char *name)
 {
-	int 	i;
-	int		j;
-	char	*exe;
-	char	**split;
+	t_norm	norm;
 
-	i = 0;
-	j = 0;
-	if (!(split = ft_strsplit(name, '/')))
+	norm.i = 0;
+	norm.j = 0;
+	if (!(norm.split = ft_strsplit(name, '/')))
 		return (NULL);
-	while (split[j])
-		j++;
-	j--;
-	while (split[j][i] && split[j][i] != '.')
-		i++;
-	if (split[j][i] != '.' || !(exe = (char *)malloc(sizeof(char) * (i + 4))))
+	while (norm.split[norm.j])
+		norm.j++;
+	norm.j--;
+	while (norm.split[norm.j][norm.i] && norm.split[norm.j][norm.i] != '.')
+		norm.i++;
+	if (norm.split[norm.j][norm.i] != '.' ||
+			!(norm.exe = (char *)malloc(sizeof(char) * (norm.i + 4))))
 		return (NULL);
-	exe[i + 4] = '\0';
-	i = 0;
-	while (split[j][i] != '.')
+	norm.exe[norm.i + 4] = '\0';
+	norm.i = 0;
+	while (norm.split[norm.j][norm.i] != '.')
 	{
-		exe[i] = split[j][i];
-		i++;
+		norm.exe[norm.i] = norm.split[norm.j][norm.i];
+		norm.i++;
 	}
-	ft_strcpy(exe + i, ".cor");
-	ft_matrixdel((void **)split);
-	return (exe);
+	ft_strcpy(norm.exe + norm.i, ".cor");
+	ft_matrixdel((void **)norm.split);
+	return (norm.exe);
 }
 
-int		init_bin_var(t_binary *bin, int fd, char *name)
+int			init_bin_var(t_binary *bin, int fd, char *name)
 {
 	init_header_var(&(bin->header), fd);
 	bin->name = exe_name(name);

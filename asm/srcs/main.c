@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 11:54:07 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/12 13:19:25 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		main(int argc, char **argv)
 {
-    int	fd;
-    t_src_line *lines;
-    t_binary bin;
-    int	i;
+	int			fd;
+	t_src_line	*lines;
+	t_binary	bin;
+	int			i;
 
 	i = 1;
 	if (argc == 1)
@@ -30,11 +30,12 @@ int		main(int argc, char **argv)
 		ft_putendl_fd("Could not open file", 2);
 		return (-2);
 	}
-	else if (is_valid_fd(fd)) 
+	else if (is_valid_fd(fd))
 	{
 		lines = build_line_data_struct(fd);
 		lseek(fd, 0, SEEK_SET);
 		init_bin_var(&bin, fd, argv[i]);
+		champ_size(lines, &bin);
 		if (close(fd) != 0)
 		{
 			ft_putendl_fd("Could not close file", 2);

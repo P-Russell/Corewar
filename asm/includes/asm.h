@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 08:44:25 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 13:21:54 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,20 @@ typedef	struct	s_src_line
 	int			bytes;
 }				t_src_line;
 
+typedef struct	s_norm
+{
+	int			i;
+	int			j;
+	char		*exe;
+	char		**split;
+}				t_norm;
+
 int				is_valid_fd(int fd);
 int				is_comment(char *line);
 int				is_opcode(char *line);
 int				is_label_address(char *line);
 void			print_struct(t_src_line*lines);
+void            champ_size(t_src_line *lines, t_binary *bin);
 t_src_line		*build_line_data_struct(int fd);
 char			**core_line_split(char const *s);
 int				is_param(char *line);

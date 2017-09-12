@@ -6,17 +6,17 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 11:52:43 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/12 13:28:47 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		extract_data_from_line(char **split, t_src_line *lines)
+int			extract_data_from_line(char **split, t_src_line *lines)
 {
 	int		label_found;
 	int		op_code_found;
-	int		params_found; 
+	int		params_found;
 	int		i;
 
 	label_found = 0;
@@ -38,7 +38,7 @@ int		extract_data_from_line(char **split, t_src_line *lines)
 	return (1);
 }
 
-int		get_data(t_src_line *lines, int fd)
+int			get_data(t_src_line *lines, int fd)
 {
 	int		i;
 	char	*line;
@@ -63,7 +63,7 @@ int		get_data(t_src_line *lines, int fd)
 	return (EXIT_SUCCESS);
 }
 
-void	init_line_struct(t_src_line *lines)
+void		init_line_struct(t_src_line *lines)
 {
 	int i;
 	int	j;
@@ -82,7 +82,7 @@ void	init_line_struct(t_src_line *lines)
 	}
 }
 
-t_src_line		*build_line_data_struct(int fd)
+t_src_line	*build_line_data_struct(int fd)
 {
 	t_src_line lines[MAX_LINES];
 	t_src_line *lines_ptr;
