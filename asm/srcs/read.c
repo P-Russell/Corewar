@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/09 13:03:35 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 08:43:46 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int		get_data(t_src_line *lines, int fd)
 		ft_putendl_fd("Lines in file exceed MAX_LINES", 2);
 		return (EXIT_FAILURE);
 	}
-	lines[i].data = NULL;
 	return (EXIT_SUCCESS);
 }
 
@@ -72,7 +71,6 @@ void	init_line_struct(t_src_line *lines)
 	i = 0;
 	while (i < MAX_LINES)
 	{
-		lines[i].data = NULL;
 		lines[i].label = NULL;
 		lines[i].acb = 0;
 		j = 0;
@@ -84,18 +82,20 @@ void	init_line_struct(t_src_line *lines)
 	}
 }
 
-int		assemble(int fd)
+t_src_line		*build_line_data_struct(int fd)
 {
+	t_src_line *lines_ptr;
 	t_src_line lines[MAX_LINES];
 
+	lines_ptr = lines;
 	init_line_struct(lines);
 	if (get_data(lines, fd) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (NULL);
 	if (get_acb(lines) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (NULL);
 	printf("about to get bytes\n");
 	if (get_bytes(lines) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (NULL);
 	//print_struct(lines);
-	return (EXIT_SUCCESS);
+	return (lines_ptr);
 }

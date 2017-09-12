@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/09 13:04:41 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/12 08:44:25 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 
 #include <stdio.h>
 
+typedef struct		s_header
+{
+	unsigned int	magic;
+	char			prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int	prog_size;
+	char			comment[COMMENT_LENGTH + 1];
+}					t_header;
+
 typedef struct	s_binary
 {
 	t_header	header;
@@ -33,7 +41,6 @@ typedef struct	s_binary
 
 typedef	struct	s_src_line
 {
-	char		*data;
 	char		*label;
 	int			acb;
 	char		*params[MAX_ARGS_NUMBER];
@@ -47,7 +54,7 @@ int				is_comment(char *line);
 int				is_opcode(char *line);
 int				is_label_address(char *line);
 void			print_struct(t_src_line*lines);
-int				assemble(int fd);
+t_src_line		*build_line_data_struct(int fd);
 char			**core_line_split(char const *s);
 int				is_param(char *line);
 int				get_params(t_src_line *lines);
@@ -55,5 +62,6 @@ int				get_acb(t_src_line *lines);
 int				get_bytes(t_src_line *lines);
 int				init_bin_var(t_binary *bin, int fd, char *name);
 int				is_code_line(char **line);
+int				write_cor(t_src_line *lines, t_binary *bin);
 
 #endif
