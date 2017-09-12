@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 10:42:29 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/12 11:52:43 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	init_line_struct(t_src_line *lines)
 
 t_src_line		*build_line_data_struct(int fd)
 {
-	t_src_line *lines_ptr;
 	t_src_line lines[MAX_LINES];
+	t_src_line *lines_ptr;
 
 	lines_ptr = lines;
 	init_line_struct(lines);
