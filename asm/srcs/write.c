@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 09:07:14 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 13:28:24 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/12 14:59:36 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	write_header(t_binary *bin)
 
 int		write_cor(t_src_line *lines, t_binary *bin)
 {
-	(void)lines;
 	if (!(bin->fd = open(bin->name, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU)))
 	{
 		ft_putstr_fd("Could not open .cor file", 2);
@@ -73,6 +72,7 @@ int		write_cor(t_src_line *lines, t_binary *bin)
 	else
 	{
 		write_header(bin);
+		write_bytes(bin->fd, lines);
 		close(bin->fd);
 	}
 	return (0);

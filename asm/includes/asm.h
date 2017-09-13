@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 13:21:54 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/12 14:59:34 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int				is_opcode(char *line);
 int				is_label_address(char *line);
 void			print_struct(t_src_line*lines);
 void            champ_size(t_src_line *lines, t_binary *bin);
+void			write_bytes(int fd, t_src_line *lines);
 t_src_line		*build_line_data_struct(int fd);
 char			**core_line_split(char const *s);
 int				is_param(char *line);
