@@ -1,0 +1,495 @@
+./asm testfile.s
+About to assemble
+----------------------------
+index number 0
+----------------------------
+index number 1
+----------------------------
+index number 2
+----------------------------
+index number 3
+opcode num: 8, name: xor
+param 1: r4
+param 2: r4
+param 3: r4
+----------------------------
+index number 4
+label: debut:
+----------------------------
+index number 5
+opcode num: 12, name: fork
+param 1: %:debut2
+----------------------------
+index number 6
+opcode num: 3, name: st
+param 1: r1
+----------------------------
+index number 7
+label: ld1:
+opcode num: 1, name: live
+param 1: %0
+----------------------------
+index number 8
+opcode num: 12, name: fork
+param 1: %:t2
+----------------------------
+index number 9
+opcode num: 3, name: st
+param 1: r1
+----------------------------
+index number 10
+opcode num: 2, name: ld
+param 1: %-10
+param 2: r2
+----------------------------
+index number 11
+opcode num: 2, name: ld
+param 1: %1
+param 2: r3
+----------------------------
+index number 12
+label: live1:
+opcode num: 1, name: live
+param 1: %4
+----------------------------
+index number 13
+opcode num: 4, name: add
+param 1: r2
+param 2: r3
+param 3: r2
+----------------------------
+index number 14
+opcode num: 9, name: zjmp
+param 1: %:live1b
+----------------------------
+index number 15
+opcode num: 8, name: xor
+param 1: r4
+param 2: r4
+param 3: r4
+----------------------------
+index number 16
+opcode num: 9, name: zjmp
+param 1: %:live1
+----------------------------
+index number 17
+label: live1b:
+opcode num: 12, name: fork
+param 1: %:t2
+----------------------------
+index number 18
+opcode num: 2, name: ld
+param 1: %-10
+param 2: r2
+----------------------------
+index number 19
+opcode num: 8, name: xor
+param 1: r4
+param 2: r4
+param 3: r4
+----------------------------
+index number 20
+opcode num: 9, name: zjmp
+param 1: %:live1
+----------------------------
+index number 21
+label: debut2:
+----------------------------
+index number 22
+opcode num: 3, name: st
+param 1: r1
+----------------------------
+index number 23
+label: ld2:
+opcode num: 1, name: live
+param 1: %0
+----------------------------
+index number 24
+opcode num: 12, name: fork
+param 1: %:t1
+----------------------------
+index number 25
+opcode num: 3, name: st
+param 1: r1
+----------------------------
+index number 26
+opcode num: 2, name: ld
+param 1: %-10
+param 2: r2
+----------------------------
+index number 27
+opcode num: 2, name: ld
+param 1: %1
+param 2: r3
+----------------------------
+index number 28
+label: live2:
+opcode num: 1, name: live
+param 1: %4
+----------------------------
+index number 29
+opcode num: 4, name: add
+param 1: r2
+param 2: r3
+param 3: r2
+----------------------------
+index number 30
+opcode num: 9, name: zjmp
+param 1: %:live2b
+----------------------------
+index number 31
+opcode num: 8, name: xor
+param 1: r4
+param 2: r4
+param 3: r4
+----------------------------
+index number 32
+opcode num: 9, name: zjmp
+param 1: %:live2
+----------------------------
+index number 33
+label: live2b:
+opcode num: 12, name: fork
+param 1: %:t1
+----------------------------
+index number 34
+opcode num: 2, name: ld
+param 1: %-10
+param 2: r2
+----------------------------
+index number 35
+opcode num: 8, name: xor
+param 1: r4
+param 2: r4
+param 3: r4
+----------------------------
+index number 36
+opcode num: 9, name: zjmp
+param 1: %:live2
+----------------------------
+index number 37
+----------------------------
+index number 38
+----------------------------
+index number 39
+----------------------------
+index number 40
+----------------------------
+index number 41
+----------------------------
+index number 42
+----------------------------
+index number 43
+----------------------------
+index number 44
+----------------------------
+index number 45
+----------------------------
+index number 46
+----------------------------
+index number 47
+----------------------------
+index number 48
+----------------------------
+index number 49
+----------------------------
+index number 50
+----------------------------
+index number 51
+----------------------------
+index number 52
+----------------------------
+index number 53
+----------------------------
+index number 54
+----------------------------
+index number 55
+----------------------------
+index number 56
+----------------------------
+index number 57
+----------------------------
+index number 58
+----------------------------
+index number 59
+----------------------------
+index number 60
+----------------------------
+index number 61
+----------------------------
+index number 62
+----------------------------
+index number 63
+----------------------------
+index number 64
+----------------------------
+index number 65
+----------------------------
+index number 66
+----------------------------
+index number 67
+----------------------------
+index number 68
+----------------------------
+index number 69
+----------------------------
+index number 70
+----------------------------
+index number 71
+----------------------------
+index number 72
+----------------------------
+index number 73
+----------------------------
+index number 74
+----------------------------
+index number 75
+----------------------------
+index number 76
+----------------------------
+index number 77
+----------------------------
+index number 78
+----------------------------
+index number 79
+----------------------------
+index number 80
+----------------------------
+index number 81
+----------------------------
+index number 82
+----------------------------
+index number 83
+----------------------------
+index number 84
+----------------------------
+index number 85
+----------------------------
+index number 86
+----------------------------
+index number 87
+----------------------------
+index number 88
+----------------------------
+index number 89
+----------------------------
+index number 90
+----------------------------
+index number 91
+----------------------------
+index number 92
+----------------------------
+index number 93
+----------------------------
+index number 94
+----------------------------
+index number 95
+----------------------------
+index number 96
+----------------------------
+index number 97
+----------------------------
+index number 98
+----------------------------
+index number 99
+----------------------------
+index number 100
+----------------------------
+index number 101
+----------------------------
+index number 102
+----------------------------
+index number 103
+----------------------------
+index number 104
+----------------------------
+index number 105
+----------------------------
+index number 106
+----------------------------
+index number 107
+----------------------------
+index number 108
+----------------------------
+index number 109
+----------------------------
+index number 110
+----------------------------
+index number 111
+----------------------------
+index number 112
+----------------------------
+index number 113
+----------------------------
+index number 114
+----------------------------
+index number 115
+----------------------------
+index number 116
+----------------------------
+index number 117
+----------------------------
+index number 118
+----------------------------
+index number 119
+----------------------------
+index number 120
+----------------------------
+index number 121
+----------------------------
+index number 122
+----------------------------
+index number 123
+----------------------------
+index number 124
+----------------------------
+index number 125
+----------------------------
+index number 126
+----------------------------
+index number 127
+----------------------------
+index number 128
+----------------------------
+index number 129
+----------------------------
+index number 130
+----------------------------
+index number 131
+----------------------------
+index number 132
+----------------------------
+index number 133
+----------------------------
+index number 134
+----------------------------
+index number 135
+----------------------------
+index number 136
+----------------------------
+index number 137
+----------------------------
+index number 138
+----------------------------
+index number 139
+----------------------------
+index number 140
+----------------------------
+index number 141
+----------------------------
+index number 142
+----------------------------
+index number 143
+----------------------------
+index number 144
+----------------------------
+index number 145
+----------------------------
+index number 146
+----------------------------
+index number 147
+----------------------------
+index number 148
+----------------------------
+index number 149
+----------------------------
+index number 150
+----------------------------
+index number 151
+----------------------------
+index number 152
+----------------------------
+index number 153
+----------------------------
+index number 154
+----------------------------
+index number 155
+----------------------------
+index number 156
+----------------------------
+index number 157
+----------------------------
+index number 158
+----------------------------
+index number 159
+----------------------------
+index number 160
+----------------------------
+index number 161
+----------------------------
+index number 162
+----------------------------
+index number 163
+----------------------------
+index number 164
+----------------------------
+index number 165
+----------------------------
+index number 166
+----------------------------
+index number 167
+----------------------------
+index number 168
+----------------------------
+index number 169
+----------------------------
+index number 170
+----------------------------
+index number 171
+----------------------------
+index number 172
+----------------------------
+index number 173
+----------------------------
+index number 174
+----------------------------
+index number 175
+----------------------------
+index number 176
+----------------------------
+index number 177
+----------------------------
+index number 178
+----------------------------
+index number 179
+----------------------------
+index number 180
+----------------------------
+index number 181
+----------------------------
+index number 182
+----------------------------
+index number 183
+----------------------------
+index number 184
+----------------------------
+index number 185
+----------------------------
+index number 186
+----------------------------
+index number 187
+----------------------------
+index number 188
+----------------------------
+index number 189
+----------------------------
+index number 190
+----------------------------
+index number 191
+----------------------------
+index number 192
+----------------------------
+index number 193
+----------------------------
+index number 194
+----------------------------
+index number 195
+----------------------------
+index number 196
+----------------------------
+index number 197
+----------------------------
+index number 198
+----------------------------
+index number 199
+----------------------------

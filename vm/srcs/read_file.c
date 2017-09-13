@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm.h                                               :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/11 10:15:30 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/13 14:40:45 by prussell         ###   ########.fr       */
+/*   Created: 2017/09/13 13:30:58 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/13 14:08:14 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VM_H
-# define VM_H
-# include "op.h"
+#include "vm.h"
 
-typedef struct		s_champ
+int		seek_to_magic(int fd)
 {
-	int				player_num;
-	char			*name;
-	char			*comment;
-	int				carry;
-	unsigned int	load_position;
-	unsigned int	size;
-	unsigned int	pc
-	unsigned char	code[CHAMP_MAX_SIZE];
-}					t_champ;
+	while (get_next_line(fd, line))
+}
 
-#endif
+int		read_file(char *filename, t_champ *champ)
+{
+	int	fd;
+
+	if (!(fd = open(filename, O_RDONLY)))
+		return (EXIT_FAILURE);
+	if (!seek_to_magic(fd))
+		return (EXIT_FAILURE);
+
+}
