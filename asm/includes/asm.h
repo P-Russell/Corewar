@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 14:59:34 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/13 13:35:25 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,13 @@ int				get_bytes(t_src_line *lines);
 int				init_bin_var(t_binary *bin, int fd, char *name);
 int				is_code_line(char **line);
 int				write_cor(t_src_line *lines, t_binary *bin);
+int             check_idx(int op);
+void            reverse_bytes(int *mem, size_t size);
+void            write_bytes(int fd, t_src_line *lines);
+void            write_opcode_and_acb(t_src_line line, int fd);
+void            write_register(char *line, int fd);
+void            write_direct(t_src_line line, int fd, int p);
+void            write_indirect(char *line, int fd);
+void            write_label_adrs(char *line, int fd);
 
 #endif
