@@ -55,4 +55,3 @@ dkms.conf
 .DS_Store
 ._*
 .gitignore
-asm
