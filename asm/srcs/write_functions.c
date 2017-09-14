@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:46:36 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/13 14:14:17 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/14 16:41:32 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	write_direct(t_src_line line, int fd, int p)
 	}
 	else
 	{
-		reverse_bytes(&n, DIR_SIZE);
+		n = ((n >> 24) & 0xff) | ((n << 8) & 0xff0000) |
+			((n >> 8) & 0xff00) | ((n << 24) & 0xff000000);
 		write(fd, &n, DIR_SIZE);
 	}
 }
@@ -51,15 +52,39 @@ void	write_indirect(char *line, int fd)
 	int	n;
 
 	n = ft_atoi(line);
+	n = (n >> 8) | (n << 8);
 	write(fd, &n, IND_SIZE);
 }
 
-void    write_label_adrs(char *line, int fd)
+//Label adresses occansionally incorrect, otherwise great :)
+void    write_label_adrs(t_src_line *lines, char *line, int fd, int i)
 {
 	int n;
+	int	y;
 
-	line = line + 1;
-	n = 43981;
-	n = (n >> 8) | (n << 8);
+	y = 0;
+	n = 0;
+	y = get_offset(lines, line);
+	printf("loop exited with %d and %d\n", y, i);
+	if (y > i)
+	{
+		while (y > i)
+		{
+			n += lines[i].bytes;
+			i++;
+		}
+		n = (n >> 8) | (n << 8);
+	}
+	else
+	{
+		while (y <= i)
+		{
+			n += lines[i].bytes;
+			i--;
+		}
+		n = -n;
+		n = ((n & 0xFF) << 8) | ((n >> 8) & 0xFF);
+	}
+	printf("label index is %d\n", n);
 	write(fd, (char *)&n, IND_SIZE);
 }
