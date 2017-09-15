@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 13:28:47 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/15 11:53:19 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ t_src_line	*build_line_data_struct(int fd)
 		return (NULL);
 	if (get_bytes(lines) == EXIT_FAILURE)
 		return (NULL);
-	print_struct(lines);
 	return (lines_ptr);
 }

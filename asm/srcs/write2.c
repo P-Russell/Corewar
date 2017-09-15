@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 13:48:55 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/14 16:23:50 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/15 11:52:28 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int		get_offset(t_src_line *lines, char *line)
 	n = 0;
 	while (lines[n].label != NULL || lines[n].opcode != 0)
 	{
-		printf("comparing %s and %s\n", line + 2, lines[n].label);
 		while (lines[n].label == NULL)
 			n++;
-		if (ft_strncmp(lines[n].label, line + 2, ft_strlen(lines[n].label) - 1) == 0)
-			break ;
+		if (ft_strlen(lines[n].label) - 1 == ft_strlen(line + 2))
+			if (ft_strncmp(lines[n].label, line + 2, ft_strlen(line + 2)) == 0)
+				break ;
 		n++;
 	}
 	return (n);

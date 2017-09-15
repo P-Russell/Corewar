@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:46:36 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/14 16:41:32 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/15 11:53:06 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	write_indirect(char *line, int fd)
 	int	n;
 
 	n = ft_atoi(line);
-	n = (n >> 8) | (n << 8);
+	if (n > 0)
+		n = (n >> 8) | (n << 8);
+	else
+		n = ((n & 0xFF) << 8) | ((n >> 8) & 0xFF);
 	write(fd, &n, IND_SIZE);
 }
 
@@ -65,7 +68,6 @@ void    write_label_adrs(t_src_line *lines, char *line, int fd, int i)
 	y = 0;
 	n = 0;
 	y = get_offset(lines, line);
-	printf("loop exited with %d and %d\n", y, i);
 	if (y > i)
 	{
 		while (y > i)
@@ -77,6 +79,7 @@ void    write_label_adrs(t_src_line *lines, char *line, int fd, int i)
 	}
 	else
 	{
+		i--;
 		while (y <= i)
 		{
 			n += lines[i].bytes;
@@ -85,6 +88,5 @@ void    write_label_adrs(t_src_line *lines, char *line, int fd, int i)
 		n = -n;
 		n = ((n & 0xFF) << 8) | ((n >> 8) & 0xFF);
 	}
-	printf("label index is %d\n", n);
 	write(fd, (char *)&n, IND_SIZE);
 }
