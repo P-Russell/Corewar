@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/19 09:22:55 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/19 10:40:48 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		check_player_numbers(t_env *env)
 {
-	int		i;
-	char	possible;
+	unsigned int	i;
+	char			possible;
 	
 	possible = '1';
 	i = 0;

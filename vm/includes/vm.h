@@ -27,7 +27,8 @@ typedef struct		s_champ
 	unsigned int	size;
 	unsigned int	stated_size;
 	unsigned int	cycles_to_exec;
-	t_core			*pc;
+	t_core			*core_ptr;
+	int				PC;
 	int				carry;
 	unsigned int	load_address;
 	unsigned char	reg[REG_NUMBER * REG_SIZE + 1];
@@ -45,6 +46,6 @@ typedef struct		s_env
 
 void	init_arena(t_env *env);									
 int		init_env(int argc, char **argv, t_env *env); 
-int		read_champ_data(t_champ *champs, int num_players);
+//int		read_champ_data(t_champ *champs, int num_players);
 
 #endif

@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/19 10:48:38 by prussell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-"./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ..."
-
-
+#include "vm.h"
 
 int		main(int argc, char **argv)
 {
@@ -12,10 +21,11 @@ int		main(int argc, char **argv)
 		ft_putendl_fd(PARAM_ERROR, 2);
 		return (-1);
 	}
-	if (read_champ_data(&env.champs, env.num_players) < 0)
+	/*
+	if (read_champ_data(&(env.champs), env.num_players) < 0)
 	{
 		ft_putendl_fd("Read .cor error", 2);
 		return (-1);
-	}
+	}*/
 	return (0);	
 }
