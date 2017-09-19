@@ -1,13 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_champ_data.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/19 11:10:49 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/19 11:11:27 by prussell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "vm.h"
+
 static int		check_magic(t_champ *champ)
 {
 	char	magic[5];
+	char	hex[9];
 	int		mag;
 
 	ft_bzero(magic, 5);
+	ft_bzero(hex, 9);
 	if (read(champ->fd, magic, sizeof(COREWAR_EXEC_MAGIC)) < 0)
 		return (-1);
-	magic[1] = 'x'
-	mag = ft_atoi(magic);       // problem here. Determine the value held at magic and then write hex to decimal function
+	write_char_to_hex(magic[0], hex);
+	write_char_to_hex(magic[1], &hex[2]);
+	write_char_to_hex(magic[2], &hex[4]);
+	write_char_to_hex(magic[3], &hex[6]);
+	printf("%s\n", hex);
 	if (mag == COREWAR_EXEC_MAGIC)
 		return (0);
 	return (-1);
