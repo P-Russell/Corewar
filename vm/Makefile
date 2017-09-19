@@ -6,13 +6,13 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/09/19 09:31:10 by prussell         ###   ########.fr        #
+#    Updated: 2017/09/19 10:53:04 by prussell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corwar
 
-SRCS = srcs/main.c srcs/init_env.c
+SRCS = srcs/main.c srcs/init_env.c srcs/init_arena.c
 
 FLAGS = -g3 -Wall -Werror -Wextra -iquoteincludes
 
