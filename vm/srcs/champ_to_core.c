@@ -6,13 +6,13 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:31:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/19 12:00:02 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/19 15:55:55 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	load_addr_val(t_env *env)
+static void		load_addr_val(t_env *env)
 {
 	unsigned int	i;
 	unsigned int	step;
@@ -26,7 +26,7 @@ void	load_addr_val(t_env *env)
 	}
 }
 
-void	load_mem(t_env *env, int i)
+static void		load_mem(t_env *env, int i)
 {
 	unsigned int	j;
 	unsigned int	addr;
@@ -42,7 +42,7 @@ void	load_mem(t_env *env, int i)
 	}
 }
 
-void	read_champs_into_core(t_env *env)
+void		read_champs_into_core(t_env *env)
 {
 	unsigned int	i;
 
