@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/19 11:26:05 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/19 11:48:04 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main(int argc, char **argv)
 		ft_putendl_fd("Read .cor error", 2);
 		return (-1);
 	}*/
-	if (read_champs_into_core(&env) < 0)
+//	if (read_champs_into_core(&env) < 0)
 		/* Function sets variable at champ to load address (MEM_SIZE / env->num_players * 2)
 		 * reads champ->code in to env->arena[champ->load_address]
 		 * bonus - debug file - print_arena in accordance with pdf

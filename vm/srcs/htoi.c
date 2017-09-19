@@ -6,15 +6,11 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 09:17:32 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/19 11:05:43 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/19 11:16:37 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "op.h"
-//#include "vm.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
+#include "vm.h"
 
 int		ft_power(int a, int b)
 {
@@ -30,6 +26,8 @@ int		ft_power(int a, int b)
 	}
 	return (t);
 }
+
+//Give negative if len = 8;
 
 int		htoi(char *str, size_t len)
 {

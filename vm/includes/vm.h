@@ -8,6 +8,10 @@
 # include "op.h"
 # include "../../libft/libft.h"
 
+
+#include <stdio.h>
+
+
 # define PARAM_ERROR "./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ..."
 
 typedef	struct		s_core

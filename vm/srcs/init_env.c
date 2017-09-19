@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/19 10:40:48 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/19 14:03:58 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		check_player_numbers(t_env *env)
 {
 	unsigned int	i;
 	char			possible;
-	
+
 	possible = '1';
 	i = 0;
 	while (i < env->num_players)
@@ -28,6 +28,8 @@ static void		check_player_numbers(t_env *env)
 			env->player_nums[i] = possible;
 			env->champs[i].player_num = possible - '0';
 		}
+		else
+			env->champs[i].player_num = env->player_nums[i] - '0';
 		i++;
 	}
 	i = 0;
@@ -35,6 +37,7 @@ static void		check_player_numbers(t_env *env)
 
 static int		new_champ(char *file_name, t_champ *champ, unsigned int play_num)
 {
+	printf("creating new champ from %s\n", file_name);
 	if (play_num <= MAX_PLAYERS)
 	{
 		champ->filename = file_name;	//ptr aliasing could be prob
@@ -51,6 +54,7 @@ static int		new_champ(char *file_name, t_champ *champ, unsigned int play_num)
 		champ->size = 0;
 		champ->carry = 0;
 		champ->load_address = 0;
+		champ->PC = 0;
 		return (1);
 	}
 	ft_putendl_fd("player number specified exceeds MAX_PLAYERS", 2);
@@ -107,6 +111,13 @@ int		init_env(int argc, char **argv, t_env *env)
 	if (init_env_loop(argc, argv, env, i) < 0)
 		return (-1);
 	check_player_numbers(env);
+	unsigned int j = 0;
+	printf("Used Numbers: %s\n", env->player_nums);
+	while (j < env->num_players)
+	{
+		printf("%d\n", env->champs[j].player_num);
+		j++;
+	}
 	init_arena(env);
 	return (1);
 }
