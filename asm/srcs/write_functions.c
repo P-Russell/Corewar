@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:46:36 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/19 08:10:56 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/19 11:53:49 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	write_direct(t_src_line line, int fd, int p)
 	n = ft_atoi(line.params[p] + 1);
 	if (idx == 1)
 	{
-		n = (n >> 8) | (n << 8);
+		n = ((n & 0xff) << 8) | ((n >> 8) & 0xff);
 		write(fd, &n, IND_SIZE);
 	}
 	else
@@ -52,14 +52,10 @@ void	write_indirect(char *line, int fd)
 	int	n;
 
 	n = ft_atoi(line);
-	if (n > 0)
-		n = (n >> 8) | (n << 8);
-	else
-		n = ((n & 0xFF) << 8) | ((n >> 8) & 0xFF);
+	n = ((n & 0xff) << 8) | ((n >> 8) & 0xff);
 	write(fd, &n, IND_SIZE);
 }
 
-//Label adresses occansionally incorrect, otherwise great :)
 void    write_label_adrs(t_src_line *lines, char *line, int fd, int i)
 {
 	int n;
