@@ -6,12 +6,24 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/09/07 09:30:00 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/19 08:43:16 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
-
+/*
+typedef struct 		s_op
+{
+	char			*name;
+	int				nb_params;
+	int				param_types[4];
+	int				opcode;
+	int				nb_cycles;
+	char			*description;
+	int				has_pcode;
+	int				has_idx;
+}					t_op;
+*/
 t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},

@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:46:36 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/19 11:42:52 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/19 11:53:49 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	write_indirect(char *line, int fd)
 	write(fd, &n, IND_SIZE);
 }
 
-//Label adresses occansionally incorrect, otherwise great :)
 void    write_label_adrs(t_src_line *lines, char *line, int fd, int i)
 {
 	int n;
