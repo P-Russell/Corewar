@@ -35,7 +35,7 @@ typedef struct		s_champ
 	int				PC;
 	int				carry;
 	unsigned int	load_address;
-	unsigned char	reg[REG_NUMBER * REG_SIZE + 1];
+	unsigned char	reg[REG_NUMBER + 1][REG_SIZE + 1];
 	unsigned char	code[CHAMP_MAX_SIZE + 1];
 }					t_champ;
 
@@ -50,6 +50,6 @@ typedef struct		s_env
 
 void	init_arena(t_env *env);									
 int		init_env(int argc, char **argv, t_env *env); 
-//int		read_champ_data(t_champ *champs, int num_players);
+int		read_champ_data(t_champ *champs, int num_players);
 
 #endif
