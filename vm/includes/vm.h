@@ -19,7 +19,29 @@ typedef	struct		s_core
 	char			value[3];
 	unsigned char	raw;
 	unsigned int	champ_num;
+/*
+ * reg
+ * alive
+ * player num;
+ * size;
+ * cyles to exec
+ * carry?
+ * *core_ptr // core_index /
+ * stated_size
+*/
 }					t_core;
+
+typedef struct		s_process
+{
+	int					pc;
+	int					load_address;
+	int					cycles_to_exec;
+	t_core				*core_ptr;
+	int					carry;
+	int					alive;
+	int					cycles_to_die;
+	unsigned char		reg[REG_NUMBER + 1][REG_SIZE + 1];
+}						t_process;
 
 typedef struct		s_champ
 {
@@ -35,7 +57,6 @@ typedef struct		s_champ
 	int				PC;
 	int				carry;
 	unsigned int	load_address;
-	unsigned char	reg[REG_NUMBER + 1][REG_SIZE + 1];
 	unsigned char	code[CHAMP_MAX_SIZE + 1];
 }					t_champ;
 
@@ -50,9 +71,10 @@ typedef struct		s_env
 
 void	init_arena(t_env *env);									
 int		init_env(int argc, char **argv, t_env *env); 
-int		read_champ_data(t_champ *champs, int num_players);
+int		read_champ_data(t_env *env, int num_players);
 void	read_champs_into_core(t_env *env);
 void	write_char_to_hex(unsigned char num, char *reg);
 void	print_arena(t_env env);
+int		is_valid_params(char **params);
 
 #endif

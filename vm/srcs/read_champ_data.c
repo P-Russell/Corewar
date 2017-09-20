@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:10:49 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/19 16:41:24 by rheukelm         ###   ########.fr       */
+/*   Updated: 2017/09/20 15:38:04 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int		get_name_and_size(t_champ *champ)
 		return (-1);
 	while (read(champ->fd, &buf, 1) > 0 && i < PROG_NAME_LENGTH) 
 		champ->name[i++] = buf;
-	//printf("champ->name: '%s'\n", champ->name);
+	printf("champ->name: '%s'\n", champ->name);
 	return (0);
 }
 
@@ -83,7 +83,7 @@ static int		get_champion(t_champ *champ)
 
 	i = 0;
 	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH
-	+ sizeof(int) + 4 + COMMENT_LENGTH, SEEK_SET) < 0)
+	+ sizeof(int) + 8 + COMMENT_LENGTH, SEEK_SET) < 0)
 		return (-1);
 	while (read(champ->fd, &buf, 1) > 0 && i < CHAMP_MAX_SIZE)
 		champ->code[i++] = buf;
@@ -95,19 +95,30 @@ static int		get_champion(t_champ *champ)
 	return (0);
 }
 
-int		read_champ_data(t_champ *champs, int num_champs)
+int		read_champ_data(t_env *env, int num_champs)
 {
 	int	i;
 
 	i = 0;
+    printf("Reading champ data...\n");
 	while (i < num_champs)
 	{
-		if (check_magic(champs + i) < 0 || get_name_and_size(champs + i) < 0 ||
-		get_comment(champs + i) < 0 || get_champion(champs + i) < 0)
+        printf("entered loop with %d...\n", i);
+        printf("file_name %s\n", env->champs[i].filename);
+		if (check_magic(&env->champs[i]) < 0 || get_name_and_size(&env->champs[i]) < 0 ||
+		    get_comment(&env->champs[i]) < 0 || get_champion(&env->champs[i]) < 0)
 			return (-1);
-		else if (close(champs[i].fd) < 0)
+		else if (close(env->champs[i].fd) < 0)
 			return (-1);
+    	printf("Champ name for %d: %s\n", i, env->champs[i].name);
 		i++;
 	}
+    i = 0;
+    while (i < num_champs)
+    {
+		printf("%s\n", env->champs[i].name);
+    	i++;
+    }
+   	printf("Exiting read_champ_data: %d\n", num_champs);
 	return (0);
 }
