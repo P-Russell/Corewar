@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:57:36 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/20 09:09:26 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/20 10:30:43 by tbarlow-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ static void		clean_arena(t_core *arena)
 		arena[i].raw = 0;
 		i++;
 	}
+    printf("clean_arena exit\n");
 }
 
 void			init_arena(t_env *env)
 {
 	clean_arena(env->arena);
+    printf("cleaned arena with : %s\n", env->player_nums);
 }
