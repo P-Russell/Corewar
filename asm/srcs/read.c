@@ -6,34 +6,47 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/15 11:53:19 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/20 16:30:34 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			extract_data_from_line(char **split, t_src_line *lines)
+void		extract_loop(t_norm *n, char **split, t_src_line *lines)
 {
-	int		label_found;
-	int		op_code_found;
-	int		params_found;
-	int		i;
-
-	label_found = 0;
-	op_code_found = 0;
-	params_found = 0;
-	i = 0;
 	while (*split)
 	{
 		if (is_comment(*split))
 			break ;
-		else if (is_label_address(*split) && (label_found = 1))
+		else if (is_label_address(*split) && (n->label_found = 1))
 			lines->label = ft_strdup(*split);
-		else if (is_opcode(*split) && (op_code_found = 1))
+		else if (is_opcode(*split) && (n->op_code_found = 1))
 			lines->opcode = is_opcode(*split);
-		else if (is_param(*split) && i < MAX_ARGS_NUMBER && (params_found = 1))
-			lines->params[i++] = ft_strdup(*split);
+		else if (is_param(*split) && n->i < MAX_ARGS_NUMBER &&
+				(n->params_found = 1))
+			lines->params[n->i++] = ft_strdup(*split);
+		else
+		{
+			ft_putendl("Something's wrong");
+			exit(-7);
+		}
 		split++;
+	}
+}
+
+int			extract_data_from_line(char **split, t_src_line *lines)
+{
+	t_norm	n;
+
+	n.label_found = 0;
+	n.op_code_found = 0;
+	n.params_found = 0;
+	n.i = 0;
+	extract_loop(&n, split, lines);
+	if (n.op_code_found == 0 && n.label_found == 0)
+	{
+		ft_putendl_fd("Wrong opcode somewhere", 2);
+		exit(-6);
 	}
 	return (1);
 }

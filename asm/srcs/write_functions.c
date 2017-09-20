@@ -6,13 +6,13 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 12:46:36 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/19 11:53:49 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/20 16:35:19 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void    write_opcode_and_acb(t_src_line line, int fd)
+void	write_opcode_and_acb(t_src_line line, int fd)
 {
 	write(fd, &line.opcode, 1);
 	if (line.acb != 0)
@@ -56,7 +56,7 @@ void	write_indirect(char *line, int fd)
 	write(fd, &n, IND_SIZE);
 }
 
-void    write_label_adrs(t_src_line *lines, char *line, int fd, int i)
+void	write_label_adrs(t_src_line *lines, char *line, int fd, int i)
 {
 	int n;
 	int	y;
@@ -77,10 +77,7 @@ void    write_label_adrs(t_src_line *lines, char *line, int fd, int i)
 	{
 		i--;
 		while (y <= i)
-		{
-			n += lines[i].bytes;
-			i--;
-		}
+			n += lines[i--].bytes;
 		n = -n;
 		n = ((n & 0xFF) << 8) | ((n >> 8) & 0xFF);
 	}

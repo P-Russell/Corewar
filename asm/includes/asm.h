@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/14 16:20:26 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/20 16:31:25 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <sys/stat.h>
 # include "op.h"
 # include "../../libft/libft.h"
-# define MAX_LINES 200
+# define MAX_LINES 300
 
 
 #include <stdio.h>
@@ -52,7 +52,11 @@ typedef	struct	s_src_line
 typedef struct	s_norm
 {
 	int			i;
+	int			p;
 	int			j;
+	int			label_found;
+	int			op_code_found;
+	int			params_found;
 	char		*exe;
 	char		**split;
 }				t_norm;
@@ -74,6 +78,7 @@ int				init_bin_var(t_binary *bin, int fd, char *name);
 int				is_code_line(char **line);
 int				write_cor(t_src_line *lines, t_binary *bin);
 int             check_idx(int op);
+int				check_errors(t_src_line *lines);
 int				get_offset(t_src_line *lines, char *line);
 void            reverse_bytes(int *mem, size_t size);
 void            write_bytes(int fd, t_src_line *lines);

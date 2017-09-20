@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 13:48:55 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/15 11:52:28 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/20 16:33:11 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,45 +32,43 @@ int		get_offset(t_src_line *lines, char *line)
 
 int		check_idx(int op)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (g_op_tab[i].name != 0)
-    {
-        if (g_op_tab[i].opcode == op)
-            return (g_op_tab[i].has_idx);
-        i++;
-    }
-    return (-1);
+	i = 0;
+	while (g_op_tab[i].name != 0)
+	{
+		if (g_op_tab[i].opcode == op)
+			return (g_op_tab[i].has_idx);
+		i++;
+	}
+	return (-1);
 }
 
 void	write_bytes(int fd, t_src_line *lines)
 {
-    int	i;
-    int	p;
-    int	n;
+	t_norm	n;
 
-    i = 0;
-    n = 0;
-    while (lines[i].label != NULL || lines[i].opcode != 0)
-    {
-        if (lines[i].opcode != 0)
-        {
-            p = 0;
-            write_opcode_and_acb(lines[i], fd);
-            while (lines[i].params[p] != NULL)
-            {
-                if (lines[i].params[p][0] == 'r')
-                    write_register(lines[i].params[p], fd);
-                else if (ft_strchr(lines[i].params[p], LABEL_CHAR) != NULL)
-                    write_label_adrs(lines, lines[i].params[p], fd, i);
-                else if (lines[i].params[p][0] == DIRECT_CHAR)
-                    write_direct(lines[i], fd, p);
-                else if (ft_isnumber(lines[i].params[p]))
-                    write_indirect(lines[i].params[p], fd);
-                p++;
-            }
-        }
-        i++;
-    }
+	n.i = 0;
+	n.j = 0;
+	while (lines[n.i].label != NULL || lines[n.i].opcode != 0)
+	{
+		if (lines[n.i].opcode != 0)
+		{
+			n.j = 0;
+			write_opcode_and_acb(lines[n.i], fd);
+			while (lines[n.i].params[n.j] != NULL)
+			{
+				if (lines[n.i].params[n.j][0] == 'r')
+					write_register(lines[n.i].params[n.j], fd);
+				else if (ft_strchr(lines[n.i].params[n.j], LABEL_CHAR) != NULL)
+					write_label_adrs(lines, lines[n.i].params[n.j], fd, n.i);
+				else if (lines[n.i].params[n.j][0] == DIRECT_CHAR)
+					write_direct(lines[n.i], fd, n.j);
+				else if (ft_isnumber(lines[n.i].params[n.j]))
+					write_indirect(lines[n.i].params[n.j], fd);
+				n.j++;
+			}
+		}
+		n.i++;
+	}
 }

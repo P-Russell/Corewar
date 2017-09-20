@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/09 08:04:50 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/20 13:59:43 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	calculate_acb(t_src_line *line)
 	while (n < MAX_ARGS_NUMBER && line->params[n])
 	{
 		if (line->params[n][0] == 'r')
-			p = REG_CODE;
+			line->param_type[n] = REG_CODE;
 		else if (ft_strchr(line->params[n], '%') != NULL)
-			p = DIR_CODE;
+			line->param_type[n] = DIR_CODE;
 		else if (ft_isnumber(line->params[n]))
-			p = IND_CODE;
+			line->param_type[n] = IND_CODE;
 		else
 			p = 0;
-		line->acb += p * (square * square);
+		line->acb += line->param_type[n] * (square * square);
 		square /= 2;
 		n++;
 	}
