@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/09/20 08:37:02 by prussell         ###   ########.fr        #
+#    Updated: 2017/09/20 10:14:47 by prussell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = corewar
 
 SRCS = srcs/*.c
 
-FLAGS = -g3 -Wall -Werror -Wextra -iquoteincludes
+FLAGS = -Wall -Werror -Wextra -iquoteincludes
 
 all: $(NAME)
 

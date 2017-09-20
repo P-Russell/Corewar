@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/20 09:05:22 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/20 12:02:07 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		init_env_loop(int argc, char **argv, t_env *env, int i)
 		}
 		else if (ft_strstr(argv[i], ".cor") != NULL)
 		{
-			if (new_champ(argv[i], env->champs, 0) < 0)
+			if (new_champ(argv[i], &env->champs[env->num_players], 0) < 0)
 				return (-1);
 			env->num_players++;
 		}
@@ -105,6 +105,8 @@ int		init_env(int argc, char **argv, t_env *env)
 	int i;
 
 	i = 1;
+	if (!is_valid_params(argv))
+		return (-1);
 	env->dump = 0;
 	env->num_players = 0;
 	ft_bzero(env->player_nums, MAX_PLAYERS);

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:10:49 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/19 16:41:24 by rheukelm         ###   ########.fr       */
+/*   Updated: 2017/09/20 11:27:01 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int		get_champion(t_champ *champ)
 
 	i = 0;
 	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH
-	+ sizeof(int) + 4 + COMMENT_LENGTH, SEEK_SET) < 0)
+	+ sizeof(int) + 8 + COMMENT_LENGTH, SEEK_SET) < 0)
 		return (-1);
 	while (read(champ->fd, &buf, 1) > 0 && i < CHAMP_MAX_SIZE)
 		champ->code[i++] = buf;

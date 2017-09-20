@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:31:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/19 15:55:55 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/20 12:20:09 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ static void		load_addr_val(t_env *env)
 	step = (MEM_SIZE >> 1) / (env->num_players);
 	while (i < env->num_players)
 	{
-		env->champs[i].load_address = step * (i + 1);
+		env->champs[i].load_address = step * i;
 		i++;
 	}
 }
 
 static void		load_mem(t_env *env, int i)
 {
+	printf("about to load player num %d\n", env->champs[i].player_num);
 	unsigned int	j;
 	unsigned int	addr;
 
