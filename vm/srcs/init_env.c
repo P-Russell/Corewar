@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/19 14:03:58 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/20 09:05:22 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ int		init_env(int argc, char **argv, t_env *env)
 	if (init_env_loop(argc, argv, env, i) < 0)
 		return (-1);
 	check_player_numbers(env);
-	unsigned int j = 0;
-	printf("Used Numbers: %s\n", env->player_nums);
+/*	unsigned int j = 0;
+	("Used Numbers: %s\n", env->player_nums);
 	while (j < env->num_players)
 	{
-		printf("%d\n", env->champs[j].player_num);
+		("%d\n", env->champs[j].player_num);
 		j++;
-	}
+	}*/
 	init_arena(env);
 	return (1);
 }
