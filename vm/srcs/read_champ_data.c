@@ -6,48 +6,94 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:10:49 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/19 11:11:27 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:41:24 by rheukelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
+static int	swap_two_octets(int nb)
+{
+	int		tmp;
+
+	tmp = nb & 0xff;
+	nb = (nb & 0xff00) / 0xff;
+	nb = nb + (tmp * 0x100);
+	return (nb);
+}
+
+int			little_to_big_endian(int nb)
+{
+	int		tmp;
+
+	tmp = nb & 0xffff;
+	nb = (nb & 0xffff0000) / 0xffff;
+	tmp = swap_two_octets(tmp) * 0x10000;
+	nb = swap_two_octets(nb) + tmp;
+    return (nb);
+}
+
 static int		check_magic(t_champ *champ)
 {
-	char	magic[5];
-	char	hex[9];
-	int		mag;
+	int		magic;
 
-	ft_bzero(magic, 5);
-	ft_bzero(hex, 9);
-	if (read(champ->fd, magic, sizeof(COREWAR_EXEC_MAGIC)) < 0)
+	magic = 0;
+	if (read(champ->fd, &magic, sizeof(COREWAR_EXEC_MAGIC)) == -1)
 		return (-1);
-	write_char_to_hex(magic[0], hex);
-	write_char_to_hex(magic[1], &hex[2]);
-	write_char_to_hex(magic[2], &hex[4]);
-	write_char_to_hex(magic[3], &hex[6]);
-	printf("%s\n", hex);
-	if (mag == COREWAR_EXEC_MAGIC)
+	magic = little_to_big_endian(magic);
+	//printf("magic:%d == %d\n", magic, COREWAR_EXEC_MAGIC);
+	if (magic == COREWAR_EXEC_MAGIC)
 		return (0);
 	return (-1);
 }
 
 static int		get_name_and_size(t_champ *champ)
 {
-	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC)) < 0)  //possible that this lseek is not nesessary as the cursor depends on the order of calls to functions
+	int		i;
+	char	buf;
+
+	i = 0;
+	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC), SEEK_SET) < 0)
 		return (-1);
-	if (read(champ->fd, champ->name, PROG_NAME_LENGTH) < 0)  //Will take some tinkering but after printing out the name
-		return (-1);
+	while (read(champ->fd, &buf, 1) > 0 && i < PROG_NAME_LENGTH) 
+		champ->name[i++] = buf;
+	//printf("champ->name: '%s'\n", champ->name);
+	return (0);
 }
 
 static int		get_comment(t_champ *champ)
 {
-	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + sizeof(int)) < 0)
+	int		i;
+	char 	buf;
+
+	i = 0;
+	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH
+	+ sizeof(int) + 4, SEEK_SET) < 0)
 		return (-1);
-	if (read(champ->fd, champ->comment, COMMENT_LENGTH) < 0)
-		return (-1);
+	while (read(champ->fd, &buf, 1) > 0 && i < COMMENT_LENGTH)
+		champ->comment[i++] = buf;
+	//printf("champ->comment: '%s'\n", champ->comment);
+	return (0);
 }
 
+static int		get_champion(t_champ *champ)
+{
+	int		i;
+	char	buf;
+
+	i = 0;
+	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH
+	+ sizeof(int) + 4 + COMMENT_LENGTH, SEEK_SET) < 0)
+		return (-1);
+	while (read(champ->fd, &buf, 1) > 0 && i < CHAMP_MAX_SIZE)
+		champ->code[i++] = buf;
+	//printf("champ->code: ");
+	//i = 0;
+	//while (i < CHAMP_MAX_SIZE)
+	//	printf("%c", champ->code[i++]);
+	//printf("\n");
+	return (0);
+}
 
 int		read_champ_data(t_champ *champs, int num_champs)
 {
@@ -56,11 +102,12 @@ int		read_champ_data(t_champ *champs, int num_champs)
 	i = 0;
 	while (i < num_champs)
 	{
-		if (check_magic(champs + i) < 0 || get_name(champs + i) < 0 ||
-			get_stated_size(champs + i) < 0 || get_comment(champs + i) < 0)
+		if (check_magic(champs + i) < 0 || get_name_and_size(champs + i) < 0 ||
+		get_comment(champs + i) < 0 || get_champion(champs + i) < 0)
 			return (-1);
 		else if (close(champs[i].fd) < 0)
 			return (-1);
 		i++;
 	}
+	return (0);
 }
