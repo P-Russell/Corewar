@@ -71,7 +71,7 @@ typedef struct		s_env
 
 void	init_arena(t_env *env);									
 int		init_env(int argc, char **argv, t_env *env); 
-int		read_champ_data(t_champ *champs, int num_players);
+int		read_champ_data(t_env *env, int num_players);
 void	read_champs_into_core(t_env *env);
 void	write_char_to_hex(unsigned char num, char *reg);
 void	print_arena(t_env env);

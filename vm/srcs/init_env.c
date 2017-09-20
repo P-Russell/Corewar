@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/20 15:27:34 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/20 15:37:22 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int		new_champ(char *file_name, t_champ *champ, unsigned int play_num)
 		champ->size = 0;
 		champ->carry = 0;
 		champ->load_address = 0;
+        printf("initialised to 0");
 		champ->PC = 0;
 		return (1);
 	}
@@ -91,7 +92,7 @@ int		init_env_loop(int argc, char **argv, t_env *env, int i)
 		}
 		else if (ft_strstr(argv[i], ".cor") != NULL)
 		{
-			if (new_champ(argv[i], &env->champs[env->num_players], 0) < 0)
+			if (new_champ(argv[i], &(env->champs[env->num_players]), 0) < 0)
 				return (-1);
 			env->num_players++;
 		}
@@ -113,13 +114,14 @@ int		init_env(int argc, char **argv, t_env *env)
 	if (init_env_loop(argc, argv, env, i) < 0)
 		return (-1);
 	check_player_numbers(env);
-/*	unsigned int j = 0;
-	("Used Numbers: %s\n", env->player_nums);
+	/*unsigned int j = 0;
+	printf("Used Numbers: %s\n", env->player_nums);
 	while (j < env->num_players)
 	{
-		("%d\n", env->champs[j].player_num);
+		printf("%d\n", env->champs[j].player_num);
 		j++;
 	}*/
-	init_arena(env);
+ 	init_arena(env);
+    printf("initialised arena with players: %d\n", env->num_players);
 	return (1);
 }
