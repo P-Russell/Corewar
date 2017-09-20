@@ -54,7 +54,7 @@ typedef struct		s_champ
 	unsigned int	stated_size;
 	unsigned int	cycles_to_exec;
 	t_core			*core_ptr;
-	int				pc;
+	int				PC;
 	int				carry;
 	unsigned int	load_address;
 	unsigned char	code[CHAMP_MAX_SIZE + 1];

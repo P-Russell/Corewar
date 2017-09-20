@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/20 11:24:55 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/20 15:28:12 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int		main(int argc, char **argv)
 		ft_putendl_fd(PARAM_ERROR, 2);
 		return (-1);
 	}
-/*	if (read_champ_data(env.champs, env.num_players) < 0)
+	if (read_champ_data(env.champs, env.num_players) < 0)
 	{
 		ft_putendl_fd("Read .cor error", 2);
 		return (-1);
 	}
 	read_champs_into_core(&env);
-	print_arena(env); */
+	print_arena(env);
 	return (0);	
 }
