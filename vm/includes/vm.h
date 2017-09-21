@@ -76,5 +76,9 @@ void	read_champs_into_core(t_env *env);
 void	write_char_to_hex(unsigned char num, char *reg);
 void	print_arena(t_env env);
 int		is_valid_params(char **params);
+int     is_direct(int acb, int param_num);
+int     is_indirect(int acb, int param_num);
+int     is_register(int acb, int param_num);
+int     valid_reg(int num);
 
 #endif
