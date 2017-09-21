@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/20 16:30:34 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/21 16:32:51 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int			get_data(t_src_line *lines, int fd)
 		{
 			extract_data_from_line(split, lines + i);
 			ft_matrixdel((void **)split);
+			lines[i].num = i;
 			i++;
 		}
 		ft_strdel(&line);
