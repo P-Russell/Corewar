@@ -1,4 +1,4 @@
-#include "../includes/vm.h"
+#include "vm.h"
 
 int     is_direct(int acb, int param_num)
 {
