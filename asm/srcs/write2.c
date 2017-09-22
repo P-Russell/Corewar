@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 13:48:55 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/20 16:33:11 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/21 16:27:56 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,22 @@ int		get_offset(t_src_line *lines, char *line)
 	while (lines[n].label != NULL || lines[n].opcode != 0)
 	{
 		while (lines[n].label == NULL)
+		{
+			if (lines[n].num > MAX_LINES)
+				return (-1);
 			n++;
-		if (ft_strlen(lines[n].label) - 1 == ft_strlen(line + 2))
+		}
+		if (lines[n].label != NULL &&
+				ft_strlen(lines[n].label) - 1 == ft_strlen(line + 2))
+		{
 			if (ft_strncmp(lines[n].label, line + 2, ft_strlen(line + 2)) == 0)
-				break ;
+			{
+				return (n);
+			}
+		}
 		n++;
 	}
-	return (n);
+	return (-1);
 }
 
 int		check_idx(int op)
