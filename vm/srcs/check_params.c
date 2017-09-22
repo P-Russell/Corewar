@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 10:21:17 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/22 13:09:26 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/22 14:49:01 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@ int		is_valid_params(char **params)
 		{
 			if (params[i + 1] && !ft_isnumber(params[i + 1]))
 				return (0);
-			else if (params[i + 2] && ft_strstr(params[i + 2], ".cor") != NULL)
+			else if (params[i + 2] && ft_strstr(params[i + 2], ".cor") == NULL)
 				return (0);
 		}
 		else if (!valid_param(params[i]))
-		{
-			printf("invalid params");
 			return (0);
-		}
 		i++;
 	}
 	return (1);

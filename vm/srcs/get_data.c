@@ -6,16 +6,17 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:14:10 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/22 14:35:50 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/22 14:43:33 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
+/*
 void	write_to_reg(unsigned char *reg, int index, unsigned char value)
 {
 
-}
+}*/
 
 int		value_from_core(t_core *arena, int *pc, int size)
 {
