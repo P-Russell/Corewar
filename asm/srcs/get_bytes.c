@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:14:43 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/21 16:32:12 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/22 08:45:03 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		get_bytes(t_src_line *lines)
 	int	p;
 
 	i = 0;
-	while (i < MAX_LINES)
+	while (lines[i].num >= 0)
 	{
 		n = 0;
 		if (lines[i].opcode != 0)

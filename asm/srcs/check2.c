@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:50:47 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/20 15:59:18 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/22 16:01:55 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,12 @@ int		is_code_line(char **line)
 int		is_valid_fd(int fd)
 {
 	return (fd > 0);
+}
+
+int		ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	else
+		return (n);
 }

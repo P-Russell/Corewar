@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/21 16:24:21 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/22 16:10:29 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include <sys/stat.h>
 # include "op.h"
 # include "../../libft/libft.h"
-# define MAX_LINES 200
-
-
 #include <stdio.h>
 
 typedef struct		s_header
@@ -66,10 +63,11 @@ int				is_valid_fd(int fd);
 int				is_comment(char *line);
 int				is_opcode(char *line);
 int				is_label_address(char *line);
+int				get_size(int fd);
 void			print_struct(t_src_line*lines);
 void            champ_size(t_src_line *lines, t_binary *bin);
 void			write_bytes(int fd, t_src_line *lines);
-t_src_line		*build_line_data_struct(int fd);
+t_src_line		*build_line_data_struct(int fd, int n);
 char			**core_line_split(char const *s);
 int				is_param(char *line);
 int				get_params(t_src_line *lines);
@@ -81,11 +79,14 @@ int				write_cor(t_src_line *lines, t_binary *bin);
 int             check_idx(int op);
 int				check_errors(t_src_line *lines);
 int				get_offset(t_src_line *lines, char *line);
+int				ft_abs(int n);
+int				set_params(t_src_line *lines);
 void            reverse_bytes(int *mem, size_t size);
 void            write_bytes(int fd, t_src_line *lines);
 void            write_opcode_and_acb(t_src_line line, int fd);
 void            write_register(char *line, int fd);
 void            write_direct(t_src_line line, int fd, int p);
+void			print_error(char *str, int line_num);
 void            write_indirect(char *line, int fd);
 void            write_label_adrs(t_src_line *lines, char *line, int fd, int i);
 

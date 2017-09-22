@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 13:48:55 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/21 16:27:56 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/22 08:47:57 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		get_offset(t_src_line *lines, char *line)
 	{
 		while (lines[n].label == NULL)
 		{
-			if (lines[n].num > MAX_LINES)
+			if (lines[n].num < 0)
 				return (-1);
 			n++;
 		}

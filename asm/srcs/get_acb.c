@@ -6,11 +6,31 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/21 16:32:04 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/22 16:10:06 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+int	set_params(t_src_line *lines)
+{
+	int	i;
+	int	p;
+
+	i = 0;
+	while (lines[i].num >= 0)
+	{
+		p = 0;
+		while (lines[i].param_type[p] != 0)
+		{
+			if (lines[i].param_type[p] == 3)
+				lines[i].param_type[p] = 4;
+			p++;
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	calculate_acb(t_src_line *line)
 {
@@ -43,7 +63,7 @@ int	get_acb(t_src_line *lines)
 	int	n;
 
 	i = 0;
-	while (i < MAX_LINES)
+	while (lines[i].num >= 0)
 	{
 		n = 0;
 		while (g_op_tab[n].opcode != 0 && g_op_tab[n].opcode != lines[i].opcode)

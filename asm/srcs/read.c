@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/21 16:32:51 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/22 16:11:09 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			extract_data_from_line(char **split, t_src_line *lines)
 	extract_loop(&n, split, lines);
 	if (n.op_code_found == 0 && n.label_found == 0)
 	{
-		ft_putendl_fd("Wrong opcode somewhere", 2);
+		ft_putstr_fd("Wrong opcode on line", 2);
 		exit(-6);
 	}
 	return (1);
@@ -54,37 +54,38 @@ int			extract_data_from_line(char **split, t_src_line *lines)
 int			get_data(t_src_line *lines, int fd)
 {
 	int		i;
+	int		n;
 	char	*line;
 	char	**split;
 
 	i = 0;
-	while (i < MAX_LINES && get_next_line(fd, &line) > 0)
+	n = 1;
+	while (get_next_line(fd, &line) > 0)
 	{
 		if (*line && (split = core_line_split(line)) && is_code_line(split))
 		{
 			extract_data_from_line(split, lines + i);
 			ft_matrixdel((void **)split);
-			lines[i].num = i;
 			i++;
 		}
+		lines[i].num = n;
+		n++;
 		ft_strdel(&line);
-	}
-	if (i == MAX_LINES)
-	{
-		ft_putendl_fd("Lines in file exceed MAX_LINES", 2);
-		return (EXIT_FAILURE);
+		ft_strarrdel(split);
+		split = NULL;
 	}
 	return (EXIT_SUCCESS);
 }
 
-void		init_line_struct(t_src_line *lines)
+void		init_line_struct(t_src_line *lines, int n)
 {
 	int i;
 	int	j;
 
 	i = 0;
-	while (i < MAX_LINES)
+	while (i <= n)
 	{
+		lines[i].num = -1;
 		lines[i].label = NULL;
 		lines[i].acb = 0;
 		j = 0;
@@ -96,18 +97,19 @@ void		init_line_struct(t_src_line *lines)
 	}
 }
 
-t_src_line	*build_line_data_struct(int fd)
+t_src_line	*build_line_data_struct(int fd, int n)
 {
-	t_src_line lines[MAX_LINES];
-	t_src_line *lines_ptr;
+	t_src_line *lines;
 
-	lines_ptr = lines;
-	init_line_struct(lines);
+	lines = (t_src_line *)malloc(sizeof(t_src_line) * n);
+	init_line_struct(lines, n);
 	if (get_data(lines, fd) == EXIT_FAILURE)
 		return (NULL);
 	if (get_acb(lines) == EXIT_FAILURE)
 		return (NULL);
+	if (set_params(lines) == EXIT_FAILURE)
+		return (NULL);
 	if (get_bytes(lines) == EXIT_FAILURE)
 		return (NULL);
-	return (lines_ptr);
+	return (lines);
 }

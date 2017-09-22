@@ -6,22 +6,46 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/21 16:28:34 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/22 16:12:13 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+int		get_size(int fd)
+{
+	char	buffer[42];
+	int		i;
+	int		n;
+
+	n = 0;
+	i = 0;
+	while (read(fd, buffer, 42) != 0)
+	{
+		i = 0;
+		while (buffer[i])
+		{
+			if (buffer[i] == '\n')
+				n++;
+			i++;
+		}
+	}
+	lseek(fd, 0, SEEK_SET);
+	return (n);
+}
+
 void	main_part_two(int fd, char **argv)
 {
 	t_src_line	*lines;
 	t_binary	bin;
+	int	n;
 
-	lines = build_line_data_struct(fd);
+	n = get_size(fd);
+	lines = build_line_data_struct(fd, n);
 	lseek(fd, 0, SEEK_SET);
 	init_bin_var(&bin, fd, argv[1]);
 	champ_size(lines, &bin);
-//	print_struct(lines);
+	//print_struct(lines);
 	if (close(fd) != 0)
 	{
 		ft_putendl_fd("Could not close file", 2);

@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 13:06:00 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/21 14:53:21 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/22 16:01:00 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@ int		check_params(t_src_line line)
 	while (g_op_tab[n].opcode != line.opcode)
 		n++;
 	p = 0;
-	while (p < g_op_tab[n].nb_params - 1)
+	while (p < g_op_tab[n].nb_params)
 	{
+		if (line.params[p][0] == 'r')
+			if (ft_atoi(line.params[p] + 1) > REG_NUMBER)
+			{
+				print_error("Register number too big", line.num);
+				return (1);
+			}
 		if ((g_op_tab[n].param_types[p] & line.param_type[p])
 				!= line.param_type[p])
 		{
-			ft_putendl("Wrong Parameter Somewhere");
+			print_error("Parameter is wrong", line.num);
 			return (1);
 		}
 		p++;
@@ -88,6 +94,23 @@ int		check_labels(t_src_line *lines)
 	return (0);
 }
 
+int		check_size(t_src_line *lines)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (lines[i].num >= 0)
+	{
+		n += lines[i].bytes;
+		i++;
+	}
+	if (n > CHAMP_MAX_SIZE)
+		return (1);
+	return (0);
+}
+
 int		check_errors(t_src_line *lines)
 {
 	int	i;
@@ -101,7 +124,8 @@ int		check_errors(t_src_line *lines)
 		{
 			error = (error | check_params(lines[i]));
 			error = (error | check_nb_params(lines[i]));
-			error = (error | check_labels(lines)); 
+			error = (error | check_labels(lines));
+			error = (error | check_size(lines));
 		}
 		i++;
 	}
