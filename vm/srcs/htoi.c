@@ -6,13 +6,13 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 09:17:32 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/19 11:16:37 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/22 14:33:30 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		ft_power(int a, int b)
+static int		ft_power(int a, int b)
 {
 	int	i;
 	int	t;
@@ -27,9 +27,7 @@ int		ft_power(int a, int b)
 	return (t);
 }
 
-//Give negative if len = 8;
-
-int		htoi(char *str, size_t len)
+int			ft_htoi(char *str, size_t len)
 {
 	int		i;
 	int		tot;

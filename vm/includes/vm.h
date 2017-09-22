@@ -19,16 +19,6 @@ typedef	struct		s_core
 	char			value[3];
 	unsigned char	raw;
 	unsigned int	champ_num;
-/*
- * reg
- * alive
- * player num;
- * size;
- * cyles to exec
- * carry?
- * *core_ptr // core_index /
- * stated_size
-*/
 }					t_core;
 
 typedef struct		s_process
@@ -80,5 +70,9 @@ int     is_direct(int acb, int param_num);
 int     is_indirect(int acb, int param_num);
 int     is_register(int acb, int param_num);
 int     valid_reg(int num);
+int		value_from_core(t_core *arena, int *pc, int size);
+int		value_from_reg(unsigned char **reg, int index);
+int		little_to_big_endian(int nb);
+int		ft_htoi(char *str, size_t len);
 
 #endif
