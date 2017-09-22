@@ -4,7 +4,7 @@ Compiler for corewar assembly code and  a virtual battle arena
             /                                                    \
            |    _____________________________________________     |
            |   |                                             |    |
-           |   |  ➜ corewar                                 |    |
+           |   |  ➜ corewar                                  |    |
            |   |                                             |    |
            |   |                                             |    |
            |   |                                             |    |
