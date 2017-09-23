@@ -21,12 +21,11 @@ typedef	struct		s_core
 	unsigned int	champ_num;
 }					t_core;
 
-typedef struct		s_process
+typedef struct			s_process
 {
 	int					pc;
 	int					load_address;
 	int					cycles_to_exec;
-	t_core				*core_ptr;
 	int					carry;
 	int					alive;
 	int					cycles_to_die;
@@ -43,7 +42,6 @@ typedef struct		s_champ
 	unsigned int	size;
 	unsigned int	stated_size;
 	unsigned int	cycles_to_exec;
-	t_core			*core_ptr;
 	int				PC;
 	int				carry;
 	unsigned int	load_address;
@@ -57,6 +55,7 @@ typedef struct		s_env
 	char			player_nums[MAX_PLAYERS];
 	t_champ			champs[MAX_PLAYERS];
 	t_core			arena[MEM_SIZE];
+	t_process		*process;
 }					t_env;
 
 void	init_arena(t_env *env);									

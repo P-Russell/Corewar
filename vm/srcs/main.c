@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/23 07:49:58 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/23 09:50:55 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ int		main(int argc, char **argv)
 	}
 	read_champs_into_core(&env);
 	print_champ_data(env.champs, env.num_players);
-//	print_arena(env);
+	print_arena(env);
 	return (0);	
 }

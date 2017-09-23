@@ -6,32 +6,11 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:10:49 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/22 15:21:39 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/23 10:12:47 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-static int	swap_two_octets(int nb)
-{
-	int		tmp;
-
-	tmp = nb & 0xff;
-	nb = (nb & 0xff00) / 0xff;
-	nb = nb + (tmp * 0x100);
-	return (nb);
-}
-
-int			little_to_big_endian(int nb)
-{
-	int		tmp;
-
-	tmp = nb & 0xffff;
-	nb = (nb & 0xffff0000) / 0xffff;
-	tmp = swap_two_octets(tmp) * 0x10000;
-	nb = swap_two_octets(nb) + tmp;
-    return (nb);
-}
 
 static int		check_magic(t_champ *champ)
 {
@@ -50,12 +29,26 @@ static int		get_name_and_size(t_champ *champ)
 {
 	int		i;
 	char	buf;
+	int		size;
 
 	i = 0;
 	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC), SEEK_SET) < 0)
 		return (-1);
-	while (read(champ->fd, &buf, 1) > 0 && i < PROG_NAME_LENGTH) 
+	while (read(champ->fd, &buf, 1) > 0 && i <= PROG_NAME_LENGTH && buf) 
 		champ->name[i++] = buf;
+	if (i == PROG_NAME_LENGTH)
+	{
+		ft_putendl_fd("Name too big", 2);
+		return (-1);
+	}
+	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) +
+				PROG_NAME_LENGTH + 4, SEEK_SET) < 0)
+		return (-1);
+	size = 0;
+	if (read(champ->fd, &size, sizeof(int)) == -1)
+		return (-1);
+	champ->stated_size = little_to_big_endian(size);
+	printf("%s stated size = %d\n", champ->name, champ->stated_size);
 	return (0);
 }
 
@@ -68,8 +61,13 @@ static int		get_comment(t_champ *champ)
 	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH
 	+ sizeof(int) + 4, SEEK_SET) < 0)
 		return (-1);
-	while (read(champ->fd, &buf, 1) > 0 && i < COMMENT_LENGTH)
+	while (read(champ->fd, &buf, 1) > 0 && i <= COMMENT_LENGTH && buf)
 		champ->comment[i++] = buf;
+	if (i == COMMENT_LENGTH)
+	{
+		ft_putendl_fd("Comment too big", 2);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -82,8 +80,20 @@ static int		get_champion(t_champ *champ)
 	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH
 	+ sizeof(int) + 8 + COMMENT_LENGTH, SEEK_SET) < 0)
 		return (-1);
-	while (read(champ->fd, &buf, 1) > 0 && i < CHAMP_MAX_SIZE)
+	while (read(champ->fd, &buf, 1) > 0 && i <= CHAMP_MAX_SIZE)
 		champ->code[i++] = buf;
+	if (i == CHAMP_MAX_SIZE)
+	{
+		ft_putendl_fd("Champ too big", 2);
+		return (-1);
+	}
+	champ->size = i;
+	printf("measured size: %d\n", champ->size);
+	if (champ->size != champ->stated_size)
+	{
+		ft_putendl_fd("Invalid champ size in header", 2);
+//		return (-1);
+	}
 	return (0);
 }
 
