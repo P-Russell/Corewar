@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/23 08:52:35 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/23 10:31:02 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int				init_env(int argc, char **argv, t_env *env)
 		return (-1);
 	env->dump = 0;
 	env->num_players = 0;
+	env->process = NULL;
 	all_zero(env->player_nums, MAX_PLAYERS);
 	while (i < argc)
 	{

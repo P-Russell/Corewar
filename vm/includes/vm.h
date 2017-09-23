@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/23 11:59:03 by prussell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VM_H
 # define VM_H
 
@@ -25,6 +37,7 @@ typedef struct			s_process
 {
 	int					pc;
 	int					load_address;
+	int					end_address;
 	int					cycles_to_exec;
 	int					carry;
 	int					alive;
@@ -69,9 +82,10 @@ int     is_direct(int acb, int param_num);
 int     is_indirect(int acb, int param_num);
 int     is_register(int acb, int param_num);
 int     valid_reg(int num);
-int		value_from_core(t_core *arena, int *pc, int size);
+int		value_from_core(t_core *arena, int pc, int size);
 int		value_from_reg(unsigned char **reg, int index);
 int		little_to_big_endian(int nb);
 int		ft_htoi(char *str, size_t len);
+void	write_to_reg(unsigned char *reg, int value);
 
 #endif
