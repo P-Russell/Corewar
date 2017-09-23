@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/22 15:23:18 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/23 08:07:39 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void		check_player_numbers(t_env *env)
 {
+	printf("numbers found: %s\n", env->player_nums);
 	unsigned int	i;
 	char			possible;
 
@@ -21,7 +22,7 @@ static void		check_player_numbers(t_env *env)
 	i = 0;
 	while (i < env->num_players)
 	{
-		if (env->player_nums[i] == 0)
+		if (env->player_nums[i] == '0')
 		{
 			while (ft_strchr(env->player_nums, possible) != NULL)
 				possible++;
@@ -38,7 +39,7 @@ static int		new_champ(char *file_name, t_champ *champ, unsigned int play_num)
 {
 	if (play_num <= MAX_PLAYERS)
 	{
-		champ->filename = file_name;	//ptr aliasing could be prob
+		champ->filename = file_name;
 		if ((champ->fd = open(file_name, O_RDONLY)) < 0)
 		{
 			ft_putstr_fd("could not open: ", 2);
@@ -63,17 +64,11 @@ static int		new_champ(char *file_name, t_champ *champ, unsigned int play_num)
 ** ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...
 **/
 
-int		init_env_loop(int argc, char **argv, t_env *env, int i)
+static int		init_env_loop(int argc, char **argv, t_env *env, int i)
 {
 	while (i < argc)
 	{
-		if (ft_strcmp(argv[i], "-dump") == 0)
-		{	
-			if (env->dump != 0 || !argv[i + 1] || !ft_isnumber(argv[i + 1]))
-				return (-1);
-			env->dump = ft_atoi(argv[i + 1]);
-		}
-		else if (ft_strcmp(argv[i], "-n") == 0)
+		if (ft_strcmp(argv[i], "-n") == 0)
 		{
 			if ((i + 2) < argc && ft_isnumber(argv[i + 1]) && ft_strstr(argv[i + 2], ".cor") != NULL
 					&& (ft_atoi(argv[i + 1]) <= 4) && ft_strchr(env->player_nums, argv[i + 1][0]) == NULL)
@@ -99,7 +94,19 @@ int		init_env_loop(int argc, char **argv, t_env *env, int i)
 	return (1);
 }
 
-int		init_env(int argc, char **argv, t_env *env)
+void			all_zero(char *str, int num)
+{
+	int i;
+
+	i = 0;
+	while (i < num)
+	{
+		str[i] = '0';
+		i++;
+	}
+}
+
+int				init_env(int argc, char **argv, t_env *env)
 {
 	int i;
 
@@ -108,7 +115,18 @@ int		init_env(int argc, char **argv, t_env *env)
 		return (-1);
 	env->dump = 0;
 	env->num_players = 0;
-	ft_bzero(env->player_nums, MAX_PLAYERS);
+	all_zero(env->player_nums, MAX_PLAYERS);
+	while (i < argc)
+	{
+		if (ft_strcmp(argv[i], "-dump") == 0)
+		{	
+			if (env->dump != 0 || !argv[i + 1] || !ft_isnumber(argv[i + 1]))
+				return (-1);
+			env->dump = ft_atoi(argv[i + 1]);
+		}
+		i++;
+	}
+	i = 1;
 	if (init_env_loop(argc, argv, env, i) < 0)
 		return (-1);
 	check_player_numbers(env);
