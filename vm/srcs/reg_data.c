@@ -5,27 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/24 07:52:56 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 07:53:58 by prussell         ###   ########.fr       */
+/*   Created: 2017/09/22 14:14:10 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/24 10:36:21 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		value_from_core(t_core *arena, int pc, int size)
+void	write_to_reg(unsigned char *reg, int value)
+{
+	unsigned char 	*p;
+	int				i;
+
+	value = little_to_big_endian(value);
+	p = (unsigned char *)&value;
+	reg--;
+	i = 0;
+	while (i < REG_SIZE)
+	{
+		reg[i] = p[i];
+		i++;
+	}
+}
+
+int		value_from_reg(unsigned char *reg)
 {
 	int		k;
 	int		j;
-	char	num[9];
+	char 	num[REG_SIZE * 2 + 1];
 
-	ft_bzero(num, 9);
+	ft_bzero(num, REG_SIZE * 2 + 1);
 	k = 0;
 	j = 0;
-	while (j < size)
+	reg--;
+	while (reg[j] && j < REG_SIZE)
 	{
-		write_char_to_hex(arena[pc].raw, num + k);
+		write_char_to_hex(reg[j], num + k);
 		k += 2;
-		pc = (pc + 1) % MEM_SIZE;
+		j++;
 	}
-	return (ft_htoi(num, size * 2));
+	return (ft_htoi(num, REG_SIZE * 2 + 1));
 }

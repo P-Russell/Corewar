@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/23 10:31:02 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/24 10:39:55 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void		check_player_numbers(t_env *env)
 {
-	printf("numbers found: %s\n", env->player_nums);
 	unsigned int	i;
 	char			possible;
 
@@ -33,7 +32,6 @@ static void		check_player_numbers(t_env *env)
 			env->champs[i].player_num = env->player_nums[i] - '0';
 		i++;
 	}
-	printf("player nums %s\n", env->player_nums);
 }
 
 static int		new_champ(char *file_name, t_champ *champ, unsigned int play_num)
@@ -54,7 +52,7 @@ static int		new_champ(char *file_name, t_champ *champ, unsigned int play_num)
 		champ->size = 0;
 		champ->carry = 0;
 		champ->load_address = 0;
-		champ->PC = 0;
+		champ->pc = 0;
 		return (1);
 	}
 	ft_putendl_fd("player number specified exceeds MAX_PLAYERS", 2);

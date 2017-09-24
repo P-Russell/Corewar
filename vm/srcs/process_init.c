@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_data.c                                         :+:      :+:    :+:   */
+/*   process_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/24 07:52:56 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 07:53:58 by prussell         ###   ########.fr       */
+/*   Created: 2017/09/24 09:50:00 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/24 10:37:22 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		value_from_core(t_core *arena, int pc, int size)
+t_process	*init_process(t_champ *champs, int num_champs)
 {
-	int		k;
-	int		j;
-	char	num[9];
+	int			i;
+	int			j;
+	t_process 	*new;
+	t_process	*head;
 
-	ft_bzero(num, 9);
-	k = 0;
-	j = 0;
-	while (j < size)
+	j = 1;
+	head = NULL;
+	while (j <= MAX_PLAYERS)
 	{
-		write_char_to_hex(arena[pc].raw, num + k);
-		k += 2;
-		pc = (pc + 1) % MEM_SIZE;
+		i = 0;
+		while (i < num_champs)
+		{
+			if (champs[i].player_num == j)
+			{
+				if ((new = new_proc_from_champ(champs + i)) == NULL)
+					return (NULL);
+				push_proc(&head, new);
+			}
+			i++;
+		}
+		j++;
 	}
-	return (ft_htoi(num, size * 2));
+	return (head);
 }

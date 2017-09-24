@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:10:49 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/23 10:18:33 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/24 10:40:49 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int		get_name_and_size(t_champ *champ)
 	if (read(champ->fd, &size, sizeof(int)) == -1)
 		return (-1);
 	champ->stated_size = little_to_big_endian(size);
-	printf("%s stated size = %d\n", champ->name, champ->stated_size);
 	return (0);
 }
 
@@ -88,7 +87,6 @@ static int		get_champion(t_champ *champ)
 		return (-1);
 	}
 	champ->size = i;
-	printf("measured size: %d\n", champ->size);
 	if (champ->size != champ->stated_size)
 	{
 		ft_putendl_fd("Invalid champ size in header", 2);

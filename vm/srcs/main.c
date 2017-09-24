@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/23 09:50:55 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/24 10:34:56 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,21 @@ void	print_champ_data(t_champ *champs, int num_players)
 	}
 }
 
+void	print_proc_data(t_process *proc)
+{
+	t_process *cur;
+
+	printf("---------------------------------------\n");
+	cur = proc;
+	while (cur)
+	{
+		printf("Player num: %d\n", cur->player_num);
+		printf("Load address: %d\n", cur->load_address);
+		printf("---------------------------------------\n");
+		cur = cur->next;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_env	env;
@@ -48,7 +63,13 @@ int		main(int argc, char **argv)
 		return (-1);
 	}
 	read_champs_into_core(&env);
-	print_champ_data(env.champs, env.num_players);
-	print_arena(env);
+	if ((env.process = init_process(env.champs, env.num_players)) == NULL)
+	{
+		ft_putendl_fd("Process init error", 2);
+		return (-1);
+	}
+//	print_champ_data(env.champs, env.num_players);
+	print_proc_data(env.process);
+//	print_arena(env);
 	return (0);	
 }
