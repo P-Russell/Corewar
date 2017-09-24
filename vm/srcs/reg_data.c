@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:14:10 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 12:02:24 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/24 12:05:34 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	write_to_reg(unsigned char *reg, int value)
 	}
 	p = (unsigned char *)&value;
 	i = 0;
+	reg--;
 	while (i < REG_SIZE)
 	{
 		printf("%x, ", p[i]);

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 12:02:26 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/24 12:04:59 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_process		*new_proc_from_champ(t_champ *champ)
 	new->alive = 1;
 	new->cycles_to_die = CYCLE_TO_DIE;;
 	clean_reg(new->reg);
-	write_to_reg(new->reg[0], 50); 
+	write_to_reg(new->reg[0], champ->player_num); 
 	new->next = NULL;
 	return (new);
 }
