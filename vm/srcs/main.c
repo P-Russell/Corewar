@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 10:34:56 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/24 12:02:27 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	print_champ_data(t_champ *champs, int num_players)
 void	print_proc_data(t_process *proc)
 {
 	t_process *cur;
+	int			i;
 
 	printf("---------------------------------------\n");
 	cur = proc;
@@ -43,6 +44,11 @@ void	print_proc_data(t_process *proc)
 	{
 		printf("Player num: %d\n", cur->player_num);
 		printf("Load address: %d\n", cur->load_address);
+		i = 0;
+		while (i < REG_NUMBER)
+			printf("%d, ", value_from_reg(cur->reg[i++]));
+		printf("\n");
+		i++;
 		printf("---------------------------------------\n");
 		cur = cur->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:14:10 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 10:36:21 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/24 12:02:24 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,22 @@ void	write_to_reg(unsigned char *reg, int value)
 	unsigned char 	*p;
 	int				i;
 
+	printf("about to write %d\n", value);	
 	value = little_to_big_endian(value);
+	if (value < 0)
+	{
+		value = ~value;
+		value++;
+	}
 	p = (unsigned char *)&value;
-	reg--;
 	i = 0;
 	while (i < REG_SIZE)
 	{
+		printf("%x, ", p[i]);
 		reg[i] = p[i];
 		i++;
 	}
+	printf("\n");
 }
 
 int		value_from_reg(unsigned char *reg)
@@ -38,11 +45,11 @@ int		value_from_reg(unsigned char *reg)
 	k = 0;
 	j = 0;
 	reg--;
-	while (reg[j] && j < REG_SIZE)
+	while (j < REG_SIZE)
 	{
 		write_char_to_hex(reg[j], num + k);
 		k += 2;
 		j++;
 	}
-	return (ft_htoi(num, REG_SIZE * 2 + 1));
+	return (ft_htoi(num, REG_SIZE * 2));
 }

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 10:23:18 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/24 12:02:26 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		clean_reg(unsigned char reg[REG_NUMBER + 1][REG_SIZE + 1])
 
 	i = 0;
 	while (i < REG_NUMBER + 1)
-		ft_bzero(reg[i++], REG_SIZE + 1); 
+		ft_bzero(reg[i++], REG_SIZE + 1);
 }
 
 t_process		*new_proc_from_champ(t_champ *champ)
@@ -34,6 +34,7 @@ t_process		*new_proc_from_champ(t_champ *champ)
 	new->alive = 1;
 	new->cycles_to_die = CYCLE_TO_DIE;;
 	clean_reg(new->reg);
+	write_to_reg(new->reg[0], 50); 
 	new->next = NULL;
 	return (new);
 }
