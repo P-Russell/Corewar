@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/25 12:38:31 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/25 13:44:07 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_process		*new_proc(t_process *father, int pc)
 	new->load_address = pc;
 	new->player_num = father->player_num;
 	new->carry = father->carry;
-	new->alive_calls = 0;
+	new->live_calls = 0;
 	cpy_reg(father->reg, new->reg);
 	new->next = NULL;
 	return (new);
@@ -69,9 +69,10 @@ void		del_first_proc(t_process **head)
 {
 	t_process *next_node;
 
+	next_node  = NULL;
 	if (*head != NULL)
 	{
-		next_node = head->next;
+		next_node = (*head)->next;
 		free(*head);
 		*head = next_node;
 	}

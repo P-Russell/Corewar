@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 09:50:00 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/25 10:02:41 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/25 13:56:20 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_process		*new_proc_from_champ(t_champ *champ)
 	new->load_address = new->pc;
 	new->player_num = champ->player_num;
 	new->carry = 0;
-	new->alive_calls = 0;
+	new->live_calls = NBR_LIVE;
 	clean_reg(new->reg);
 	write_to_reg(new->reg[0], champ->player_num); 
 	new->next = NULL;
