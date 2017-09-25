@@ -6,38 +6,11 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 12:04:59 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/25 12:38:31 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-static void		clean_reg(unsigned char reg[REG_NUMBER + 1][REG_SIZE + 1])
-{
-	int	i;
-
-	i = 0;
-	while (i < REG_NUMBER + 1)
-		ft_bzero(reg[i++], REG_SIZE + 1);
-}
-
-t_process		*new_proc_from_champ(t_champ *champ)
-{
-	t_process	*new;
-
-	if ((new = (t_process *)malloc(sizeof(t_process))) == NULL)
-		return (NULL);
-	new->pc = champ->pc;
-	new->load_address = champ->pc;
-	new->player_num = champ->player_num;
-	new->carry = 0;
-	new->alive = 1;
-	new->cycles_to_die = CYCLE_TO_DIE;;
-	clean_reg(new->reg);
-	write_to_reg(new->reg[0], champ->player_num); 
-	new->next = NULL;
-	return (new);
-}
 
 static void		cpy_reg(unsigned char src[REG_NUMBER + 1][REG_SIZE + 1],
 		unsigned char dst[REG_NUMBER + 1][REG_SIZE + 1])
@@ -69,8 +42,7 @@ t_process		*new_proc(t_process *father, int pc)
 	new->load_address = pc;
 	new->player_num = father->player_num;
 	new->carry = father->carry;
-	new->alive = 1;
-	new->cycles_to_die = father->cycles_to_die;
+	new->alive_calls = 0;
 	cpy_reg(father->reg, new->reg);
 	new->next = NULL;
 	return (new);
@@ -91,4 +63,16 @@ void		append_proc(t_process *head, t_process *new)
 		tmp = tmp->next;
 	tmp->next = new;
 	new->next = NULL;
+}
+
+void		del_first_proc(t_process **head)
+{
+	t_process *next_node;
+
+	if (*head != NULL)
+	{
+		next_node = head->next;
+		free(*head);
+		*head = next_node;
+	}
 }

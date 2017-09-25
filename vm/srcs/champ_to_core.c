@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:31:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/22 15:24:24 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/25 10:04:16 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ static void		load_addr_val(t_env *env)
 	while (i < env->num_players)
 	{
 		env->champs[i].load_address = step * i;
+		env->champs[i].pc = env->champs[i].load_address;
 		i++;
-		env->champs[i].load_address =  step * i;
-        i++;
 	}
     
 }
