@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/25 14:01:33 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 09:42:07 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct		s_env
 	t_process		*process;
 }					t_env;
 
+
 void		init_arena(t_env *env);									
 int			init_env(int argc, char **argv, t_env *env); 
 int			read_champ_data(t_env *env, int num_players);
@@ -92,4 +93,24 @@ t_process	*new_proc(t_process *father, int pc);
 t_process	*init_process(t_champ *champs, int num_players);
 void		del_first_proc(t_process **head);
 int			game_loop(t_env *env);
+int			op_live(t_process *p, t_core *arena);
+int			op_ld(t_process *p, t_core *arena);
+int			op_st(t_process *p, t_core *arena);
+int			op_add(t_process *p, t_core *arena);
+int			op_sub(t_process *p, t_core *arena);
+int			op_and(t_process *p, t_core *arena);
+int			op_or(t_process *p, t_core *arena);
+int			op_xor(t_process *p, t_core *arena);
+int			op_zjump(t_process *p, t_core *arena);
+int			op_ldi(t_process *p, t_core *arena);
+int			op_sti(t_process *p, t_core *arena);
+int			op_fork(t_process *p, t_core *arena);
+int			op_lld(t_process *p, t_core *arena);
+int			op_lldi(t_process *p, t_core *arena);
+int			op_lfork(t_process *p, t_core *arena);
+int			op_aff(t_process *p, t_core *arena);
+
+typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
+
+
 #endif
