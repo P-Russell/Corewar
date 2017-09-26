@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 09:17:32 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/24 11:33:22 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 09:24:54 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,31 @@ int			ft_htoi(char *str, size_t len)
 		power++;
 	}
 	return (tot);
+}
+
+char	*ft_itoh(int val)
+{
+	char	*ans;
+	int		t;
+	char	hex[16];
+
+	if (val < 0)
+		val = ~val;
+	ft_strcpy(hex, "0123456789ABCDEF");
+	ans = (char *)malloc(sizeof(char) * (9));
+	t = 7;
+	ans[8] = '\0';
+	while ((val >> 4) != 0 && t > 0)
+	{
+		ans[t] = hex[15 - val % 16];
+		val = val >> 4;
+		t--;
+	}
+	ans[t] = hex[15 - val % 16];
+	while (t - 1 >= 0)
+	{
+		ans[t - 1] = 'F';
+		t--;
+	}
+	return (ans);
 }

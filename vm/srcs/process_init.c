@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 09:50:00 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/25 10:02:41 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 09:11:47 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_process		*new_proc_from_champ(t_champ *champ)
 	new->carry = 0;
 	new->alive_calls = 0;
 	clean_reg(new->reg);
-	write_to_reg(new->reg[0], champ->player_num); 
+	write_to_reg(new->reg[0], -2000); 
 	new->next = NULL;
 	return (new);
 }

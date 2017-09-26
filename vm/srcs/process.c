@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/25 12:38:31 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 09:11:07 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		del_first_proc(t_process **head)
 
 	if (*head != NULL)
 	{
-		next_node = head->next;
+		next_node = (*head)->next;
 		free(*head);
 		*head = next_node;
 	}
