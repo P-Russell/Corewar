@@ -6,11 +6,11 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 08:24:03 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/26 10:34:09 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 10:44:04 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "vm.h"
 
 int		add(t_process *p, t_core *arena)
 {
