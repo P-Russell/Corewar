@@ -6,16 +6,11 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:14:10 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/26 10:41:20 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/26 10:45:20 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-/*
-** Function write to reg is not working properly.
-**
-*/
 
 void	write_to_reg(unsigned char *reg, int value)
 {

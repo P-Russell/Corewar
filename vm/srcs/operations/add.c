@@ -6,30 +6,43 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 08:24:03 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/26 08:11:03 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 10:34:09 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "../includes/vm.h"
 
 int		add(t_process *p, t_core *arena)
 {
 	int	i;
-	int param1;
-	int param2;
-	int	param3;
+	int param[3];
 	int	acb;
 
 	p->pc = (p->pc + 1) % MEM_SIZE;
 	acb = (arena[p->pc].raw);
 	p->pc = (p->pc + 1) % MEM_SIZE;
-	param1 = value_from_reg(p->reg[arena[p->pc].raw]);
-	p->pc = (p->pc + 1) % MEM_SIZE;
-	param2 = value_from_reg(p->reg[arena[p->pc].raw]);
-	p->pc = (p->pc + 1) % MEM_SIZE;
-	param3 = value_from_reg(p->reg[arena[p->pc].raw]);
-	p->pc = (p->pc + 1) % MEM_SIZE;
-	write_to_reg(p->reg[param3], param1 + param2);
-	p->cycles_to_exec =  g_op_tab[arena[p->pc].raw - 1].nb_cycles;
-	return (0);
+	i = 0;
+	while (i < 3)
+	{
+		if (is_register(acb, i) == 1 &&
+				valid_reg(arena[(p->pc + i) % MEM_SIZE].raw))
+			i++;
+		else
+			break ;
+	}
+	p->cycles_to_exec =  g_op_tab[arena[(p->pc + 3) % MEM_SIZE].raw].nb_cycles;
+	if (i == 3)
+	{
+		param[0] = value_from_reg(p->reg[arena[p->pc].raw]);
+		param[1] = value_from_reg(p->reg[arena[(p->pc + 1) % MEM_SIZE].raw]);
+		param[2] = value_from_reg(p->reg[arena[(p->pc + 2) % MEM_SIZE].raw]);
+		write_to_reg(p->reg[param[2]], param[0] + param[1]);
+		p->pc = (p->pc + 3) % MEM_SIZE;
+	}
+	else
+	{
+		p->pc = (p->pc + 3) % MEM_SIZE;
+		return (0);
+	}
+	return (1);
 }
