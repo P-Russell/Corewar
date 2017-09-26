@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/26 09:10:31 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/26 09:32:25 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct			s_process
 	int					player_num;
 	int					cycles_to_exec;
 	int					carry;
-	int					alive_calls;
+	int					live_calls;
 	unsigned char		reg[REG_NUMBER + 1][REG_SIZE + 1];
 	struct s_process	*next;
 }						t_process;
@@ -92,5 +92,6 @@ t_process	*new_proc(t_process *father, int pc);
 t_process	*init_process(t_champ *champs, int num_players);
 void		del_first_proc(t_process **head);
 char		*ft_itoh(int val);
+int			game_loop(t_env *env);
 
 #endif
