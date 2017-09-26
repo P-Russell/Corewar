@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:14:10 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/26 09:30:42 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/26 10:41:20 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ void	write_to_reg(unsigned char *reg, int value)
 	unsigned char 	*p;
 	int				i;
 	char			*tmp;
-	char			*t;
 
 	if (value < 0)
 	{
 		tmp = ft_itoh(value);
-		t = tmp;
 		i = 0;
 		while (i < REG_SIZE)
 		{
@@ -35,8 +33,6 @@ void	write_to_reg(unsigned char *reg, int value)
 			i++;
 			tmp += 2;
 		}
-		ft_strdel(&t);
-		tmp = NULL;
 	}
 	else
 	{
