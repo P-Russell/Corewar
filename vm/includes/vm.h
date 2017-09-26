@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/26 09:42:07 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 09:46:40 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void		push_proc(t_process **head, t_process *new_p);
 t_process	*new_proc(t_process *father, int pc);
 t_process	*init_process(t_champ *champs, int num_players);
 void		del_first_proc(t_process **head);
+char		*ft_itoh(int val);
 int			game_loop(t_env *env);
 int			op_live(t_process *p, t_core *arena);
 int			op_ld(t_process *p, t_core *arena);
@@ -111,6 +112,5 @@ int			op_lfork(t_process *p, t_core *arena);
 int			op_aff(t_process *p, t_core *arena);
 
 typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
-
 
 #endif
