@@ -6,28 +6,19 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 08:36:57 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/22 08:49:39 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/26 16:12:58 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	fork(int addr, t_process *p, t_env *env, unsigned int i, t_process *r)
+int		op_fork(t_process *p, t_core *arena)
 {
-	unsigned int	j;
+	char param[9];
 
-	j = 0;
-	while (j < env->champs[i].size)
-	{
-		env->arena[(p->pc + j + (addr % IDX_MOD)) % MEM_SIZE].raw =
-			env->champs[i].code[j];
-		j++;
-	}
-	r->load_address = (p->pc + (addr % IDX_MOD)) % MEM_SIZE;
-	r->cycles_to_exec = ;
-	r->pc = r->load_address;
-	r->core_ptr = &env->arena[r->load_address];
-	r->carry = ;
-	r->alive = 1;
-	r->cycles_to_die;
+	ft_bzero(param, 9);
+	ft_strncpy(arena[p->pc + 1 % MEM_SIZE].value, param + 6, 2) 
+	param1 = value_from_core(arena, p->pc + 1 % MEM_SIZE, IND_SIZE);
+	if 
+	return (1);
 }

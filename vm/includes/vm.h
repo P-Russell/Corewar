@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/26 15:39:28 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/27 08:30:59 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,20 @@ typedef struct		s_env
 	t_process		*process;
 }					t_env;
 
+typedef struct		s_op_var
+{
+	int acb;
+	int params[3];
+	int types[3];
+}					t_op_var;
+
+typedef union	u_data
+{
+	int8_t		byte_1;
+	int16_t		byte_2;
+	int32_t		byte_4;
+}				t_data;
+
 void		init_arena(t_env *env);									
 int			init_env(int argc, char **argv, t_env *env); 
 int			read_champ_data(t_env *env, int num_players);
@@ -111,6 +125,7 @@ int			op_lldi(t_process *p, t_core *arena);
 int			op_lfork(t_process *p, t_core *arena);
 int			op_aff(t_process *p, t_core *arena);
 int			ft_power(int a, int b);
+int			data_var(int pc, t_core *arena, size_t s);
 
 typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
 

@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 08:24:03 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/26 10:44:04 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 16:02:24 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		add(t_process *p, t_core *arena)
 	{
 		param[0] = value_from_reg(p->reg[arena[p->pc].raw]);
 		param[1] = value_from_reg(p->reg[arena[(p->pc + 1) % MEM_SIZE].raw]);
-		param[2] = value_from_reg(p->reg[arena[(p->pc + 2) % MEM_SIZE].raw]);
+		param[2] = arena[(p->pc + 2) % MEM_SIZE].raw;
 		write_to_reg(p->reg[param[2]], param[0] + param[1]);
 		p->pc = (p->pc + 3) % MEM_SIZE;
 	}
@@ -44,5 +44,6 @@ int		add(t_process *p, t_core *arena)
 		p->pc = (p->pc + 3) % MEM_SIZE;
 		return (0);
 	}
+	p->carry = 1;
 	return (1);
 }
