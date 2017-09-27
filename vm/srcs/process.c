@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/26 09:31:47 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/27 13:56:04 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_process		*new_proc(t_process *father, int pc)
 	if ((new = (t_process *)malloc(sizeof(t_process))) == NULL)
 		return (NULL);
 	new->pc = pc;
-	new->load_address = pc;
 	new->player_num = father->player_num;
 	new->carry = father->carry;
 	new->live_calls = 0;

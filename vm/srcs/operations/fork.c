@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 08:36:57 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/26 16:12:58 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/27 13:57:14 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 int		op_fork(t_process *p, t_core *arena)
 {
-	char param[9];
+	int			p1;
+	t_process	*new;
 
-	ft_bzero(param, 9);
-	ft_strncpy(arena[p->pc + 1 % MEM_SIZE].value, param + 6, 2) 
-	param1 = value_from_core(arena, p->pc + 1 % MEM_SIZE, IND_SIZE);
-	if 
+	p1 = data_var((p->pc + 1) % MEM_SIZE, arena, IND_SIZE);
+	if ((new = new_proc(p, p->pc + (p1 % IDX_MOD))))
+		append_proc(p, new);
+	else
+		return (0);
+	p->pc += (1 + IND_SIZE);
 	return (1);
 }
