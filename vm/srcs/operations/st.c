@@ -6,18 +6,29 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 07:44:07 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/21 10:25:46 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/26 16:14:06 by tbarlow-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "../includes/vm.h"
 
-void	st_arg(unsigned char *reg, t_env *env, int arg, t_process *p)
+int     st(t_process *p, t_core *arena)
 {
-	env->arena[(p->pc + (arg % IDX_MOD)) % MEM_SIZE].raw = *reg;
-}
+    int param;
+    int index;
+    int acb;
 
-void	st_reg(unsigned char *reg1, unsigned char *reg2)
-{
-	*reg2 = *reg1;
+    p->pc = (p->pc + 1) % MEM_SIZE;
+    acb = (arena[p->pc].raw);
+    p->pc = (p->pc + 1) % MEM_SIZE;
+    if (is_register(acb, 1) == 1 &&
+            valid_reg(arena[(p->pc + 1) % MEM_SIZE].raw))
+        param = value_from_reg(p->reg[arena[(p->pc + 1) % MEM_SIZE].raw]);
+    if ((is_register(acb, 2) == 1) && 
+        valid_reg(arena[(p->pc + 1) % MEM_SIZE].raw))
+    {
+        index = arena[(p->pc + 1) % MEM_SIZE].raw + p->pc + 1;
+        write_to_reg(p->reg[index], param);
+    }
+    return (0);
 }
