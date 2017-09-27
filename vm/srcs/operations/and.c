@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 06:59:50 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/27 15:06:31 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/27 15:34:44 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ static int	get_value(int acb, int param_num, int *pc, t_core *arena)
 	if (is_register(acb, param_num) == 1)
 	{
 		ans = data_var(*pc, arena, T_REG);
-		*pc = (*pc + 1) % MEM_SIZE;
+		*pc = (*pc + T_REG) % MEM_SIZE;
 		return (ans);
 	}
 	else if (is_direct(acb, param_num) == 1)
 	{
 		ans = data_var(*pc, arena, T_DIR);
-		*pc = (*pc + 2) % MEM_SIZE;
+		*pc = (*pc + T_DIR) % MEM_SIZE;
 		return (ans);
 	}
-	ans = data_var(((*pc + data_var(*pc, arena, T_REG)) % IDX_MOD) % MEM_SIZE,
+	ans = data_var(((*pc + data_var(*pc, arena, T_IND)) % IDX_MOD) % MEM_SIZE,
 			arena, T_IND);
-	*pc = (*pc + 1) % MEM_SIZE;
+	*pc = (*pc + T_IND) % MEM_SIZE;
 	return (ans);
 }
 

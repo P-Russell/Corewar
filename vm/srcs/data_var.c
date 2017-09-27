@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 07:57:54 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/27 08:16:59 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/27 12:33:54 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int16_t	get_val(int pc, t_core *arena)
 
 	ans = arena[pc].raw;
 	ans = ans << 4;
-	ans = ans + arena[pc + 1].raw;
+	ans = ans + arena[(pc + 1) % MEM_SIZE].raw;
 	return (ans);
 }
 

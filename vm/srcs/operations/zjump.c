@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fork.c                                             :+:      :+:    :+:   */
+/*   zjump.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/22 08:36:57 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/27 14:30:52 by prussell         ###   ########.fr       */
+/*   Created: 2017/09/27 14:22:01 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/27 14:30:49 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		op_fork(t_process *p, t_core *arena)
+int		op_zjump(t_process *p, t_core *arena)
 {
-	int			p1;
-	t_process	*new;
+	int	p1;
 
-	p1 = data_var((p->pc + 1) % MEM_SIZE, arena, IND_SIZE);
-	if ((new = new_proc(p, p->pc + (p1 % IDX_MOD))))
-		append_proc(p, new);
-	else
+	if (p->carry <= 0)
+	{
+		p->pc = (p->pc + 1 + IND_SIZE) % MEM_SIZE;
 		return (0);
-	p->pc = (p->pc + 1 + IND_SIZE) % MEM_SIZE;
+	}
+	p1 = data_var((p->pc + 1) % MEM_SIZE, arena, IND_SIZE);
+	p->pc = (p->pc + p1) % MEM_SIZE;
 	return (1);
 }

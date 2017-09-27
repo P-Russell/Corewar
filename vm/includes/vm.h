@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/27 08:30:59 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/27 15:08:11 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef	struct		s_core
 typedef struct			s_process
 {
 	int					pc;
-	int					load_address;
 	int					player_num;
 	int					cycles_to_exec;
 	int					carry;
@@ -74,7 +73,7 @@ typedef struct		s_env
 typedef struct		s_op_var
 {
 	int acb;
-	int params[3];
+	int param[3];
 	int types[3];
 }					t_op_var;
 
@@ -103,6 +102,7 @@ int			little_to_big_endian(int nb);
 int			ft_htoi(char *str, size_t len);
 void		write_to_reg(unsigned char *reg, int value);
 void		push_proc(t_process **head, t_process *new_p);
+void		append_proc(t_process *head, t_process *p);
 t_process	*new_proc(t_process *father, int pc);
 t_process	*init_process(t_champ *champs, int num_players);
 void		del_first_proc(t_process **head);
@@ -126,6 +126,7 @@ int			op_lfork(t_process *p, t_core *arena);
 int			op_aff(t_process *p, t_core *arena);
 int			ft_power(int a, int b);
 int			data_var(int pc, t_core *arena, size_t s);
+void		init_var(t_op_var *v);
 
 typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
 
