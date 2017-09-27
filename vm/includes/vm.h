@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/26 10:50:11 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/26 15:39:28 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct		s_env
 	t_process		*process;
 }					t_env;
 
-
 void		init_arena(t_env *env);									
 int			init_env(int argc, char **argv, t_env *env); 
 int			read_champ_data(t_env *env, int num_players);
@@ -84,6 +83,7 @@ int			is_indirect(int acb, int param_num);
 int			is_register(int acb, int param_num);
 int			valid_reg(int num);
 int			value_from_core(t_core *arena, int pc, int size);
+int			write_to_core(t_core *arena, int pc, int value, int size);
 int			value_from_reg(unsigned char *reg);
 int			little_to_big_endian(int nb);
 int			ft_htoi(char *str, size_t len);
@@ -110,6 +110,7 @@ int			op_lld(t_process *p, t_core *arena);
 int			op_lldi(t_process *p, t_core *arena);
 int			op_lfork(t_process *p, t_core *arena);
 int			op_aff(t_process *p, t_core *arena);
+int			ft_power(int a, int b);
 
 typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
 
