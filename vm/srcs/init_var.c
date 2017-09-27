@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 15:05:20 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/27 15:08:42 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/27 15:41:09 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	init_var(t_op_var *v)
 	int	i;
 
 	i = 0;
-	ft_bzero(v->param, 3);
-	ft_bzero(v->types, 3);
-	while (i < MAX_ARGS_NUMBER - 1)
+	ft_bzero(v->param, MAX_ARGS_NUMBER);
+	ft_bzero(v->types, MAX_ARGS_NUMBER);
+	while (i < MAX_ARGS_NUMBER)
 	{
 		if (is_register(v->acb, i + 1))
 			v->types[i] = T_REG;
