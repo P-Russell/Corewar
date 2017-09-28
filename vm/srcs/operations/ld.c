@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 08:26:01 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/28 14:59:50 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/28 15:04:22 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int 	op_ld(t_process *p, t_core *arena)
         write_to_reg(p->reg[data_var_pc(&(p->pc), arena, T_REG)], load_val);
 	}
 	else
-		p->pc = pc_counter(p->pc, acb, 1);
+		p->pc = pc_counter(p->pc, acb, 2);
 	p->carry = (chk == 2) ? 1 : 0;
 	if (chk == 2)
 		return (1);
