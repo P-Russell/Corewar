@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 09:44:33 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/28 15:27:46 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/28 15:54:27 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		check_param_type(t_op_var *v)
 	return (1);
 }
 
-int		check_regs(t_op_var v)
+static int		check_regs(t_op_var v)
 {
 	if (v.t[1] == T_REG)
 		if (!valid_reg(v.p[1]))
@@ -44,7 +44,7 @@ int		check_regs(t_op_var v)
 	return (1);
 }
 
-int		do_ldi(t_op_var v, int acb, t_process *p, t_core *arena)
+static  int		do_ldi(t_op_var v, int acb, t_process *p, t_core *arena)
 {
 	int		result;
 
@@ -65,6 +65,24 @@ int		do_ldi(t_op_var v, int acb, t_process *p, t_core *arena)
 	return (result);
 }
 
+static int		pc_forward(int acb)
+{
+	int i;
+	i = 1;
+	if (is_register(acb, 1))
+		i++;
+	else
+		i += 2;
+	if (is_register(acb, 2))
+		i++;
+	else
+		i += 2;
+	if (is_register(acb, 3))
+		i++;
+	else
+		i += 2;
+	return (i);
+}
 
 int		op_ldi(t_process *p, t_core *arena)
 {
@@ -77,7 +95,7 @@ int		op_ldi(t_process *p, t_core *arena)
 	if (!check_param_type(&v))
 	{
 		p->carry = 0;
-//		p->pc = advance_pc(v, p->pc, LDI);
+		p->pc = pc_forward(acb);
 		return (0);
 	}
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
@@ -85,7 +103,9 @@ int		op_ldi(t_process *p, t_core *arena)
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
 	if (v.t[1] == T_REG && v.t[2] == T_DIR)
 	{
-		write_to_reg(p->reg[v.p[3]], do_ldi(v, acb, p, arena));
+		write_to_reg(p->reg[v.p[3]], data_var(p->pc +
+					(do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE, arena, REG_SIZE));
 	}
+	p->pc = (p->pc + v.t[1] + v.t[2] + v.t[3] + 1) % MEM_SIZE;
 	return (1);
 }
