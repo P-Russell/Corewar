@@ -1,0 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_add.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/28 09:44:33 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/28 15:27:46 by prussell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "vm.h"
+
+static int		check_param_type(t_op_var *v)
+{
+	if (v->t[1] != T_REG || v->t[1] != T_DIR || v->t[1] != T_IND)
+		return (0);
+	if (v->t[2] != T_REG || v->t[2] != T_DIR)
+		return (0);
+	if (v->t[3] != T_REG)
+		return (0);
+	else
+	{
+		if (v->t[1] != T_REG)
+			v->t[1] = IND_SIZE;
+		if (v->t[2] != T_REG)
+			v->t[2] = IND_SIZE;
+	}
+	return (1);
+}
+
+int		check_regs(t_op_var v)
+{
+	if (v.t[1] == T_REG)
+		if (!valid_reg(v.p[1]))
+			return (0);
+	if (v.t[2] == T_REG)
+		if (!valid_reg(v.p[2]))
+			return (0);
+	if (v.t[3] == T_REG)
+		if (!valid_reg(v.p[3]))
+			return (0);
+	return (1);
+}
+
+int		do_ldi(t_op_var v, int acb, t_process *p, t_core *arena)
+{
+	int		result;
+
+	result = 0;
+	if (is_register(acb, 1) && is_direct(acb, 2))
+		result = value_from_reg(p->reg[v.p[1]]) + v.p[2];
+	else if (is_register(acb, 1) && is_register(acb, 2))
+		result = value_from_reg(p->reg[v.p[1]]) + value_from_reg(p->reg[v.p[2]]);
+	else if (is_direct(acb, 1) && is_direct(acb, 2))
+		result = v.p[1] + v.p[2];
+	else if (is_direct(acb, 1) && is_register(acb, 2))
+		result = v.p[1] + value_from_reg(p->reg[v.p[2]]);
+	else if (is_indirect(acb, 1) && is_direct(acb, 2))
+		result = data_var((p->pc + (v.p[1] % IDX_MOD)) % MEM_SIZE, arena, IND_SIZE) + v.p[2];
+	else if (is_indirect(acb, 1) && is_register(acb, 2))
+		result = data_var((p->pc + (v.p[1] % IDX_MOD)) % MEM_SIZE, arena, IND_SIZE) +
+			value_from_reg(p->reg[v.p[2]]);
+	return (result);
+}
+
+
+int		op_ldi(t_process *p, t_core *arena)
+{
+	t_op_var 	v;
+	int			acb;
+
+	v.acb = data_var((p->pc + 1) % MEM_SIZE, arena, T_REG);
+	acb = v.acb;
+	init_var(&v);
+	if (!check_param_type(&v))
+	{
+		p->carry = 0;
+//		p->pc = advance_pc(v, p->pc, LDI);
+		return (0);
+	}
+	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
+	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
+	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
+	if (v.t[1] == T_REG && v.t[2] == T_DIR)
+	{
+		write_to_reg(p->reg[v.p[3]], do_ldi(v, acb, p, arena));
+	}
+	return (1);
+}
