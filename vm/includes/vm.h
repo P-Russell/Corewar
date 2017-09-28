@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/27 15:41:12 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/28 16:00:06 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ typedef struct		s_env
 typedef struct		s_op_var
 {
 	int acb;
-	int param[MAX_ARGS_NUMBER];
-	int types[MAX_ARGS_NUMBER];
+	int p[MAX_ARGS_NUMBER];
+	int t[MAX_ARGS_NUMBER];
 }					t_op_var;
 
 typedef union	u_data
@@ -127,6 +127,8 @@ int			op_aff(t_process *p, t_core *arena);
 int			ft_power(int a, int b);
 int			data_var(int pc, t_core *arena, size_t s);
 void		init_var(t_op_var *v);
+int			data_var_pc(int *pc, t_core *arena, size_t s);
+int			pc_counter(int pc, int acb, int param_num);
 
 typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
 

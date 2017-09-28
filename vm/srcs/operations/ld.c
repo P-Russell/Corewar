@@ -6,28 +6,36 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 08:26:01 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/27 11:02:20 by tbarlow-         ###   ########.fr       */
+/*   Updated: 2017/09/28 15:38:45 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-int 	ld(t_process *p, t_core *arena)
+int 	op_ld(t_process *p, t_core *arena)
 {
     int load_val;
-    int param[2];
     int acb;
+	int	chk;
 
-    p->pc = (p->pc + 1) % MEM_SIZE;
-    acb = (arena[p->pc].raw);
-    p->pc = (p->pc + 1) % MEM_SIZE;
-    if (is_direct(acb, 0) == 1)
-        load_val = value_from_core(arena, p->pc, T_DIR);      //Change to new function get index from core
-    else if (is_indirect(acb, 1) == 1)
-        load_val = value_from_core(arena, (p->pc + value_from_reg(p->reg[arena[p->pc].raw]) % IDX_MOD), T_IND);
-    if (is_register(acb, 2) && valid_reg(arena[(p->pc + 1) % MEM_SIZE].raw))
-        write_to_reg(p->reg[param[1]], load_val);
+    acb = (arena[(p->pc + 1) % MEM_SIZE].raw);
     p->pc = (p->pc + 2) % MEM_SIZE;
-    p->carry = (load_val) ? 0 : 1;
+    if (is_direct(acb, 1) == 1)
+        load_val = data_var(p->pc, arena, REG_SIZE);
+    else if (is_indirect(acb, 1) == 1)
+        load_val = data_var((p->pc + (data_var(p->pc, arena, T_IND) % IDX_MOD))
+				% MEM_SIZE, arena, T_IND);
+	chk = (is_direct(acb, 1) == 1 || is_indirect(acb, 1) == 1) ? 1 : 0;
+	p->pc = pc_counter(p->pc, acb, 1);
+    if (chk == 1 && is_register(acb, 2) == 1 && valid_reg(arena[(p->pc)
+				% MEM_SIZE].raw))
+	{
+		chk++;
+        write_to_reg(p->reg[data_var(p->pc, arena, T_REG)], load_val);
+	}
+	p->pc = pc_counter(p->pc, acb, 2);
+	p->carry = (chk == 2) ? 1 : 0;
+	if (chk == 2)
+		return (1);
     return (0);
 }

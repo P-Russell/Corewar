@@ -3,82 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/29 13:21:50 by prussell          #+#    #+#             */
-/*   Updated: 2017/06/06 07:04:12 by prussell         ###   ########.fr       */
+/*   Created: 2017/05/29 13:49:59 by lde-jage          #+#    #+#             */
+/*   Updated: 2017/06/30 09:40:23 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static		size_t		count_num(const char *s)
+#define MIN -9223372036854775807LL
+#define MAX 9223372036854775807LL
+
+static int	ft_value(const char *str, int i, long long int value)
 {
-	size_t i;
+	long long int	check;
+	int				temp;
+	long long int	tot;
 
-	i = 0;
-	while (s[i] >= '0' && s[i] <= '9')
-		i++;
-	return (i);
-}
-
-static		int			check_size(const char *s, int is_neg)
-{
-	char	*max;
-	char	*min;
-	size_t	s_len;
-
-	max = ft_strdup("2147483647");
-	min = ft_strdup("2147483648");
-	s_len = count_num(s);
-	if ((s_len > ft_strlen(max)) && is_neg == 1)
-		return (0);
-	else if ((s_len > ft_strlen(min)) && is_neg == -1)
-		return (-1);
-	return (1);
-}
-
-static		int			min_int(const char *s)
-{
-	char	*min;
-	int		i;
-
-	min = ft_strdup("2147483648\0");
-	i = 0;
-	while (min[i] != '\0')
+	check = 0;
+	tot = 0;
+	while (str[i] >= 48 && str[i] <= 57 && str[i] != '\0')
 	{
-		if (min[i] != s[i])
+		check = 1;
+		temp = ((int)str[i]) - 48;
+		tot = (tot * 10) + temp;
+		i++;
+	}
+	if (value == 1 && !(value * check * tot))
+		return (0);
+	if (value == -1 && !(value * check * tot))
+		return (-1);
+	if ((value * check * tot) > MAX ||
+			(value * check * tot) < MIN)
+		return (0);
+	return (value * check * tot);
+}
+
+int			ft_atoi(const char *str)
+{
+	long long int	value;
+	int				i;
+
+	i = 0;
+	value = 1;
+	while (str[i] != '\0')
+	{
+		if (str[i] == 45 || (str[i] >= 48 && str[i] <= 57) || str[i] == 43)
+			break ;
+		if (str[i] != 9 && str[i] != 10 && str[i] != 32
+			&& str[i] != '\v' && str[i] != '\f' && str[i] != '\r')
 			return (0);
 		i++;
 	}
-	return (1);
-}
-
-int						ft_atoi(const char *s)
-{
-	int i;
-	int sol;
-	int neg;
-
-	i = 0;
-	sol = 0;
-	neg = 1;
-	while ((s[i] == '\n' || s[i] == '\t' || s[i] == '\v' || s[i] == '+'
-			|| s[i] == '\f' || s[i] == '\r' || s[i] == ' ') && s[i] != '\0')
-		i++;
-	if (s[i] == '-')
-	{
-		neg = -1;
-		i++;
-	}
-	if (neg && min_int(s + i))
-		return (-2147483648);
-	if (check_size(s + i, neg) == 1)
-		while (s[i] >= '0' && s[i] <= '9' && s[i] != '\0')
-			sol = sol * 10 + (s[i++] - '0');
-	else if (check_size(s + i, neg) == 0)
-		return (-1);
-	else if (check_size(s + i, neg) == -1)
+	if (str[i + 1] >= 48 && str[i + 1] <= 57 && str[i] == 45)
+		value = ft_value(str, i + 1, -1);
+	else if (str[i + 1] >= 48 && str[i + 1] <= 57 && str[i] == 43)
+		value = ft_value(str, i + 1, 1);
+	else if (str[i] >= 48 && str[i] <= 57)
+		value = ft_value(str, i, value);
+	else
 		return (0);
-	return (sol * neg);
+	return (value);
 }
