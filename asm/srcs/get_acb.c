@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/22 16:10:06 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/27 11:15:28 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	calculate_acb(t_src_line *line)
 {
 	int	square;
 	int	n;
-	int	p;
 
 	n = 0;
 	square = 8;
@@ -49,7 +48,7 @@ int	calculate_acb(t_src_line *line)
 		else if (ft_isnumber(line->params[n]))
 			line->param_type[n] = IND_CODE;
 		else
-			p = 0;
+			line->param_type[n] = 0;
 		line->acb += line->param_type[n] * (square * square);
 		square /= 2;
 		n++;
