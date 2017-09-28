@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:33:33 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/12 13:24:42 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/27 12:41:39 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,15 @@ char		*exe_name(char *name)
 	while (norm.split[norm.j][norm.i] && norm.split[norm.j][norm.i] != '.')
 		norm.i++;
 	if (norm.split[norm.j][norm.i] != '.' ||
-			!(norm.exe = (char *)malloc(sizeof(char) * (norm.i + 4))))
+			!(norm.exe = (char *)malloc(sizeof(char) * (norm.i))))
 		return (NULL);
-	norm.exe[norm.i + 4] = '\0';
 	norm.i = 0;
 	while (norm.split[norm.j][norm.i] != '.')
 	{
 		norm.exe[norm.i] = norm.split[norm.j][norm.i];
 		norm.i++;
 	}
-	ft_strcpy(norm.exe + norm.i, ".cor");
+	ft_strcat(norm.exe + norm.i, ".cor");
 	ft_matrixdel((void **)norm.split);
 	return (norm.exe);
 }
@@ -100,6 +99,6 @@ int			init_bin_var(t_binary *bin, int fd, char *name)
 {
 	init_header_var(&(bin->header), fd);
 	bin->name = exe_name(name);
-	printf("%s\n", bin->name);
+	ft_putendl(bin->name);
 	return (1);
 }

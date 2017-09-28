@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/22 16:11:09 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/27 13:20:01 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void		extract_loop(t_norm *n, char **split, t_src_line *lines)
 		else
 		{
 			ft_putendl("Something's wrong");
+			free(lines);
 			exit(-7);
 		}
 		split++;
@@ -46,6 +47,7 @@ int			extract_data_from_line(char **split, t_src_line *lines)
 	if (n.op_code_found == 0 && n.label_found == 0)
 	{
 		ft_putstr_fd("Wrong opcode on line", 2);
+		free(lines);
 		exit(-6);
 	}
 	return (1);
@@ -101,7 +103,7 @@ t_src_line	*build_line_data_struct(int fd, int n)
 {
 	t_src_line *lines;
 
-	lines = (t_src_line *)malloc(sizeof(t_src_line) * n);
+	lines = (t_src_line *)malloc(sizeof(t_src_line) * (n + 1));
 	init_line_struct(lines, n);
 	if (get_data(lines, fd) == EXIT_FAILURE)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 13:06:00 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/27 13:57:25 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/28 08:35:10 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		check_params(t_src_line line)
 	while (g_op_tab[n].opcode != line.opcode)
 		n++;
 	p = 0;
-	while (p < g_op_tab[n].nb_params)
+	while (p < g_op_tab[n].nb_params && line.params[p] != NULL)
 	{
 		if (line.params[p][0] == 'r')
 			if (ft_atoi(line.params[p] + 1) > REG_NUMBER)
@@ -51,7 +51,7 @@ int		check_nb_params(t_src_line line)
 		n++;
 	if (line.params[g_op_tab[n].nb_params] != NULL)
 	{
-		ft_putendl("Too many parameters somewhere");
+		print_error("Too many parameters", line.num);
 		return (1);
 	}
 	else
@@ -60,7 +60,7 @@ int		check_nb_params(t_src_line line)
 			i++;
 		if (i < g_op_tab[n].nb_params)
 		{
-			ft_putendl("Too little parameters somewhere");
+			print_error("Too little parameters", line.num);
 			return (1);
 		}
 	}
@@ -83,8 +83,8 @@ int		check_labels(t_src_line *lines)
 				{
 					if (get_offset(lines, lines[i].params[p]) == -1)
 					{
-						ft_putendl("Label does not exist");
-						exit(-8);
+						print_error("Label does not exist", lines[i].num);
+						return (1);
 					}
 				}
 				p++;
