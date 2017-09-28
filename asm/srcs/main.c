@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/22 16:12:13 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/27 11:14:57 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ void	main_part_two(int fd, char **argv)
 {
 	t_src_line	*lines;
 	t_binary	bin;
-	int	n;
+	int			n;
 
 	n = get_size(fd);
 	lines = build_line_data_struct(fd, n);
 	lseek(fd, 0, SEEK_SET);
 	init_bin_var(&bin, fd, argv[1]);
 	champ_size(lines, &bin);
-	//print_struct(lines);
 	if (close(fd) != 0)
 	{
 		ft_putendl_fd("Could not close file", 2);
@@ -54,10 +53,12 @@ void	main_part_two(int fd, char **argv)
 	if (check_errors(lines) == 1)
 	{
 		ft_putendl("Errors detected, aborting compilation");
+		free(lines);
 		exit(-4);
 	}
-	printf("No errors detected, Proceeding with compilation\n");
+	ft_putstr("No errors detected, Proceeding with compilation\n");
 	write_cor(lines, &bin);
+	free(lines);
 }
 
 int		main(int argc, char **argv)
