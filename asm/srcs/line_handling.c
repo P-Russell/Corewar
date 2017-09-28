@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 07:42:20 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/27 13:12:36 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:32:09 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,18 @@ char			**core_line_split(char const *s)
 	i = 0;
 	len = ft_strlen(s);
 	while (i < len)
-	{
 		if (!ft_isspace(s[i]) && s[i] != SEPARATOR_CHAR)
 		{
 			split[y] = add_word(s + i);
 			if (!split[y++])
+			{
+				ft_strarrdel(split);
 				return (NULL);
+			}
 			i += word_len(s + i);
 		}
 		else
 			i++;
-	}
 	split[y] = NULL;
 	return (split);
 }

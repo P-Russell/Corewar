@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/27 11:14:57 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/28 15:52:52 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,28 @@ int		get_size(int fd)
 	return (n);
 }
 
+void	free_lines(t_src_line *lines)
+{
+	int	i;
+	int	p;
+
+	i = 0;
+	while (lines[i].num != -1)
+	{
+		if (lines[i].label != NULL)
+			free(lines[i].label);
+		p = 0;
+		while (lines[i].params[p] != NULL)
+		{
+			if (lines[i].params[p] != NULL)
+				free(lines[i].params[p]);
+			p++;
+		}
+		i++;
+	}
+	free(lines);
+}
+
 void	main_part_two(int fd, char **argv)
 {
 	t_src_line	*lines;
@@ -53,12 +75,14 @@ void	main_part_two(int fd, char **argv)
 	if (check_errors(lines) == 1)
 	{
 		ft_putendl("Errors detected, aborting compilation");
-		free(lines);
+		free_lines(lines);
+		free(bin.name);
 		exit(-4);
 	}
 	ft_putstr("No errors detected, Proceeding with compilation\n");
 	write_cor(lines, &bin);
-	free(lines);
+	free(bin.name);
+	free_lines(lines);
 }
 
 int		main(int argc, char **argv)

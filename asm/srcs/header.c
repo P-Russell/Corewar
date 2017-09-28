@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:33:33 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/27 12:41:39 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/28 15:45:06 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			init_header_var(t_header *head, int fd)
 	head->prog_size = 0;
 	name_found = 0;
 	comment_found = 0;
-	while (get_next_line(fd, &line) && (!name_found || !comment_found))
+	while ((!name_found || !comment_found) && get_next_line(fd, &line))
 	{
 		if (line && ft_strstr(line, NAME_CMD_STRING) && (name_found = 1))
 			read_in_name(line, head->prog_name);
@@ -91,7 +91,7 @@ char		*exe_name(char *name)
 		norm.i++;
 	}
 	ft_strcat(norm.exe + norm.i, ".cor");
-	ft_matrixdel((void **)norm.split);
+	ft_strarrdel(norm.split);
 	return (norm.exe);
 }
 
