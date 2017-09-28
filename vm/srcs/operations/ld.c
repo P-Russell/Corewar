@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 08:26:01 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/28 15:04:22 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/28 15:38:45 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ int 	op_ld(t_process *p, t_core *arena)
 				% MEM_SIZE, arena, T_IND);
 	chk = (is_direct(acb, 1) == 1 || is_indirect(acb, 1) == 1) ? 1 : 0;
 	p->pc = pc_counter(p->pc, acb, 1);
-    if (chk == 1 && is_register(acb, 2) == 1 && valid_reg(arena[(p->pc + 1)
+    if (chk == 1 && is_register(acb, 2) == 1 && valid_reg(arena[(p->pc)
 				% MEM_SIZE].raw))
 	{
 		chk++;
-        write_to_reg(p->reg[data_var_pc(&(p->pc), arena, T_REG)], load_val);
+        write_to_reg(p->reg[data_var(p->pc, arena, T_REG)], load_val);
 	}
-	else
-		p->pc = pc_counter(p->pc, acb, 2);
+	p->pc = pc_counter(p->pc, acb, 2);
 	p->carry = (chk == 2) ? 1 : 0;
 	if (chk == 2)
 		return (1);

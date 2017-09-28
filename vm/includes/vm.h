@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/28 14:48:02 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/28 16:00:06 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ typedef struct		s_env
 typedef struct		s_op_var
 {
 	int acb;
-	int param[MAX_ARGS_NUMBER];
-	int types[MAX_ARGS_NUMBER];
+	int p[MAX_ARGS_NUMBER];
+	int t[MAX_ARGS_NUMBER];
 }					t_op_var;
 
 typedef union	u_data
