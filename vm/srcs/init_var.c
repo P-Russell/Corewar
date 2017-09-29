@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 15:05:20 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 10:15:38 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/29 15:40:58 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	init_var(t_op_var *v)
 		if (is_register(v->acb, i))
 			v->t[i] = T_REG;
 		else if (is_direct(v->acb, i))
-			v->t[i] = T_DIR;
+			v->t[i] = DIR_SIZE;
 		else if (is_indirect(v->acb, i))
-			v->t[i] = T_IND;
+			v->t[i] = IND_SIZE;
 		i++;
 	}
 }

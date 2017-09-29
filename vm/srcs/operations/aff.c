@@ -6,17 +6,30 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 07:32:39 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/29 10:21:14 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/29 14:16:16 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		op_aff(unsigned char reg)
+int			op_aff(t_process *p, t_core *arena)
 {
-	char	c;
+	int		acb;
+	int		val;
+	int		reg_data;
 
-	c = (char)(reg % 256);
-	write(1, &c, 1);
-	write(1, "\n", 1);
+	acb = data_var((p->pc + 1) % MEM_SIZE, arena, T_REG);
+	if (is_register(acb, 1))
+	{
+		val = data_var((p->pc + 2) % MEM_SIZE, arena, T_REG);
+		if (valid_reg(val))
+		{
+			reg_data = value_from_reg(p->reg[val - 1]);
+			ft_putchar(reg_data % 256);
+			p->pc = (p->pc + 3) % MEM_SIZE;
+			return (1);
+		}
+	}
+	p->pc = (p->pc + 3) % MEM_SIZE;
+	return (0);
 }

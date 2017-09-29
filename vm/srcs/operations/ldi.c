@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 09:57:15 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/29 10:31:57 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/29 15:25:18 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,20 @@ int				op_ldi(t_process *p, t_core *arena)
 	init_var(&v);
 	if (!check_param_type(&v))
 	{
-		p->carry = 0;
 		p->pc = pc_forward(acb);
-		return (0);
+		return ((p->carry = 0));
 	}
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
 	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
-	if (v.t[1] == T_REG && v.t[2] == DIR_SIZE)
+	if (valid_reg(v.p[3]))
 	{
 		write_to_reg(p->reg[v.p[3]], data_var(p->pc +
 					(do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE, arena,
 					REG_SIZE));
+		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
+		return ((p->carry = 1));
 	}
-	p->pc = (p->pc + v.t[1] + v.t[2] + v.t[3] + 1) % MEM_SIZE;
-	return (1);
+	p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
+	return ((p->carry = 0));
 }

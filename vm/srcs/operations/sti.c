@@ -6,13 +6,13 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 13:16:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/21 13:20:13 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/29 16:08:29 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	sti(unsigned char *reg, int i, int j, t_env *env)
+void	op_sti(t_process *p, t_core *arena)
 {
-	env->arena[(i + j) % MEM_SIZE].raw = *reg;
+
 }

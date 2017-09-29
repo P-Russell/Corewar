@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 07:31:26 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/29 10:15:46 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/29 14:33:10 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		put_live(t_process *p)
 	ft_putchar(' ');
 	ft_putstr(p->player_name);
 	ft_putchar(' ');
-	ft_putendln("is alive");
+	ft_putendl("is alive");
 }
 
 int			op_live(t_process *p, t_core *arena)

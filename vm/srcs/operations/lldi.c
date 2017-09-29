@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 09:44:33 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 10:02:39 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/29 15:25:12 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int		pc_forward(int acb)
 	i = 1;
 	if (is_register(acb, 1))
 		i++;
-	else
+	else\
 		i += 2;
 	if (is_register(acb, 2))
 		i++;
@@ -91,24 +91,26 @@ int				op_lldi(t_process *p, t_core *arena)
 {
 	t_op_var	v;
 	int			acb;
+	int			result;
 
 	v.acb = data_var((p->pc + 1) % MEM_SIZE, arena, T_REG);
 	acb = v.acb;
 	init_var(&v);
 	if (!check_param_type(&v))
 	{
-		p->carry = 0;
-		p->pc = pc_forward(acb);
-		return (0);
+		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
+		return ((p->carry = 0));
 	}
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
 	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
-	if (v.t[1] == T_REG && v.t[2] == DIR_SIZE)
+	if (valid_reg(v.p[3]))
 	{
 		write_to_reg(p->reg[v.p[3]], data_var(p->pc +
 					(do_ldi(v, acb, p, arena)) % MEM_SIZE, arena, REG_SIZE));
+		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
+		return ((p->carry = 1));
 	}
-	p->pc = (p->pc + v.t[1] + v.t[2] + v.t[3] + 1) % MEM_SIZE;
-	return (1);
+	p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
+	return ((p->carry = 0));
 }
