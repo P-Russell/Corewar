@@ -24,13 +24,13 @@ static int	get_value(int acb, int param_num, int *pc, t_core *arena)
 	}
 	else if (is_direct(acb, param_num) == 1)
 	{
-		ans = data_var(*pc, arena, T_DIR);
-		*pc = (*pc + T_DIR) % MEM_SIZE;
+		ans = data_var(*pc, arena, DIR_SIZE);
+		*pc = (*pc + DIR_SIZE) % MEM_SIZE;
 		return (ans);
 	}
-	ans = data_var(((*pc + data_var(*pc, arena, T_IND)) % IDX_MOD) % MEM_SIZE,
-			arena, T_IND);
-	*pc = (*pc + T_IND) % MEM_SIZE;
+	ans = data_var(((*pc + data_var(*pc, arena, IND_SIZE)) % IDX_MOD) % MEM_SIZE,
+			arena, IND_SIZE);
+	*pc = (*pc + IND_SIZE) % MEM_SIZE;
 	return (ans);
 }
 

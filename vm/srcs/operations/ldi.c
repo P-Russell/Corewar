@@ -14,9 +14,9 @@
 
 static int		check_param_type(t_op_var *v)
 {
-	if (v->t[1] != T_REG || v->t[1] != T_DIR || v->t[1] != T_IND)
+	if (v->t[1] != T_REG || v->t[1] != DIR_SIZE || v->t[1] != IND_SIZE)
 		return (0);
-	if (v->t[2] != T_REG || v->t[2] != T_DIR)
+	if (v->t[2] != T_REG || v->t[2] != DIR_SIZE)
 		return (0);
 	if (v->t[3] != T_REG)
 		return (0);
@@ -101,7 +101,7 @@ int		op_ldi(t_process *p, t_core *arena)
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
 	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
-	if (v.t[1] == T_REG && v.t[2] == T_DIR)
+	if (v.t[1] == T_REG && v.t[2] == DIR_SIZE)
 	{
 		write_to_reg(p->reg[v.p[3]], data_var(p->pc +
 					(do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE, arena, REG_SIZE));
