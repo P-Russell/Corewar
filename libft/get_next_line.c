@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 11:53:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/06/25 08:11:58 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/28 15:32:27 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ static	int		check_newl(t_line *t, char **line)
 	{
 		temp = ft_strnjoin(*line, t->buf, t->i);
 		ft_strdel(line);
-		*line = ft_strdup(temp);
-		ft_strdel(&temp);
+		*line = temp;
 		buf_clean(t->buf);
 		t->i = 0;
 		return (1);

@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/09/13 09:09:32 by prussell         ###   ########.fr        #
+#    Updated: 2017/09/28 15:46:22 by dbarrow          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = asm
 
 SRCS = srcs/*.c
 
-FLAGS = -g3 -Wall -Werror -Wextra -iquoteincludes
+FLAGS = -g -g3 -Wall -Werror -Wextra -iquoteincludes
 
 all: $(NAME)
 
