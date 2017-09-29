@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/28 13:37:30 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/29 14:02:10 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,20 @@ int			get_data(t_src_line *lines, int fd)
 	n = 1;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (*line && (split = core_line_split(line)) && is_code_line(split))
+		if (*line && (split = core_line_split(line)))
 		{
-			extract_data_from_line(split, lines + i);
-			ft_strarrdel(split);
-			i++;
+			if (is_code_line(split))
+			{
+				extract_data_from_line(split, lines + i);
+				ft_strarrdel(split);
+				i++;
+			}
+			else
+				ft_strarrdel(split);
 		}
 		lines[i].num = n;
 		n++;
 		ft_strdel(&line);
-		ft_strarrdel(split);
-		split = NULL;
 	}
 	return (EXIT_SUCCESS);
 }
