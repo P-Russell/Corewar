@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/27 13:20:01 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/28 13:37:30 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int			extract_data_from_line(char **split, t_src_line *lines)
 	{
 		ft_putstr_fd("Wrong opcode on line", 2);
 		free(lines);
+		ft_strarrdel(split);
 		exit(-6);
 	}
 	return (1);
@@ -67,7 +68,7 @@ int			get_data(t_src_line *lines, int fd)
 		if (*line && (split = core_line_split(line)) && is_code_line(split))
 		{
 			extract_data_from_line(split, lines + i);
-			ft_matrixdel((void **)split);
+			ft_strarrdel(split);
 			i++;
 		}
 		lines[i].num = n;
