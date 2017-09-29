@@ -6,13 +6,13 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 09:59:11 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/29 09:59:13 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/29 10:32:51 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		sub(t_process *p, t_core *arena)
+int		op_sub(t_process *p, t_core *arena)
 {
 	t_op_var	var;
 
