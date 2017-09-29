@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/28 16:00:06 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/29 09:43:28 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct			s_process
 {
 	int					pc;
 	int					player_num;
+	char				*player_name;
 	int					cycles_to_exec;
 	int					carry;
 	int					live_calls;

@@ -6,13 +6,13 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 07:32:39 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/21 13:25:17 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/29 10:21:14 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		aff(unsigned char reg)
+void		op_aff(unsigned char reg)
 {
 	char	c;
 
