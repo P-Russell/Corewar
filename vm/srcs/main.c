@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/25 14:04:39 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/29 10:17:42 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	print_proc_data(t_process *proc)
 	while (cur)
 	{
 		printf("Player num: %d\n", cur->player_num);
-		printf("Load address: %d\n", cur->load_address);
 		printf("calls to live %d\n", cur->live_calls);
 		i = 0;
 		while (i < REG_NUMBER)
