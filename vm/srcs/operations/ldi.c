@@ -5,63 +5,111 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/21 07:51:06 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/28 08:12:46 by prussell         ###   ########.fr       */
+/*   Created: 2017/09/29 09:57:15 by lde-jage          #+#    #+#             */
+/*   Updated: 2017/09/29 10:31:57 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../vm/includes/vm.h"
+#include "vm.h"
 
-int         first_val(t_process *p, t_core *arena)
+static int		check_param_type(t_op_var *v)
 {
-    int     val;
-    int     acb;
-
-    p->pc = (p->pc + 1) % MEM_SIZE;
-    acb = (arena[p->pc].raw);
-    p->pc = (p->pc + 1) % MEM_SIZE;
-    if (is_register(acb, 1) == 1 && valid_reg(arena[(p->pc + 1) % MEM_SIZE].raw))
-        val = value_form_core(arena, p->pc, T_REG);
-    if (is_direct(acb, 1) == 1)
-        val = value_from_core(arena, p->pc, T_DIR);
-    if (is_indirect(acb, 1) == 1)
-        val = value_from_core(arena, (p->pc + value_from_reg(p->reg[arena[p->pc].raw]) % IDX_MOD), T_IND);
-    return (val);
+	if (v->t[1] != T_REG || v->t[1] != DIR_SIZE || v->t[1] != IND_SIZE)
+		return (0);
+	if (v->t[2] != T_REG || v->t[2] != DIR_SIZE)
+		return (0);
+	if (v->t[3] != T_REG)
+		return (0);
+	else
+	{
+		if (v->t[1] != T_REG)
+			v->t[1] = IND_SIZE;
+		if (v->t[2] != T_REG)
+			v->t[2] = IND_SIZE;
+	}
+	return (1);
 }
 
-int     second_val(t_process *p, t_core *arena)
+static int		check_regs(t_op_var v)
 {
-    int     val;
-    int     acb;
-
-    p->pc = (p->pc + 1) % MEM_SIZE;
-    acb = (arena[p->pc].raw);
-    p->pc = (p->pc + 1) % MEM_SIZE;
-    if (is_direct(acb, 2) == 1)
-        val = value_from_core(arena, p->pc, T_DIR);
-    if (is_register(acb, 2) == 1 && valid_reg(arena[(p->pc) % MEM_SIZE].raw))
-        val = value_from_core(arena, p->pc, T_REG);
-    return (val);
+	if (v.t[1] == T_REG)
+		if (!valid_reg(v.p[1]))
+			return (0);
+	if (v.t[2] == T_REG)
+		if (!valid_reg(v.p[2]))
+			return (0);
+	if (v.t[3] == T_REG)
+		if (!valid_reg(v.p[3]))
+			return (0);
+	return (1);
 }
 
-void		ldi(t_process *p, t_core *arena)
+static int		do_ldi(t_op_var v, int acb, t_process *p, t_core *arena)
 {
-    int     val1;
-    int     val2;
-    int     acb;
-    int     res;
-    int     index;
+	int		result;
 
-    p->pc = (p->pc + 1) % MEM_SIZE;
-    acb = arena[p->pc].raw;
-    val1 = first_val(process, arena);
-    val2 = second_val(process, arena);
-    res = val1 + val2;
-    res = value_from_core(arena, p->pc + (res % IDX_MOD), REG_SIZE);
-    index = 
-    if (is_register(acb, 3) == 1 && valid_reg(arena[(p->pc + 1) % MEM_SIZE].raw))
-    {
-        write_to_reg(p->reg[index], res);
-        p->carry = (res) ? 0 : 1;
-    }
+	result = 0;
+	if (is_register(acb, 1) && is_direct(acb, 2))
+		result = value_from_reg(p->reg[v.p[1]]) + v.p[2];
+	else if (is_register(acb, 1) && is_register(acb, 2))
+		result = value_from_reg(p->reg[v.p[1]]) +
+			value_from_reg(p->reg[v.p[2]]);
+	else if (is_direct(acb, 1) && is_direct(acb, 2))
+		result = v.p[1] + v.p[2];
+	else if (is_direct(acb, 1) && is_register(acb, 2))
+		result = v.p[1] + value_from_reg(p->reg[v.p[2]]);
+	else if (is_indirect(acb, 1) && is_direct(acb, 2))
+		result = data_var((p->pc + (v.p[1] % IDX_MOD)) % MEM_SIZE, arena,
+				IND_SIZE) + v.p[2];
+	else if (is_indirect(acb, 1) && is_register(acb, 2))
+		result = data_var((p->pc + (v.p[1] % IDX_MOD)) % MEM_SIZE, arena,
+				IND_SIZE) + value_from_reg(p->reg[v.p[2]]);
+	return (result);
+}
+
+static int		pc_forward(int acb)
+{
+	int i;
+
+	i = 1;
+	if (is_register(acb, 1))
+		i++;
+	else
+		i += 2;
+	if (is_register(acb, 2))
+		i++;
+	else
+		i += 2;
+	if (is_register(acb, 3))
+		i++;
+	else
+		i += 2;
+	return (i);
+}
+
+int				op_ldi(t_process *p, t_core *arena)
+{
+	t_op_var	v;
+	int			acb;
+
+	v.acb = data_var((p->pc + 1) % MEM_SIZE, arena, T_REG);
+	acb = v.acb;
+	init_var(&v);
+	if (!check_param_type(&v))
+	{
+		p->carry = 0;
+		p->pc = pc_forward(acb);
+		return (0);
+	}
+	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
+	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
+	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
+	if (v.t[1] == T_REG && v.t[2] == DIR_SIZE)
+	{
+		write_to_reg(p->reg[v.p[3]], data_var(p->pc +
+					(do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE, arena,
+					REG_SIZE));
+	}
+	p->pc = (p->pc + v.t[1] + v.t[2] + v.t[3] + 1) % MEM_SIZE;
+	return (1);
 }

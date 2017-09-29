@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 09:50:00 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/27 13:50:00 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/29 09:43:33 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_process		*new_proc_from_champ(t_champ *champ)
 	if ((new = (t_process *)malloc(sizeof(t_process))) == NULL)
 		return (NULL);
 	new->pc = champ->pc;
+	new->player_name = champ->name;
 	new->player_num = champ->player_num;
 	new->carry = 0;
 	new->live_calls = 0;
