@@ -1,0 +1,18 @@
+Patrick
+add acb r1, r2, r3
+aff acb r1
+fork
+lfork
+live
+lldi
+lld
+
+Leslie
+and
+ld
+lldi
+or
+
+
+still to do
+sti
