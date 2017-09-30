@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/09/30 07:34:51 by lde-jage         ###   ########.fr        #
+#    Updated: 2017/09/30 22:44:30 by lde-jage         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = corewar
 SRCS = srcs/*.c
 OPER = srcs/operations/*.c
 
-FLAGS = -Wall -Werror -Wextra -iquoteincludes
+FLAGS = -Wall -Werror -Wextra -iquoteincludes -g -g3
 
 all: $(NAME)
 
