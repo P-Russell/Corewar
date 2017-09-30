@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 22:29:06 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 22:29:08 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 22:33:39 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	exec_op(t_process *p, t_op_var v)
 	if (v.t[3] == T_REG && valid_reg(v.p[3]) == 1)
 	{
 		p->pc = (p->pc + v.t[1] + v.t[2] + v.t[3] + 1) % MEM_SIZE;
-		printf("pc at end of nd = %d, with value\n", p->pc);
 		write_to_reg(p->reg[v.p[3] - 1], v.p[1] | v.p[2]);
 		p->carry = 1;
 	}
