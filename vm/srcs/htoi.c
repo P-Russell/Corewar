@@ -6,12 +6,12 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 09:17:32 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/26 15:38:54 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 09:59:30 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "vm.h"
-#include <unistd.h>
+#include "vm.h"
+
 int			ft_power(int a, int b)
 {
 	int	i;
@@ -50,7 +50,7 @@ int			ft_htoi(char *str, size_t len)
 	}
 	return (tot);
 }
-/*
+
 char	*ft_itoh(int val)
 {
 	char	a[9];
@@ -75,12 +75,6 @@ char	*ft_itoh(int val)
 		ans[t - 1] = 'F';
 		t--;
 	}
+	printf("ans %s\n", ans);
 	return (ans);
-}
-*/
-#include <stdio.h>
-int		main(void)
-{
-	printf("%d\n",ft_htoi("FFFFFFFB", 8));
-	return (0);
 }
