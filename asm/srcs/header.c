@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:33:33 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/28 15:45:06 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/30 12:29:14 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int			init_bin_var(t_binary *bin, int fd, char *name)
 {
 	init_header_var(&(bin->header), fd);
 	bin->name = exe_name(name);
-	ft_putendl(bin->name);
+	ft_putendl(bin->header.prog_name);
+	ft_putendl(bin->header.comment);
 	return (1);
 }

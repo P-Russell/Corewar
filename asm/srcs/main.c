@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 22:45:21 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/30 12:27:22 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int		main(int argc, char **argv)
 	}
 	else if (is_valid_fd(fd))
 	{
+		ft_putstr("Assembling ");
+		ft_putendl(argv[1]);
 		main_part_two(fd, argv);
 	}
 	else
