@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:15:27 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 21:12:32 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 21:29:50 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ int		exec_proc(t_process *p, t_core *arena)
 		op = arena[p->pc].raw - 1;
 		if (op < 16 && op >= 0)
 		{
+			printf("op %d\n", op);
 			ret = g_op_ptr[op](p, arena);
+			printf("ret %d\n", ret);
+			if (op == 0 && ret == 1)
+				printf("\nlive\n");
 			p->cycles_to_exec = cyc(arena[p->pc].raw);
+			printf("cyc exec %d\n", p->cycles_to_exec);
 		}
 		else
 		{
@@ -69,7 +74,7 @@ int		run_processes_dump(t_env *e, int iter)
 	cycles = 0;
 	while(iter && cycles < e->dump)
 	{
-		printf("%d, ", cycles);
+//		printf("%d, ", cycles);
 		p = e->process;
 		while(p)
 		{
@@ -79,7 +84,7 @@ int		run_processes_dump(t_env *e, int iter)
 		cycles++;
 		iter--;
 	}
-	printf("\n");
+//	printf("\n");
 	if (cycles == e->dump)
 		exit_prog(e);
 	return (player);
