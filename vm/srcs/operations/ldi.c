@@ -103,7 +103,7 @@ int				op_ldi(t_process *p, t_core *arena)
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
 	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
-	if (valid_reg(v.p[3]))
+	if (check_regs(v))
 	{
 		write_to_reg(p->reg[v.p[3]], data_var(p->pc +
 					(do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE, arena,

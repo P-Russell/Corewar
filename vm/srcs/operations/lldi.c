@@ -74,7 +74,7 @@ static int		pc_forward(int acb)
 	i = 1;
 	if (is_register(acb, 1))
 		i++;
-	else\
+	else
 		i += 2;
 	if (is_register(acb, 2))
 		i++;
@@ -104,7 +104,7 @@ int				op_lldi(t_process *p, t_core *arena)
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
 	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
-	if (valid_reg(v.p[3]))
+	if (check_regs(v))
 	{
 		write_to_reg(p->reg[v.p[3]], data_var(p->pc +
 					(do_ldi(v, acb, p, arena)) % MEM_SIZE, arena, REG_SIZE));
