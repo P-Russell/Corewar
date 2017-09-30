@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 07:31:26 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 22:28:54 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 22:33:43 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		put_live(t_process *p)
 
 int			op_live(t_process *p, t_core *arena)
 {
+	printf("live\n");
 	int	param;
 
 	param = data_var((p->pc + 1) % MEM_SIZE, arena, DIR_SIZE);
