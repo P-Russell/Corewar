@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 13:16:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 18:02:33 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 19:38:03 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,27 @@
 static int		check_param_type(t_op_var *v)
 {
 	if (v->t[1] != T_REG)
-		return (0);
-	if (v->t[2] != T_REG || v->t[2] != DIR_SIZE || v->t[2] != IND_SIZE)
-		return (0);
-	if (v->t[3] != T_REG || v->t[3] != T_DIR)
-		return (0);
-	else
 	{
-		if (v->t[2] != T_REG)
-			v->t[1] = IND_SIZE;
-		if (v->t[3] != T_REG)
-			v->t[2] = IND_SIZE;
+		printf("fail ion first param\n");
+		return (0);
 	}
+	if (v->t[2] != T_REG)
+		if (v->t[2] != DIR_SIZE)
+			if (v->t[2] != IND_SIZE)
+			{
+				printf("fail on second param\n");
+				return (0);
+			}
+	if (v->t[3] != T_REG)
+		if (v->t[3] != DIR_SIZE)
+		{
+			printf("fail on third param\n");
+			return (0);
+		}
+	if (v->t[2] != T_REG)
+		v->t[2] = IND_SIZE;
+	if (v->t[3] != T_REG)
+		v->t[3] = IND_SIZE;
 	return (1);
 }
 
@@ -48,7 +57,7 @@ static int		pc_forward(int acb)
 {
 	int i;
 
-	i = 1;
+	i = 2;
 	if (is_register(acb, 0))
 		i++;
 	else
@@ -84,6 +93,7 @@ static int		do_sti(t_op_var v, int acb, t_process *p, t_core *arena)
 	else if (is_indirect(acb, 1) && is_register(acb, 2))
 		result = data_var((p->pc + (v.p[2])) % MEM_SIZE, arena, IND_SIZE) +
 			value_from_reg(p->reg[v.p[3]]);
+	printf("do_sti return value %d\n", result);
 	return (result);
 }
 
@@ -96,14 +106,17 @@ int				op_sti(t_process *p, t_core *arena)
 	v.acb = arena[(p->pc + 1) % MEM_SIZE].raw;
 	acb = v.acb;
 	init_var(&v);
+	printf("t1 %d, t2 %d, t3 %d\n", v.t[1], v.t[2], v.t[3]);
 	if (!check_param_type(&v))
 	{
+		printf("param types fail\n");
 		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
 		return (0);
 	}
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
 	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
+	printf("p1 %d, p2 %d, p3 %d\n", v.p[1], v.p[2], v.p[3]);
 	if (check_regs(v))
 	{
 		v.p[1] = value_from_reg(p->reg[v.p[1]]);
