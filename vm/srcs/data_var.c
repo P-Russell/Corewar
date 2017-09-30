@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 07:57:54 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 10:11:41 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 10:33:11 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,3 @@ int		data_var(int pc, t_core *arena, size_t s)
 	}
 	return (ans);
 }
-/*
-int		value_from_reg(unsigned char *reg)
-{
-	int32_t ans;
-	int		i;
-	int		t;
-	
-	i = 0;
-	ans = 0;
-	while (i < REG_SIZE)
-	{
-		ans += reg[i];
-		ans = ans << 1;
-		i++;
-	}
-	t = ans;
-	return (t);
-}*/
