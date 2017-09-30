@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zjmp.c                                             :+:      :+:    :+:   */
+/*   cycles.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/21 08:04:44 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/21 12:04:15 by lde-jage         ###   ########.fr       */
+/*   Created: 2017/09/30 07:19:38 by lde-jage          #+#    #+#             */
+/*   Updated: 2017/09/30 07:29:08 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	zjmp(t_process *p, t_env *env, int index)
+int		cyc(unsigned char op)
 {
-	if (p->carry == 1)
-		p->core_ptr = &env->arena[(p->pc + (index % IDX_MOD)) % MEM_SIZE];
+	if (op <= 15)
+	{
+		return (g_op_tab[op].nb_cycles);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 14:11:45 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 07:29:41 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int			data_var(int pc, t_core *arena, size_t s);
 void		init_var(t_op_var *v);
 int			data_var_pc(int *pc, t_core *arena, size_t s);
 int			pc_counter(int pc, int acb, int param_num);
+int			cyc(unsigned char op);
 
 typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
 
