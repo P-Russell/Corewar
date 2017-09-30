@@ -132,6 +132,8 @@ int			data_var_pc(int *pc, t_core *arena, size_t s);
 int			pc_counter(int pc, int acb, int param_num);
 int			cyc(unsigned char op);
 int			exec_proc(t_process *p, t_core *arena);
+int			run_processes(t_env *e, int iter)
+int			run_processes_dump(t_env *e, int iter)
 
 typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
 
