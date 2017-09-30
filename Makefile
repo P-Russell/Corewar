@@ -6,29 +6,31 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/09/13 09:09:31 by prussell         ###   ########.fr        #
+#    Updated: 2017/09/30 20:33:43 by lde-jage         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = corewar
+all: lib asmc vmc
 
-all: $(NAME)
+asmc:
+	@echo "Compile Asm"
+	@make -C asm/ fclean && make -C asm/
 
-$(NAME):
-
-asm:
-	make -C asm/ fclean
-
-vm:
-	make -C vm/ fclean && make -C /vm
+vmc:
+	@echo "Compile vm"
+	@make -C vm/ fclean && make -C vm/
 
 clean:
-	rm -f $(NAME)
+	make -C vm/ clean
+	make -C asm/ clean
 
-fclean: clean
-	rm -f $(NAME)
+fclean:
+	make -C vm/ fclean
+	make -C asm/ fclean
+	make -C libft/ fclean
 
 re: fclean all
 
 lib:
-	make -C libft/ fclean && make -C libft/ && make -C libft/ clean
+	@echo "Compile Libft"
+	@make -C libft/ fclean && make -C libft/ && make -C libft/ clean
