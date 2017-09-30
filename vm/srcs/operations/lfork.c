@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 08:50:17 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/29 14:30:23 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:54:06 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int		op_lfork(t_process *p, t_core *arena)
 	else
 	{
 		p->pc = (p->pc + 1 + IND_SIZE) % MEM_SIZE;
+		p->carry = 0;
 		return (0);
 	}
 	p->pc = (p->pc + 1 + IND_SIZE) % MEM_SIZE;
+	p->carry = 1;
 	return (1);
 }

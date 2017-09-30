@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 12:01:30 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/20 13:15:23 by tbarlow-         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:43:44 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_arena(t_env env)
 	{
 		ft_putstr((char *)env.arena[i].value);
 		ft_putstr(" ");
-		if ((i + 1) % 32 == 0)
+		if ((i + 1) % 64 == 0)
 			ft_putstr("\n");
 		i++;
 	}

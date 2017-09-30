@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 10:44:07 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 18:00:01 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int			op_sub(t_process *p, t_core *arena);
 int			op_and(t_process *p, t_core *arena);
 int			op_or(t_process *p, t_core *arena);
 int			op_xor(t_process *p, t_core *arena);
-int			op_zjump(t_process *p, t_core *arena);
+int			op_zjmp(t_process *p, t_core *arena);
 int			op_ldi(t_process *p, t_core *arena);
 int			op_sti(t_process *p, t_core *arena);
 int			op_fork(t_process *p, t_core *arena);

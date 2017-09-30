@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 16:32:07 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:48:46 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	print_proc_data(t_process *proc)
 		printf("player name: %s\n", cur->player_name);
 		printf("cycles to exec %d\n", cur->cycles_to_exec);
 		printf("carry: %d\n", cur->carry);
+		printf("pc: %d\n", cur->pc);
 		i = 0;
 		while (i < REG_NUMBER)
 			printf("%x, ", value_from_reg(cur->reg[i++]));
@@ -83,6 +84,7 @@ int		main(int argc, char **argv)
 	t_process *cur = env.process;
 	while(cur)
 	{
+		cur->carry = 1;
 		exec_proc(cur, env.arena);
 		cur = cur->next;
 	}
