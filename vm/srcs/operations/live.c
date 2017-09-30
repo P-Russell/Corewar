@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 07:31:26 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 14:33:26 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 22:14:02 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int			op_live(t_process *p, t_core *arena)
 	int	param;
 
 	param = data_var((p->pc + 1) % MEM_SIZE, arena, DIR_SIZE);
+	printf("live called, param found %d\n", param);
 	p->pc = (p->pc + 1 + DIR_SIZE) % MEM_SIZE;
 	if (param == p->player_num)
 	{

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 07:52:56 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 19:37:17 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 21:37:23 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		write_to_core(t_core *arena, int pc, int val, int size)
 	i = 0;
 	while (i < size)
 	{
-		t = val >> (((size - 1) << 3) - (i << 3)) & 0xFF;
-		arena[pc + i].raw = t;
+		t = val >> (((size - 1) << 3) - (i << 3)); // & 0xFF;
+		arena[pc + i % MEM_SIZE].raw = t;
 		write_char_to_hex(t, arena[pc + i].value);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 21:11:10 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 22:08:51 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int		main(int argc, char **argv)
 		return (-1);
 	}
 //	print_champ_data(env.champs, env.num_players);
+//	write_to_reg(env.process->reg[4], 89);
 	print_proc_data(env.process);
-	write_to_reg(env.process->reg[4], 89);
 	t_process *cur = env.process;
 	while(cur)
 	{

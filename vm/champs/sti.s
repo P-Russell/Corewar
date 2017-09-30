@@ -1,4 +1,4 @@
 .name "store sum tuf"
 .comment "i is da squirrel"
 
-sti r2, 5, %7
+sti r1, %5, %7

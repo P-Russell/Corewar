@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 13:16:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 20:13:58 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 22:18:08 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,12 @@ int				op_sti(t_process *p, t_core *arena)
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
 	if (check_regs(v))
 	{
-		v.p[1] = value_from_reg(p->reg[v.p[1]]);
+		v.p[1] = value_from_reg(p->reg[v.p[1] - 1]);
 		res = do_sti(v, v.acb, p, arena);
 		write_to_core(arena, (p->pc + (res % IDX_MOD)) % MEM_SIZE, v.p[1],
 				REG_SIZE);
 		p->pc = (p->pc + pc_forward(v.acb)) % MEM_SIZE;
+		printf("after sti PC = %d with value %x\n", p->pc, arena[p->pc].raw);
 		return (1);
 	}
 	p->pc = (p->pc + pc_forward(v.acb)) % MEM_SIZE;
