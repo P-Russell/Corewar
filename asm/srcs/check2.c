@@ -6,11 +6,26 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:50:47 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/22 16:01:55 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/30 11:31:50 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+int		check_registers(t_src_line line, int p)
+{
+	if (ft_atoi(line.params[p] + 1) > REG_NUMBER)
+	{
+		print_error("Register number too big", line.num);
+		return (1);
+	}
+	else if (ft_atoi(line.params[p] + 1) < 0)
+	{
+		print_error("Register number must be positive", line.num);
+		return (1);
+	}
+	return (0);
+}
 
 int		is_code_line(char **line)
 {

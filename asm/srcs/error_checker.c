@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 13:06:00 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/29 22:58:22 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/30 11:31:45 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ int		check_params(t_src_line line)
 	while (p < g_op_tab[n].nb_params && line.params[p] != NULL)
 	{
 		if (line.params[p][0] == 'r')
-			if (ft_atoi(line.params[p] + 1) > REG_NUMBER)
-			{
-				print_error("Register number too big", line.num);
+		{
+			if (check_registers(line, p) == 1)
 				return (1);
-			}
+		}
 		if ((g_op_tab[n].param_types[p] & line.param_type[p])
 				!= line.param_type[p])
 		{
