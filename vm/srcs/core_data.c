@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 07:52:56 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 10:13:36 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 14:31:39 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		value_from_core(t_core *arena, int pc, int size)
 		write_char_to_hex(arena[pc].raw, num + k);
 		k += 2;
 		pc = (pc + 1) % MEM_SIZE;
+		j++;
 	}
 	return (ft_htoi(num, size * 2));
 }

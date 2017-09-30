@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 12:59:24 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 16:17:53 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_proc_data(t_process *proc)
 		printf("carry: %d\n", cur->carry);
 		i = 0;
 		while (i < REG_NUMBER)
-			printf("%d, ", value_from_reg(cur->reg[i++]));
+			printf("%x, ", value_from_reg(cur->reg[i++]));
 		printf("\n");
 		i++;
 		printf("---------------------------------------\n");
