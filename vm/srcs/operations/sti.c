@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 13:16:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 08:24:59 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 10:33:54 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int				op_sti(t_process *p, t_core *arena)
 	int			res;
 
 	v.acb = arena[(p->pc + 1) % MEM_SIZE].raw;
+	acb = v.acb;
 	init_var(&v);
 	if (!check_param_type(&v))
 	{

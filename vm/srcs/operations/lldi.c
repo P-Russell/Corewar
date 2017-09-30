@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 09:44:33 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 15:25:12 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 10:33:34 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int				op_lldi(t_process *p, t_core *arena)
 {
 	t_op_var	v;
 	int			acb;
-	int			result;
 
 	v.acb = data_var((p->pc + 1) % MEM_SIZE, arena, T_REG);
 	acb = v.acb;

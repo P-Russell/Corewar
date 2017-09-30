@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:14:10 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/26 10:45:20 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 10:36:15 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,17 @@
 
 void	write_to_reg(unsigned char *reg, int value)
 {
-	unsigned char 	*p;
 	int				i;
-	char			*tmp;
+	int				t;
 
-	if (value < 0)
+	i = 0;
+	while (i < REG_SIZE)
 	{
-		tmp = ft_itoh(value);
-		i = 0;
-		while (i < REG_SIZE)
-		{
-			reg[i] = ft_htoi(tmp, 2);
-			i++;
-			tmp += 2;
-		}
+		t = value >> (24 - 8 * i) & 0xFF;
+		reg[i] = t;
+		i++;
 	}
-	else
-	{
-		value = little_to_big_endian(value);
-		i = 0;
-		p = (unsigned char *)&value;
-		while (i < REG_SIZE)
-		{
-			reg[i] = p[i];
-			i++;
-		}
-	}
+	reg[i] = '\0';
 }
 
 int		value_from_reg(unsigned char *reg)
