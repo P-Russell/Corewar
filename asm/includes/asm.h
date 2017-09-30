@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 08:59:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 11:31:42 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/30 20:42:04 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int					check_errors(t_src_line *lines);
 int					get_offset(t_src_line *lines, char *line);
 int					ft_abs(int n);
 int					set_params(t_src_line *lines);
-int					check_registers(t_src_line, int p);
+int					check_registers(t_src_line line, int p);
 void				free_lines(t_src_line *lines);
 void				reverse_bytes(int *mem, size_t size);
 void				write_bytes(int fd, t_src_line *lines);
