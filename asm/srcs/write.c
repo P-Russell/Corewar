@@ -6,29 +6,11 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 09:07:14 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/21 15:00:41 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/30 12:23:41 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-int		ft_puthex_fd(int n, int fd, int cursor)
-{
-	int c;
-
-	if (n < 0)
-		n = ~n + 1;
-	if (n >= 16)
-		ft_puthex_fd(n / 16, fd, cursor);
-	c = n % 16 + (n % 16 < 10 ? '0' : 'a' - 10);
-	if (cursor > 0 && cursor % 4 == 0)
-		ft_putchar_fd(' ', fd);
-	if (cursor > 0 && cursor % 39 == 0)
-		ft_putchar_fd('\n', fd);
-	ft_putchar_fd(c, fd);
-	cursor++;
-	return (cursor);
-}
 
 void	write_magic(int fd)
 {
