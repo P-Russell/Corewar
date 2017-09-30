@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 09:52:40 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 14:02:10 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/29 23:07:38 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void		extract_loop(t_norm *n, char **split, t_src_line *lines)
 			lines->params[n->i++] = ft_strdup(*split);
 		else
 		{
-			ft_putendl("Something's wrong");
-			free(lines);
+			print_error("Syntax Error", lines->num);
 			exit(-7);
 		}
 		split++;
