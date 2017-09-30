@@ -1,4 +1,4 @@
 .name "and"
 .comment "andy"
 
-and r1, %1, r1
+and r1, %3, r2
