@@ -1,4 +1,4 @@
 .name "sub"
 .comment "it's yellow"
 
-sub r2, r3, r4
+sub r1, r3, r4
