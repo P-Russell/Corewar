@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/29 12:26:33 by prussell          #+#    #+#              #
-#    Updated: 2017/09/12 15:14:59 by dbarrow          ###   ########.fr        #
+#    Updated: 2017/09/30 20:34:20 by lde-jage         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -163,15 +163,15 @@ OBJ = 	ft_atoi.o			\
 all: $(NAME)
 
 $(NAME):
-	gcc $(FLAGS) $(OPTION) $(SOURCE)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@gcc $(FLAGS) $(OPTION) $(SOURCE)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
-	/bin/rm -f $(OBJ)
+	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -f $(NAME) a.out
+	@/bin/rm -f $(NAME) a.out
 
 re: fclean all
 
