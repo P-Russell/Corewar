@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 14:40:11 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/27 11:15:28 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/29 22:46:49 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	set_params(t_src_line *lines)
 	while (lines[i].num >= 0)
 	{
 		p = 0;
-		while (lines[i].param_type[p] != 0)
+		while (p < MAX_ARGS_NUMBER)
 		{
 			if (lines[i].param_type[p] == 3)
 				lines[i].param_type[p] = 4;

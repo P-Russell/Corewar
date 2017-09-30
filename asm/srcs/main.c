@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 10:34:03 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/28 16:50:30 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/29 22:45:21 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 int		get_size(int fd)
 {
-	char	buffer[42];
+	char	*buffer;
 	int		i;
 	int		n;
 
 	n = 0;
 	i = 0;
+	buffer = ft_strnew(42);
 	while (read(fd, buffer, 42) != 0)
 	{
 		i = 0;
@@ -30,6 +31,7 @@ int		get_size(int fd)
 			i++;
 		}
 	}
+	ft_strdel(&buffer);
 	lseek(fd, 0, SEEK_SET);
 	return (n);
 }

@@ -6,7 +6,7 @@
 /*   By: dbarrow <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 13:06:00 by dbarrow           #+#    #+#             */
-/*   Updated: 2017/09/28 08:35:10 by dbarrow          ###   ########.fr       */
+/*   Updated: 2017/09/29 22:58:22 by dbarrow          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,10 @@ int		check_errors(t_src_line *lines)
 		{
 			error = (error | check_params(lines[i]));
 			error = (error | check_nb_params(lines[i]));
-			error = (error | check_labels(lines));
-			error = (error | check_size(lines));
 		}
 		i++;
 	}
+	error = (error | check_size(lines));
+	error = (error | check_labels(lines));
 	return (error);
 }
