@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:15:27 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 20:27:36 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 20:35:06 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		run_processes_dump(t_env *e, int iter)
 	cycles = 0;
 	while(iter && cycles < e->dump)
 	{
+		printf("%d, ", cycles);
 		p = e->process;
 		while(p)
 		{
@@ -78,5 +79,6 @@ int		run_processes_dump(t_env *e, int iter)
 		cycles++;
 		iter--;
 	}
+	printf("\n");
 	return (player);
 }

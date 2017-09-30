@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_arena.c                                      :+:      :+:    :+:   */
+/*   exit_prog.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/19 12:01:30 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 20:44:54 by prussell         ###   ########.fr       */
+/*   Created: 2017/09/30 20:39:56 by prussell          #+#    #+#             */
+/*   Updated: 2017/09/30 20:45:33 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	print_arena(t_env env)
+void		free_processes(t_process *p)
 {
-	int		i;
+	t_process *cur;
+	t_process *tmp;
 
-	i = 0;
-	while (i < MEM_SIZE)
+	cur = p;
+	while (cur)
 	{
-		ft_putstr((char *)env.arena[i].value);
-		ft_putstr(" ");
-		if ((i + 1) % 64 == 0)
-			ft_putstr("\n");
-		i++;
+		tmp = cur;
+		cur = tmp->next;
+		free(tmp);
 	}
+}
+
+void		exit_prog(t_env *env)
+{
+	print_arena(*env);
+	free_processes(env->process);
+	exit(0);
 }
