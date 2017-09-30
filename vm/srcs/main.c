@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 20:23:59 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 21:11:10 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int		main(int argc, char **argv)
 		exec_proc(cur, env.arena);
 		cur = cur->next;
 	}
-	print_proc_data(env.process);
 	game_loop(&env);
+	print_proc_data(env.process);
 //	printf("%d\n", check_processes(&env.process));
 //	printf("call to check processes\n");
 //	print_proc_data(env.process);
