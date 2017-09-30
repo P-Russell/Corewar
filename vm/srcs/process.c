@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 09:44:14 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 10:57:23 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_process		*new_proc(t_process *father, int pc)
 	new->player_num = father->player_num;
 	new->player_name = father->player_name;
 	new->carry = father->carry;
+	new->cycles_to_exec = 0;
 	new->live_calls = 0;
 	cpy_reg(father->reg, new->reg);
 	new->next = NULL;

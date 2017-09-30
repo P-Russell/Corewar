@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 09:35:21 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/29 09:35:52 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 11:14:20 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 inline int		valid_reg(int num)
 {
-	return ((num < REG_NUMBER && num > 0) ? 0 : 1);
+	return ((num < REG_NUMBER && num > 0) ? 1 : 0);
 }
