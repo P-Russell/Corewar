@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 06:59:50 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 20:11:08 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 22:17:26 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ static int	exec_op(t_process *p, t_op_var v)
 	{
 		p->pc = (p->pc + v.t[1] + v.t[2] + v.t[3]) % MEM_SIZE;
 		write_to_reg(p->reg[v.p[3] - 1], v.p[1] & v.p[2]);
+		p->carry = 1;
 	}
 	else
 	{
 		p->pc = (p->pc + v.t[1] + v.t[2] + v.t[3]) % MEM_SIZE;
+		p->carry = 0;
 		return (0);
 	}
 	return (1);
@@ -47,8 +49,9 @@ int			op_and(t_process *p, t_core *arena)
 		else
 			break ;
 	}
-	p->carry = (i == 3) ? 1 : 0;
+	p->pc = (p->pc + v.t[1] + v.t[2] + v.t[3]) % MEM_SIZE;
 	if (i == 3)
 		return (exec_op(p, v));
+	p->carry = 0;
 	return (0);
 }
