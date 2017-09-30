@@ -6,11 +6,11 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 16:12:47 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 16:12:57 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 16:29:55 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "vm.h"
 
 static int	exec_op(t_process *p, t_op_var v)
 {
@@ -27,7 +27,7 @@ static int	exec_op(t_process *p, t_op_var v)
 	return (1);
 }
 
-int			op_and(t_process *p, t_core *arena)
+int			op_xor(t_process *p, t_core *arena)
 {
 	int			i;
 	t_op_var	v;
@@ -47,7 +47,7 @@ int			op_and(t_process *p, t_core *arena)
 		else
 			break ;
 	}
-	p->cycles_to_exec = g_op_tab[arena[(p->pc + 3) % MEM_SIZE].raw].nb_cycles;
+//	p->cycles_to_exec = g_op_tab[arena[(p->pc + 3) % MEM_SIZE].raw].nb_cycles;
 	p->carry = (i == 3) ? 1 : 0;
 	if (i == 3)
 		return (exec_op(p, v));

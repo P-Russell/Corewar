@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 09:57:15 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 16:09:57 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 16:51:01 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,23 @@ static int		do_ldi(t_op_var v, int acb, t_process *p, t_core *arena)
 	int		result;
 
 	result = 0;
-/*	if (is_register(acb, 1) && is_direct(acb, 2))
+	if (is_register(acb, 0) && is_direct(acb, 1))
 	{
-		printf("----------found a reg and dir--------\n");
 		result = value_from_reg(p->reg[v.p[1] - 1]) + v.p[2];
-	}*/
-	if (is_register(acb, 1) && is_register(acb, 2))
+	}
+	if (is_register(acb, 0) && is_register(acb, 1))
 	{
-		printf("---------found two registers----------\n");
 		result = value_from_reg(p->reg[v.p[1] - 1]) +
 			value_from_reg(p->reg[v.p[2] - 1]);
 	}
-	else if (is_direct(acb, 1) && is_direct(acb, 2))
+	else if (is_direct(acb, 0) && is_direct(acb, 1))
 		result = v.p[1] + v.p[2];
-	else if (is_direct(acb, 1) && is_register(acb, 2))
+	else if (is_direct(acb, 0) && is_register(acb, 1))
 		result = v.p[1] + value_from_reg(p->reg[v.p[2] - 1]);
-	else if (is_indirect(acb, 1) && is_direct(acb, 2))
+	else if (is_indirect(acb, 0) && is_direct(acb, 1))
 		result = data_var((p->pc + (v.p[1] % IDX_MOD)) % MEM_SIZE, arena,
 				IND_SIZE) + v.p[2];
-	else if (is_indirect(acb, 1) && is_register(acb, 2))
+	else if (is_indirect(acb, 0) && is_register(acb, 1))
 		result = data_var((p->pc + (v.p[1] % IDX_MOD)) % MEM_SIZE, arena,
 				IND_SIZE) + value_from_reg(p->reg[v.p[2] - 1]);
 	printf("result from do_ldi %d\n", result);
@@ -82,15 +80,15 @@ static int		pc_forward(int acb)
 	int i;
 
 	i = 1;
+	if (is_register(acb, 0))
+		i++;
+	else
+		i += 2;
 	if (is_register(acb, 1))
 		i++;
 	else
 		i += 2;
 	if (is_register(acb, 2))
-		i++;
-	else
-		i += 2;
-	if (is_register(acb, 3))
 		i++;
 	else
 		i += 2;
@@ -104,12 +102,9 @@ int				op_ldi(t_process *p, t_core *arena)
 
 	v.acb = data_var((p->pc + 1) % MEM_SIZE, arena, T_REG);
 	acb = v.acb;
-	printf("acb = %d\n", acb);
 	init_var(&v);
-	printf("t1 %d, t2 %d, t3 %d\n", v.t[1], v.t[2], v.t[3]);
 	if (!check_param_type(&v))
 	{
-		printf("pram types are NOT OK\n");
 		p->pc = pc_forward(acb);
 		return ((p->carry = 0));
 	}
@@ -119,10 +114,10 @@ int				op_ldi(t_process *p, t_core *arena)
 	printf("p1 %d, p2 %d, p3 %d\n", v.p[1], v.p[2], v.p[3]);
 	if (check_regs(v))
 	{
-		printf("about to LDI\n");
-		write_to_reg(p->reg[v.p[3]], data_var((p->pc +
-					(do_ldi(v, acb, p, arena) % IDX_MOD)) % MEM_SIZE, arena,
-					REG_SIZE));
+		printf("pc value = %d about write %x \n",p->pc, data_var((p->pc + (do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE), arena, IND_SIZE));
+		write_to_reg(p->reg[v.p[3] - 1], data_var((p->pc +
+					do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE, arena,
+					IND_SIZE));
 		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
 		return ((p->carry = 1));
 	}
