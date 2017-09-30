@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 13:16:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 22:27:38 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 23:12:44 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,14 @@
 static int		check_param_type(t_op_var *v)
 {
 	if (v->t[1] != T_REG)
-	{
-		printf("fail ion first param\n");
 		return (0);
-	}
 	if (v->t[2] != T_REG)
 		if (v->t[2] != DIR_SIZE)
 			if (v->t[2] != IND_SIZE)
-			{
-				printf("fail on second param\n");
 				return (0);
-			}
 	if (v->t[3] != T_REG)
 		if (v->t[3] != DIR_SIZE)
-		{
-			printf("fail on third param\n");
 			return (0);
-		}
 	if (v->t[2] != T_REG)
 		v->t[2] = IND_SIZE;
 	if (v->t[3] != T_REG)
@@ -93,7 +84,6 @@ static int		do_sti(t_op_var v, int acb, t_process *p, t_core *arena)
 	else if (is_indirect(acb, 1) && is_register(acb, 2))
 		result = data_var((p->pc + (v.p[2])) % MEM_SIZE, arena, IND_SIZE) +
 			value_from_reg(p->reg[v.p[3]]);
-	printf("do_sti return value %d\n", result);
 	return (result);
 }
 
