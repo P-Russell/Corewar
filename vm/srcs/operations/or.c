@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 16:12:32 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 16:56:35 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 20:12:12 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int			op_or(t_process *p, t_core *arena)
 		else
 			break ;
 	}
-//	p->cycles_to_exec = g_op_tab[arena[(p->pc + 3) % MEM_SIZE].raw].nb_cycles;
 	p->carry = (i == 3) ? 1 : 0;
 	if (i == 3)
 		return (exec_op(p, v));

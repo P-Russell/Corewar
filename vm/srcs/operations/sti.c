@@ -6,11 +6,11 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 13:16:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 19:38:03 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 20:13:58 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "../../includes/vm.h"
 
 static int		check_param_type(t_op_var *v)
 {
@@ -100,32 +100,27 @@ static int		do_sti(t_op_var v, int acb, t_process *p, t_core *arena)
 int				op_sti(t_process *p, t_core *arena)
 {
 	t_op_var	v;
-	int			acb;
 	int			res;
 
 	v.acb = arena[(p->pc + 1) % MEM_SIZE].raw;
-	acb = v.acb;
 	init_var(&v);
-	printf("t1 %d, t2 %d, t3 %d\n", v.t[1], v.t[2], v.t[3]);
 	if (!check_param_type(&v))
 	{
-		printf("param types fail\n");
-		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
+		p->pc = (p->pc + pc_forward(v.acb)) % MEM_SIZE;
 		return (0);
 	}
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
 	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
-	printf("p1 %d, p2 %d, p3 %d\n", v.p[1], v.p[2], v.p[3]);
 	if (check_regs(v))
 	{
 		v.p[1] = value_from_reg(p->reg[v.p[1]]);
-		res = do_sti(v, acb, p, arena);
-		write_to_core(arena, (p->pc + (res % IDX_MOD)) %
-				MEM_SIZE, v.p[1], REG_SIZE);
-		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
+		res = do_sti(v, v.acb, p, arena);
+		write_to_core(arena, (p->pc + (res % IDX_MOD)) % MEM_SIZE, v.p[1],
+				REG_SIZE);
+		p->pc = (p->pc + pc_forward(v.acb)) % MEM_SIZE;
 		return (1);
 	}
-	p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
+	p->pc = (p->pc + pc_forward(v.acb)) % MEM_SIZE;
 	return (0);
 }
