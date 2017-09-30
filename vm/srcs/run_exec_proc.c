@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:15:27 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 20:15:37 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 20:27:36 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int		run_processes(t_env *e, int iter)
 
 int		run_processes_dump(t_env *e, int iter)
 {
-	t_process	*p;
-	int			player;
-	static int	cycles;
+	t_process			*p;
+	int					player;
+	static unsigned int	cycles;
 
 	cycles = 0;
 	while(iter && cycles < e->dump)
