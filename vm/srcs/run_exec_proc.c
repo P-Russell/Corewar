@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:15:27 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 20:35:06 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 20:49:52 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ int		run_processes_dump(t_env *e, int iter)
 		iter--;
 	}
 	printf("\n");
+	if (cycles == e->dump)
+		exit_prog(e);
 	return (player);
 }
