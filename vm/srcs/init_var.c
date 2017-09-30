@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 15:05:20 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 15:40:58 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 11:12:13 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_var(t_op_var *v)
 			v->t[i] = DIR_SIZE;
 		else if (is_indirect(v->acb, i))
 			v->t[i] = IND_SIZE;
+		else
+			v->t[i] = 0;
 		i++;
 	}
 }
