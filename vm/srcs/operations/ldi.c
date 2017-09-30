@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 09:57:15 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 16:51:01 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:19:35 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int		do_ldi(t_op_var v, int acb, t_process *p, t_core *arena)
 	else if (is_indirect(acb, 0) && is_register(acb, 1))
 		result = data_var((p->pc + (v.p[1] % IDX_MOD)) % MEM_SIZE, arena,
 				IND_SIZE) + value_from_reg(p->reg[v.p[2] - 1]);
-	printf("result from do_ldi %d\n", result);
 	return (result);
 }
 
@@ -79,7 +78,7 @@ static int		pc_forward(int acb)
 {
 	int i;
 
-	i = 1;
+	i = 2;
 	if (is_register(acb, 0))
 		i++;
 	else
@@ -105,19 +104,17 @@ int				op_ldi(t_process *p, t_core *arena)
 	init_var(&v);
 	if (!check_param_type(&v))
 	{
-		p->pc = pc_forward(acb);
+		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
 		return ((p->carry = 0));
 	}
 	v.p[1] = data_var((p->pc + 2) % MEM_SIZE, arena, v.t[1]);
 	v.p[2] = data_var((p->pc + 2 + v.t[1]) % MEM_SIZE, arena, v.t[2]);
 	v.p[3] = data_var((p->pc + 2 + v.t[1] + v.t[2]) % MEM_SIZE, arena, v.t[3]);
-	printf("p1 %d, p2 %d, p3 %d\n", v.p[1], v.p[2], v.p[3]);
 	if (check_regs(v))
 	{
-		printf("pc value = %d about write %x \n",p->pc, data_var((p->pc + (do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE), arena, IND_SIZE));
 		write_to_reg(p->reg[v.p[3] - 1], data_var((p->pc +
 					do_ldi(v, acb, p, arena) % IDX_MOD) % MEM_SIZE, arena,
-					IND_SIZE));
+					REG_SIZE));
 		p->pc = (p->pc + pc_forward(acb)) % MEM_SIZE;
 		return ((p->carry = 1));
 	}
