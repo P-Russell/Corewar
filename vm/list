@@ -40,3 +40,7 @@ aff
 lfork
 zjump
 
+Still to do
+Change root make file to only compile and relink code if nessesary
+remove print arean from vm.h and all other debuging code
+check for memory leaks
