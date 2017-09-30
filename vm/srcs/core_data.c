@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 07:52:56 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 14:31:39 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 19:37:17 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,37 +31,18 @@ int		value_from_core(t_core *arena, int pc, int size)
 	return (ft_htoi(num, size * 2));
 }
 
-int		write_to_core(t_core *arena, int pc, int value, int size)
+int		write_to_core(t_core *arena, int pc, int val, int size)
 {
-	unsigned char 	*p;
-	int				i;
-	char			*tmp;
+	int		i;
+	int		t;
 
-	if (value < 0)
+	i = 0;
+	while (i < size)
 	{
-		tmp = ft_itoh(value);
-		i = 0;
-		while (i < size)
-		{
-			arena[pc].raw = ft_htoi(tmp, 2);
-			write_char_to_hex(arena[pc].raw, arena[pc].value);
-			pc = (pc + 1) % MEM_SIZE;
-			i++;
-			tmp += 2;
-		}
-	}
-	else
-	{
-		value = little_to_big_endian(value);
-		i = 0;
-		p = (unsigned char *)&value;
-		while (i < REG_SIZE)
-		{
-			arena[pc].raw = p[i];
-			write_char_to_hex(p[i], arena[pc].value);
-			pc = (pc + 1) % MEM_SIZE;
-			i++;
-		}
+		t = val >> (((size - 1) << 3) - (i << 3)) & 0xFF;
+		arena[pc + i].raw = t;
+		write_char_to_hex(t, arena[pc + i].value);
+		i++;
 	}
 	return (1);
 }

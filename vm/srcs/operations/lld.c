@@ -18,7 +18,7 @@ int		op_lld(t_process *p, t_core *arena)
 	int acb;
 	int	chk;
 
-	acb = (arena[(p->pc + 0) % MEM_SIZE].raw);
+	acb = (arena[(p->pc + 1) % MEM_SIZE].raw);
 	p->pc = (p->pc + 2) % MEM_SIZE;
 	if (is_direct(acb, 0) == 1)
 		load_val = data_var(p->pc, arena, REG_SIZE);

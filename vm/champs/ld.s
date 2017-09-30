@@ -1,4 +1,4 @@
 .name "loader"
 .comment "ca-chink"
 
-ld %5, r4
+ld %-5, r4
