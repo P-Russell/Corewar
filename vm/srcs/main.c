@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 17:48:46 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 19:01:26 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ int		main(int argc, char **argv)
 //	printf("%d\n", check_processes(&env.process));
 //	printf("call to check processes\n");
 //	print_proc_data(env.process);
-	print_arena(env);
+//	print_arena(env);
 	return (0);	
 }

@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 13:16:43 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 10:33:54 by prussell         ###   ########.fr       */
+/*   Updated: 2017/09/30 18:02:33 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ static int		pc_forward(int acb)
 	int i;
 
 	i = 1;
+	if (is_register(acb, 0))
+		i++;
+	else
+		i += 2;
 	if (is_register(acb, 1))
 		i++;
 	else
 		i += 2;
 	if (is_register(acb, 2))
-		i++;
-	else
-		i += 2;
-	if (is_register(acb, 3))
 		i++;
 	else
 		i += 2;
@@ -69,19 +69,19 @@ static int		do_sti(t_op_var v, int acb, t_process *p, t_core *arena)
 	int		result;
 
 	result = 0;
-	if (is_register(acb, 2) && is_direct(acb, 3))
+	if (is_register(acb, 1) && is_direct(acb, 2))
 		result = value_from_reg(p->reg[v.p[2]]) + v.p[3];
-	else if (is_register(acb, 2) && is_register(acb, 3))
+	else if (is_register(acb, 1) && is_register(acb, 2))
 		result = value_from_reg(p->reg[v.p[2]]) +
 			value_from_reg(p->reg[v.p[3]]);
-	else if (is_direct(acb, 2) && is_direct(acb, 3))
+	else if (is_direct(acb, 1) && is_direct(acb, 2))
 		result = v.p[2] + v.p[3];
-	else if (is_direct(acb, 2) && is_register(acb, 3))
+	else if (is_direct(acb, 1) && is_register(acb, 2))
 		result = v.p[2] + value_from_reg(p->reg[v.p[3]]);
-	else if (is_indirect(acb, 2) && is_direct(acb, 3))
+	else if (is_indirect(acb, 1) && is_direct(acb, 2))
 		result = data_var((p->pc + (v.p[2])) % MEM_SIZE, arena, IND_SIZE) +
 			v.p[3];
-	else if (is_indirect(acb, 2) && is_register(acb, 3))
+	else if (is_indirect(acb, 1) && is_register(acb, 2))
 		result = data_var((p->pc + (v.p[2])) % MEM_SIZE, arena, IND_SIZE) +
 			value_from_reg(p->reg[v.p[3]]);
 	return (result);
