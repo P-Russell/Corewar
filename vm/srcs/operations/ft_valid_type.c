@@ -6,12 +6,12 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 15:39:58 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/29 09:34:39 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/09/30 16:15:41 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
-
+//#include "vm.h"
+#include <stdio.h>
 int		is_direct(int acb, int param_num)
 {
 	int		i;
@@ -22,7 +22,7 @@ int		is_direct(int acb, int param_num)
 		acb = acb << 2;
 		i++;
 	}
-	if ((acb & 0b11000000) == 0b100000000)
+	if ((acb & 0b11000000) == 0b1000000)
 		return (1);
 	return (0);
 }
