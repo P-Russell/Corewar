@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 07:31:26 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 23:43:33 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:04:44 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ int			op_live(t_process *p, t_core *arena)
 	if (param == p->player_num)
 	{
 		p->live_calls++;
-	//	put_live(p);
+//		put_live(p);
+		g_last_alive = p->player_num;
 		return (p->player_num);
 	}
+	if (param > 0 && param <= MAX_PLAYERS)
+		g_last_alive = param;
 	return (0);
 }

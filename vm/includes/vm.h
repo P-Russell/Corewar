@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 21:12:59 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:01:37 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,6 @@ void		print_proc_data(t_process *proc);
 typedef		int	(*op_ptr_t)(t_process *proc, t_core *arena);
 
 op_ptr_t	g_op_ptr[16];
+unsigned int	g_last_alive;
 
 #endif
