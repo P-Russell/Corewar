@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 10:21:17 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 13:39:29 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 15:00:55 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int		is_valid_params(char **params)
 		}
 		else if (ft_strstr(params[i], "-n") != NULL)
 		{
-			if (params[i + 1] && !ft_isnumber(params[i + 1]))
-				return (0);
-			else if (params[i + 2] && ft_strstr(params[i + 2], ".cor") == NULL)
+			if ((params[i + 1] && !ft_isnumber(params[i + 1])) ||
+					(params[i + 2] && ft_strstr(params[i + 2], ".cor") == NULL))
 				return (0);
 		}
 		else if (ft_strstr(params[i], ".cor") != NULL)
@@ -47,7 +46,5 @@ int		is_valid_params(char **params)
 			return (0);
 		i++;
 	}
-	if (file_found)
-		return (1);
-	return (0);
+	return (file_found);
 }
