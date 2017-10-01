@@ -159,13 +159,17 @@ OBJ = 	ft_atoi.o			\
 		ft_splitspace.o		\
 		ft_isdigits.o		\
 		ft_isnumber.o
+NONE = \x1b[0m
+OK = \x1b[32;01m
 
 all: $(NAME)
 
 $(NAME):
+	@echo "$(OK)----------   Compile ASM   ----------$(NONE)"
 	@gcc $(FLAGS) $(OPTION) $(SOURCE)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
+	@echo "$(OK)----------     Success     ----------$(NONE)\n"
 
 clean:
 	@/bin/rm -f $(OBJ)
