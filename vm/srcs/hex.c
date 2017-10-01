@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 09:56:04 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/10/01 10:34:54 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 12:17:28 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,10 @@ void			all_zero(char *str, int num)
 		str[i] = '0';
 		i++;
 	}
+}
+
+int				champ_size(void)
+{
+	ft_putendl_fd("Invalid champ size in header", 2);
+	return (-1);
 }
