@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 10:21:17 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 09:53:48 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 13:39:29 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int		valid_param(char *param)
 int		is_valid_params(char **params)
 {
 	int	i;
+	int	file_found;
 
 	i = 1;
+	file_found = 0;
 	while (params[i])
 	{
 		if (ft_strstr(params[i], "-dump") != NULL)
@@ -39,9 +41,13 @@ int		is_valid_params(char **params)
 			else if (params[i + 2] && ft_strstr(params[i + 2], ".cor") == NULL)
 				return (0);
 		}
+		else if (ft_strstr(params[i], ".cor") != NULL)
+			file_found = 1;
 		else if (!valid_param(params[i]))
 			return (0);
 		i++;
 	}
-	return (1);
+	if (file_found)
+		return (1);
+	return (0);
 }
