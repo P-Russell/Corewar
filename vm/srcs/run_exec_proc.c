@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:15:27 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 01:33:44 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 07:42:09 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		run_processes(t_env *e, int iter)
 	while(iter > 0)
 	{
 		p = e->process;
-		while(p)
+		while(p != NULL)
 		{
 			player = exec_proc(p, e->arena);
 			p = p->next;
@@ -68,10 +68,11 @@ int		run_processes_dump(t_env *e, int iter)
 	static unsigned int	cycles;
 
 	cycles = 0;
+	player = 0;
 	while(iter > 0 && cycles < e->dump)
 	{
 		p = e->process;
-		while(p)
+		while(p != NULL)
 		{
 			player = exec_proc(p, e->arena);
 			p = p->next;
