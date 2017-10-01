@@ -10,27 +10,36 @@
 #                                                                              #
 # **************************************************************************** #
 
-all: lib asmc vmc
+PROJECTS = lib asmc vmc
 
-asmc:
-	@echo "Compile Asm"
-	@make -C asm/ fclean && make -C asm/
+NONE = \x1b[0m
+OK = \x1b[32;01m
+WARN = \x1b[33;01m
 
-vmc:
-	@echo "Compile vm"
-	@make -C vm/ fclean && make -C vm/
-
-clean:
-	make -C vm/ clean
-	make -C asm/ clean
-
-fclean:
-	make -C vm/ fclean
-	make -C asm/ fclean
-	make -C libft/ fclean
-
-re: fclean all
+all: $(PROJECTS)
 
 lib:
-	@echo "Compile Libft"
-	@make -C libft/ fclean && make -C libft/ && make -C libft/ clean
+	@make -C libft/
+	@make -C libft/ clean
+
+asmc:
+	@make -C asm/
+
+vmc:
+	@make -C vm/
+
+clean:
+	@echo "$(WARN)---------- Clean ASM & VM  ----------$(NONE)"
+	@make -C vm/ clean
+	@make -C asm/ clean
+
+fclean:
+	@echo "$(WARN)----------    FClean All    ----------$(NONE)"
+	@echo "$(WARN)----------   FClean Libft   ----------$(NONE)"
+	@make -C libft/ fclean
+	@echo "Removed Libft"
+	@echo "$(WARN)----------     Success     ----------$(NONE)\n"
+	@make -C vm/ fclean
+	@make -C asm/ fclean
+
+re: fclean all
