@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 10:26:27 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:31:35 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ t_process		*new_proc(t_process *father, int pc)
 	return (new);
 }
 
-void		push_proc(t_process **head, t_process *p)
+void			push_proc(t_process **head, t_process *p)
 {
 	p->next = *head;
 	*head = p;
 }
 
-void		append_proc(t_process *head, t_process *new)
+void			append_proc(t_process *head, t_process *new)
 {
 	t_process *tmp;
 
@@ -69,11 +69,11 @@ void		append_proc(t_process *head, t_process *new)
 	new->next = NULL;
 }
 
-void		del_first_proc(t_process **head)
+void			del_first_proc(t_process **head)
 {
 	t_process *next_node;
 
-	next_node  = NULL;
+	next_node = NULL;
 	if (*head != NULL)
 	{
 		next_node = (*head)->next;

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:15:27 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 07:42:09 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:16:32 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		exec_proc(t_process *p, t_core *arena)
 {
 	int	ret;
-	int	op;
 
 	ret = 0;
 	if (p->cycles_to_exec > 1)
@@ -25,10 +24,9 @@ int		exec_proc(t_process *p, t_core *arena)
 	}
 	else if (p->cycles_to_exec <= 1)
 	{
-		op = arena[p->pc].raw - 1;
-		if (op < 16 && op >= 0)
+		if (arena[p->pc].raw - 1 < 16 && arena[p->pc].raw - 1 >= 0)
 		{
-			ret = g_op_ptr[op](p, arena);
+			ret = g_op_ptr[arena[p->pc].raw - 1](p, arena);
 			p->cycles_to_exec = cyc(arena[p->pc].raw);
 		}
 		else
@@ -36,7 +34,7 @@ int		exec_proc(t_process *p, t_core *arena)
 			p->pc = (p->pc + 1) % MEM_SIZE;
 			return (0);
 		}
-		if (op == 0 && ret)
+		if (arena[p->pc].raw - 1 == 0 && ret)
 			return (ret);
 	}
 	return (0);
@@ -48,10 +46,10 @@ int		run_processes(t_env *e, int iter)
 	int			player;
 
 	player = 0;
-	while(iter > 0)
+	while (iter > 0)
 	{
 		p = e->process;
-		while(p != NULL)
+		while (p != NULL)
 		{
 			player = exec_proc(p, e->arena);
 			p = p->next;
@@ -69,10 +67,10 @@ int		run_processes_dump(t_env *e, int iter)
 
 	cycles = 0;
 	player = 0;
-	while(iter > 0 && cycles < e->dump)
+	while (iter > 0 && cycles < e->dump)
 	{
 		p = e->process;
-		while(p != NULL)
+		while (p != NULL)
 		{
 			player = exec_proc(p, e->arena);
 			p = p->next;

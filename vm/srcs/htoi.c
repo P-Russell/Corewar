@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 09:17:32 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 10:27:37 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 09:57:52 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			ft_htoi(char *str, size_t len)
 	return (tot);
 }
 
-char	*ft_itoh(int val)
+char		*ft_itoh(int val)
 {
 	char	a[9];
 	char	*ans;

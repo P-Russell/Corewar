@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:10:49 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/24 10:40:49 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:19:03 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		get_name_and_size(t_champ *champ)
 	i = 0;
 	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC), SEEK_SET) < 0)
 		return (-1);
-	while (read(champ->fd, &buf, 1) > 0 && i <= PROG_NAME_LENGTH && buf) 
+	while (read(champ->fd, &buf, 1) > 0 && i <= PROG_NAME_LENGTH && buf)
 		champ->name[i++] = buf;
 	if (i == PROG_NAME_LENGTH)
 	{
@@ -54,7 +54,7 @@ static int		get_name_and_size(t_champ *champ)
 static int		get_comment(t_champ *champ)
 {
 	int		i;
-	char 	buf;
+	char	buf;
 
 	i = 0;
 	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH
@@ -95,15 +95,17 @@ static int		get_champion(t_champ *champ)
 	return (0);
 }
 
-int		read_champ_data(t_env *env, int num_champs)
+int				read_champ_data(t_env *env, int num_champs)
 {
 	int	i;
 
 	i = 0;
 	while (i < num_champs)
 	{
-		if (check_magic(&env->champs[i]) < 0 || get_name_and_size(&env->champs[i]) < 0 ||
-		    get_comment(&env->champs[i]) < 0 || get_champion(&env->champs[i]) < 0)
+		if (check_magic(&env->champs[i]) < 0 ||
+				get_name_and_size(&env->champs[i]) < 0 ||
+				get_comment(&env->champs[i]) < 0 ||
+				get_champion(&env->champs[i]) < 0)
 			return (-1);
 		else if (close(env->champs[i].fd) < 0)
 			return (-1);

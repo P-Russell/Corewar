@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 07:57:54 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 16:53:27 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 09:54:37 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int16_t	get_val(int pc, t_core *arena)
 	return (ans);
 }
 
-int		data_var(int pc, t_core *arena, size_t s)
+int				data_var(int pc, t_core *arena, size_t s)
 {
 	t_data	var;
 	int		ans;

@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:14:10 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 15:37:23 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:14:00 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		value_from_reg(unsigned char *reg)
 {
 	int		k;
 	int		j;
-	char 	num[REG_SIZE * 2 + 1];
+	char	num[REG_SIZE * 2 + 1];
 
 	ft_bzero(num, REG_SIZE * 2 + 1);
 	k = 0;

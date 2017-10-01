@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 10:21:17 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/22 14:49:01 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 09:53:48 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		valid_param(char *param)
 {
 	return (ft_strstr(param, "-dump") != NULL ||
-				ft_strstr(param, "-n") != NULL||
+				ft_strstr(param, "-n") != NULL ||
 				ft_strstr(param, ".cor") != NULL ||
 				ft_isnumber(param));
 }
