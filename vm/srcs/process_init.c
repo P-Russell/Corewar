@@ -6,13 +6,14 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 09:50:00 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 12:19:03 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:11:53 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void		clean_reg(unsigned char reg[REG_NUMBER + 1][REG_SIZE + 1])
+static void				clean_reg(
+		unsigned char reg[REG_NUMBER + 1][REG_SIZE + 1])
 {
 	int	i;
 
@@ -35,7 +36,7 @@ static t_process		*new_proc_from_champ(t_champ *champ)
 	new->live_calls = 0;
 	new->cycles_to_exec = 0;
 	clean_reg(new->reg);
-	write_to_reg(new->reg[0], champ->player_num); 
+	write_to_reg(new->reg[0], champ->player_num);
 	new->next = NULL;
 	return (new);
 }
@@ -44,7 +45,7 @@ t_process				*init_process(t_champ *champs, int num_champs)
 {
 	int			i;
 	int			j;
-	t_process 	*new;
+	t_process	*new;
 	t_process	*head;
 
 	j = 1;

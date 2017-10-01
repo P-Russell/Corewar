@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:57:36 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/23 07:41:17 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:00:46 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		clean_arena(t_core *arena)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		ft_bzero (arena[i].value, 3);
+		ft_bzero(arena[i].value, 3);
 		arena[i].value[0] = '0';
 		arena[i].value[1] = '0';
 		arena[i].champ_num = 0;

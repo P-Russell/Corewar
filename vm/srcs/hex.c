@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/19 11:17:53 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/23 11:47:27 by prussell         ###   ########.fr       */
+/*   Created: 2017/10/01 09:56:04 by lde-jage          #+#    #+#             */
+/*   Updated: 2017/10/01 09:57:24 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	write_char_to_hex(unsigned char num, char *reg)
 {
-	char 	hex[16];
+	char	hex[16];
 
 	ft_strcpy(hex, "0123456789ABCDEF");
 	if (num < 16)
