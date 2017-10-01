@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 08:24:29 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 10:31:35 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 11:28:29 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,8 @@ static void		cpy_reg(unsigned char src[REG_NUMBER + 1][REG_SIZE + 1],
 
 t_process		*new_proc(t_process *father, int pc)
 {
-	static int	p = 0;
 	t_process	*new;
 
-	printf("new process %d\n", p);
-	p++;
 	new = NULL;
 	if ((new = (t_process *)malloc(sizeof(t_process))) == NULL)
 		return (NULL);

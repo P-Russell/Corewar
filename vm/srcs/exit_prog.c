@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:39:56 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 21:32:27 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 11:39:30 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void		free_processes(t_process *p)
 
 void		exit_prog(t_env *env)
 {
-	print_proc_data(env->process);
-	print_arena(*env);
 	free_processes(env->process);
 	exit(0);
 }

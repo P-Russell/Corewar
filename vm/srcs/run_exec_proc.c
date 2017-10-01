@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:15:27 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 10:16:32 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 11:43:31 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,8 @@ int		run_processes_dump(t_env *e, int iter)
 {
 	t_process			*p;
 	int					player;
-	static unsigned int	cycles;
+	static unsigned int	cycles = 0;
 
-	cycles = 0;
 	player = 0;
 	while (iter > 0 && cycles < e->dump)
 	{
@@ -79,6 +78,9 @@ int		run_processes_dump(t_env *e, int iter)
 		iter--;
 	}
 	if (cycles == e->dump)
+	{
+		print_arena(*e);
 		exit_prog(e);
+	}
 	return (player);
 }
