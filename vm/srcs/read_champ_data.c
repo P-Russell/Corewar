@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_champ_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rheukelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/19 11:10:49 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 11:52:52 by prussell         ###   ########.fr       */
+/*   Created: 2017/10/01 14:57:15 by rheukelm          #+#    #+#             */
+/*   Updated: 2017/10/01 14:57:19 by rheukelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,10 @@ static int		get_comment(t_champ *champ)
 	return (0);
 }
 
-static int		get_champion(t_champ *champ)
+static int		get_champion(t_champ *champ, int i)
 {
-	int		i;
 	char	buf;
 
-	i = 0;
 	if (lseek(champ->fd, sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH
 	+ sizeof(int) + 8 + COMMENT_LENGTH, SEEK_SET) < 0)
 		return (-1);
@@ -110,7 +108,7 @@ int				read_champ_data(t_env *env, int num_champs)
 		if (check_magic(&env->champs[i]) < 0 ||
 				get_name_and_size(&env->champs[i]) < 0 ||
 				get_comment(&env->champs[i]) < 0 ||
-				get_champion(&env->champs[i]) < 0)
+				get_champion(&env->champs[i], 0) < 0)
 			return (-1);
 		else if (close(env->champs[i].fd) < 0)
 			return (-1);
