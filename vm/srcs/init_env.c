@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 10:05:35 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:34:39 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,15 @@ static int		new_champ(char *file_name, t_champ *champ,
 	return (-1);
 }
 
+int				env_loop_if(int argc, char **argv, t_env *env, int i)
+{
+	if ((i + 2) < argc && ft_isnumber(argv[i + 1]) && ft_strstr(argv[i
+				+ 2], ".cor") != NULL && (ft_atoi(argv[i + 1]) <= 4) &&
+				ft_strchr(env->player_nums, argv[i + 1][0]) == NULL)
+		return (1);
+	return (0);
+}
+
 /*
  ** ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...
 */
@@ -70,9 +79,7 @@ static int		init_env_loop(int argc, char **argv, t_env *env, int i)
 	{
 		if (ft_strcmp(argv[i], "-n") == 0)
 		{
-			if ((i + 2) < argc && ft_isnumber(argv[i + 1]) && ft_strstr(argv[i
-						+ 2], ".cor") != NULL && (ft_atoi(argv[i + 1]) <= 4) &&
-					ft_strchr(env->player_nums, argv[i + 1][0]) == NULL)
+			if (env_loop_if(argc, argv, env, i) == 1)
 			{
 				if (new_champ(argv[i + 2], &(env->champs[env->num_players]),
 							ft_atoi(argv[i + 1])) < 0)
@@ -93,18 +100,6 @@ static int		init_env_loop(int argc, char **argv, t_env *env, int i)
 		i++;
 	}
 	return (1);
-}
-
-void			all_zero(char *str, int num)
-{
-	int i;
-
-	i = 0;
-	while (i < num)
-	{
-		str[i] = '0';
-		i++;
-	}
 }
 
 int				init_env(int argc, char **argv, t_env *env)

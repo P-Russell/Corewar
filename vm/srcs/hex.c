@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 09:56:04 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/10/01 09:57:24 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:34:54 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,17 @@ void	write_char_to_hex(unsigned char num, char *reg)
 	{
 		reg[0] = hex[(num / 16) % 16];
 		reg[1] = hex[num % 16];
+	}
+}
+
+void			all_zero(char *str, int num)
+{
+	int i;
+
+	i = 0;
+	while (i < num)
+	{
+		str[i] = '0';
+		i++;
 	}
 }
