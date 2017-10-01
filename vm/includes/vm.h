@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 10:27:13 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 21:12:59 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 10:34:24 by lde-jage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int			exec_proc(t_process *p, t_core *arena);
 int			run_processes(t_env *e, int iter);
 int			run_processes_dump(t_env *e, int iter);
 void		exit_prog(t_env *e);
+void		all_zero(char *str, int num);
 
 void		print_proc_data(t_process *proc);
 
