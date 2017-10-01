@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 07:32:39 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/09/30 19:52:47 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 15:40:07 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int			op_aff(t_process *p, t_core *arena)
 		if (valid_reg(val))
 		{
 			reg_data = value_from_reg(p->reg[val - 1]);
-			printf("------aff----------------------------\n");
 			ft_putchar(reg_data % 256);
 			p->pc = (p->pc + 3) % MEM_SIZE;
 			return (1);

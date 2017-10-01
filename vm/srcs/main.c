@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 14:56:50 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/10/01 15:03:01 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 15:37:21 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			main(int argc, char **argv)
 
 	if (argc == 1 || init_env(argc, argv, &env) < 0)
 	{
-		ft_putendl_fd(PARAM_ERROR, 2);
+		ft_putendl_fd(P_E, 2);
 		return (-1);
 	}
 	if (read_champ_data(&env, env.num_players) < 0)
