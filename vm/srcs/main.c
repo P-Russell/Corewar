@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/09/30 22:26:47 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 11:34:16 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		main(int argc, char **argv)
 	}
 //	print_champ_data(env.champs, env.num_players);
 //	write_to_reg(env.process->reg[4], 89);
-	print_proc_data(env.process);
+//	print_proc_data(env.process);
 	t_process *cur = env.process;
 	while(cur)
 	{
@@ -89,7 +89,7 @@ int		main(int argc, char **argv)
 		cur = cur->next;
 	}
 	game_loop(&env);
-	print_proc_data(env.process);
+//	print_proc_data(env.process);
 //	printf("%d\n", check_processes(&env.process));
 //	printf("call to check processes\n");
 //	print_proc_data(env.process);
