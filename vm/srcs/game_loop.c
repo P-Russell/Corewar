@@ -6,7 +6,7 @@
 /*   By: lde-jage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 12:32:34 by lde-jage          #+#    #+#             */
-/*   Updated: 2017/10/01 12:40:32 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 15:16:33 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,36 +39,33 @@ static	void	winner(t_env *env, int player_num)
 ** calls to live op.
 */
 
-int				check_processes(t_process **head)
+void			check_top_proc(t_process **head, int *ret)
+{
+	while (*head && (*head)->live_calls == 0)
+		del_first_proc(head);
+	if (*head && (*head)->live_calls >= NBR_LIVE)
+	{
+		*ret = NBR_LIVE;
+		(*head)->live_calls = 0;
+	}
+}
+
+int				check_processes(t_process **head, int ret)
 {
 	t_process	*cur;
 	t_process	*tmp;
-	int			ret;
-	static int	i = 0;
 
-	ret = 0;
-	while (*head && (*head)->live_calls == 0)
-	{
-		i++;
-		del_first_proc(head);
-	}
+	check_top_proc(head, &ret);
 	cur = *head;
-	if (cur && cur->live_calls >= NBR_LIVE)
-	{
-		ret = NBR_LIVE;
-		cur->live_calls = 0;
-	}
 	while (cur && cur->next)
 	{
 		if (cur->next->live_calls >= NBR_LIVE)
 			ret = NBR_LIVE;
 		if (cur->next->live_calls <= 0)
 		{
-			i++;
 			tmp = cur->next;
 			cur->next = tmp->next;
 			free(tmp);
-			tmp = NULL;
 		}
 		else
 		{
@@ -88,24 +85,18 @@ int				check_processes(t_process **head)
 int				game_loop(t_env *env)
 {
 	int		c_to_die;
-	int		i;
 	int		checks;
-	int		last_alive;
-	int		t;
 
 	c_to_die = CYCLE_TO_DIE;
-	i = 0;
 	checks = 1;
-	last_alive = -1;
 	while (env->process)
 	{
 		if (env->dump)
-			t = run_processes_dump(env, c_to_die);
+			run_processes_dump(env, c_to_die);
 		else
-			t = run_processes(env, c_to_die);
-		last_alive = (t == 0) ? last_alive : t;
+			run_processes(env, c_to_die);
 		checks++;
-		if (check_processes(&env->process) == NBR_LIVE)
+		if (check_processes(&env->process, 0) == NBR_LIVE)
 		{
 			checks = 1;
 			c_to_die -= CYCLE_DELTA;
