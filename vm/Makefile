@@ -6,7 +6,7 @@
 #    By: prussell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/25 09:58:48 by prussell          #+#    #+#              #
-#    Updated: 2017/09/30 22:44:30 by rheukelm         ###   ########.fr        #
+#    Updated: 2017/10/01 12:15:56 by prussell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OPER =	srcs/operations/add.c srcs/operations/aff.c srcs/operations/and.c \
 		srcs/operations/sub.c srcs/operations/valid_reg.c \
 		srcs/operations/xor.c srcs/operations/zjump.c
 
-FLAGS = -Wall -Werror -Wextra -iquoteincludes
+FLAGS = -Wall -Werror -Wextra -iquoteincludes -g3
 
 NONE = \x1b[0m
 OK = \x1b[32;01m

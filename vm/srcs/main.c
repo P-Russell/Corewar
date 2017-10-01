@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 10:41:52 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 12:14:24 by lde-jage         ###   ########.fr       */
+/*   Updated: 2017/10/01 12:44:38 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		read_cor_error(void)
 int		main(int argc, char **argv)
 {
 	t_env		env;
-	t_process	*cur;
+//	t_process	*cur;
 
 	if (argc == 1 || init_env(argc, argv, &env) < 0)
 	{
@@ -36,13 +36,13 @@ int		main(int argc, char **argv)
 		ft_putendl_fd("Process init error", 2);
 		return (-1);
 	}
-	cur = env.process;
+/*	cur = env.process;
 	while (cur)
 	{
 		cur->carry = 1;
 		exec_proc(cur, env.arena);
 		cur = cur->next;
-	}
+	}*/
 	game_loop(&env);
 	return (0);
 }

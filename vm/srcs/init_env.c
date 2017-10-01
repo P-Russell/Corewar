@@ -6,7 +6,7 @@
 /*   By: prussell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 08:40:02 by prussell          #+#    #+#             */
-/*   Updated: 2017/10/01 12:15:10 by prussell         ###   ########.fr       */
+/*   Updated: 2017/10/01 13:36:32 by prussell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				env_loop_if(int argc, char **argv, t_env *env, int i)
 				+ 2], ".cor") != NULL && (ft_atoi(argv[i + 1]) <= 4) &&
 				ft_strchr(env->player_nums, argv[i + 1][0]) == NULL)
 		return (1);
-	return (0);
+	return (-1);
 }
 
 /*
@@ -112,7 +112,7 @@ int				init_env(int argc, char **argv, t_env *env)
 	env->dump = 0;
 	env->num_players = 0;
 	env->process = NULL;
-	ft_bzero(env->player_nums, MAX_PLAYERS);
+	all_zero(env->player_nums, MAX_PLAYERS);
 	while (i < argc)
 	{
 		if (ft_strcmp(argv[i], "-dump") == 0)
