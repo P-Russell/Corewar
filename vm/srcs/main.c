@@ -21,7 +21,6 @@ static int	read_cor_error(void)
 int			main(int argc, char **argv)
 {
 	t_env		env;
-	t_process	*cur;
 
 	if (argc == 1 || init_env(argc, argv, &env) < 0)
 	{
@@ -35,13 +34,6 @@ int			main(int argc, char **argv)
 	{
 		ft_putendl_fd("Process init error", 2);
 		return (-1);
-	}
-	cur = env.process;
-	while (cur)
-	{
-		cur->carry = 1;
-		exec_proc(cur, env.arena);
-		cur = cur->next;
 	}
 	game_loop(&env);
 	return (0);
